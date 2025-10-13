@@ -1,235 +1,107 @@
 /* ============================
-   index.css — index 전용 구조/장식 스캐폴드
-   - 공통 토큰은 main.css(:root 변수)를 따름
-   - 이 파일에서만 쓰는 컴포넌트는 .ix- 접두사 사용
-   - 한글 주석으로 수정 포인트 명확화
+   index.css — 홈(인덱스) 전용
+   - 풀 배경 히어로
+   - 3행 타이핑 고정/밑줄 모션
+   - 요약 패널/소셜/스크롤 인디케이터
 ============================ */
 
-/* ----------------------------
-   0) 유틸리티 (index 한정)
------------------------------ */
-:root{
-  /* 필요 시 index 한정 포인트 색을 약간 다르게 줄 수 있음 */
-  --ix-accent: var(--accent); /* 라이트: #a67c37 / 다크: #c4a46a (main.css 연동) */
-  --ix-hero-maxw: 1160px;     /* 히어로 내부 최대 폭 */
-  --ix-radius-xl: 24px;       /* 인덱스 전용 모서리 둥글기 */
-  --ix-grid-gap: 20px;        /* 인덱스 전용 그리드 간격 */
-}
-
-/* 반응형 브레이크포인트(필요 시 맞춰 조정) */
-@media (max-width: 1200px){ :root{ --ix-hero-maxw: 1040px; } }
-@media (max-width: 992px) { :root{ --ix-hero-maxw: 920px;  } }
-@media (max-width: 768px) { :root{ --ix-hero-maxw: 92vw;   } }
-
-/* ----------------------------
-   1) 헤더(투명+스크롤 시 배경) — index만
------------------------------ */
-.page--home .bs-header{
-  background: transparent;
-  border-bottom-color: transparent;
-  transition: background .25s ease, border-color .25s ease;
-}
-.page--home.scrolled .bs-header{
-  background: color-mix(in srgb, var(--bg), transparent 10%);
-  border-bottom-color: color-mix(in srgb, var(--fg), transparent 90%);
-}
-
-/* 스크롤 감지용(전역 스크립트는 index.html 아래 참고) */
-
-/* ----------------------------
-   2) 히어로 영역 레이아웃
-   - 좌: 3행 타이핑 (저는 / [타이핑] / 입니다)
-   - 우: 정보 패널 카드(요약 문구 + 버튼)
------------------------------ */
-.bs-hero{
+/* 히어로: 화면 꽉 차는 섹션 */
+.page--home .bs-hero.bs-hero--full{
   position: relative;
-  padding: clamp(72px, 12vh, 120px) 0;
-  display: grid;
-  align-items: center;
-  min-height: 72vh;
+  min-height: min(1200px, calc(100svh - var(--header-h)));
+  display: grid; align-items: center;
+  padding: clamp(40px, 8vh, 96px) 0;
+  isolation: isolate; /* 배경과 콘텐츠 레이어 분리 */
 }
 
-/* 히어로 내부 최대너비 및 2칼럼 그리드 */
+/* 내부 레이아웃(2열, 중앙 정렬) */
 .bs-hero__inner{
-  width: min(var(--ix-hero-maxw), 94vw);
-  margin: 0 auto;
+  width: min(1200px, 94vw); margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr .9fr; /* 좌(타이핑) : 우(요약패널) */
+  grid-template-columns: 1fr 1fr;
+  align-items: center; justify-items: center;
   gap: clamp(20px, 4vw, 48px);
 }
+@media (max-width: 900px){ .bs-hero__inner{ grid-template-columns: 1fr; } }
 
-/* 모바일에서는 1칼럼 전환 */
-@media (max-width: 900px){
-  .bs-hero__inner{ grid-template-columns: 1fr; }
+/* 풀 배경 이미지 스택 */
+.hero-bg{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
+.hero-bg__img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit: cover; object-position: 50% 45%;
+  opacity:0; transform: scale(1.06) translateX(8px);
+  transition: opacity 1.6s ease-in-out, transform 2.2s cubic-bezier(.25,1,.5,1);
+  will-change: transform, opacity;
 }
+.hero-bg__img.is-active{ opacity:1; transform: scale(1.01) translateX(0); }
+.hero-bg__img.is-leaving{ opacity:0; transform: scale(1.04) translateX(-8px); }
 
-/* 3행 타이틀(왼쪽) — 타이핑 라인 재정렬 */
-.bs-hero__title{
-  text-align: left;  /* 기본 중앙 → 좌측 정렬 */
-  gap: clamp(6px, 1.6vw, 12px);
-}
-.bs-hero__line--fixed-top,
-.bs-hero__line--fixed-bottom{
-  opacity: .92;
-  letter-spacing: .2px;
-}
-
-/* 타이핑 라인의 강조(두께/밑줄/포인터) */
-.bs-hero__line--typing{
-  border-bottom: 3px solid var(--ix-accent);
-  padding-bottom: .08em;
-  font-weight: 800;
-  letter-spacing: .2px;
-  /* 커서 느낌 (의견: 깜빡임 없는 밑줄형으로 이미 깔끔함) */
-}
-
-/* 히어로 보조정보 패널(오른쪽) */
-.ix-hero-pane{
-  position: relative;
-  align-self: start;
-  background: color-mix(in srgb, var(--bg), var(--fg) 5%); /* 라이트/다크에서 은은한 대비 */
-  border: 1px solid color-mix(in srgb, var(--fg), transparent 85%);
-  border-radius: var(--ix-radius-xl);
-  padding: clamp(16px, 2.6vw, 28px);
-  box-shadow:
-    0 10px 30px color-mix(in srgb, var(--fg), transparent 92%),
-    inset 0 0 0 1px color-mix(in srgb, var(--fg), transparent 92%);
-}
-
-/* 패널 내부 레이아웃 */
-.ix-hero-pane__kicker{
-  font-size: .9rem;
-  opacity: .75;
-  margin-bottom: 10px;
-}
-.ix-hero-pane__title{
-  font-size: clamp(18px, 2.6vw, 24px);
-  font-weight: 700;
-  margin: 0 0 8px;
-}
-.ix-hero-pane__desc{
-  margin: 0 0 18px;
-  opacity: .9;
-  line-height: 1.55;
-}
-
-/* 버튼 스택 */
-.ix-hero-actions{
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.ix-hero-actions .bs-btn--accent{
-  background: var(--ix-accent);
-  color: #111;
-  border: 1px solid color-mix(in srgb, #000, transparent 70%);
-}
-.ix-hero-actions .bs-btn--ghost{
-  background: transparent;
-  color: var(--fg);
-  border: 1px solid color-mix(in srgb, var(--fg), transparent 82%);
-}
-
-/* ----------------------------
-   3) 히어로 배경 장식 (index 전용)
-   - 샌드톤 스팟 + 얇은 그리드 + 노이즈 텍스처 느낌
-   - 장식 레이어는 pointer-events: none
------------------------------ */
-
-.bs-hero__bg{
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  /* 1) 그라디언트 스팟 */
+/* 가독성용 비네트 */
+.hero-bg__vignette{
+  position:absolute; inset:0; pointer-events:none;
   background:
-    radial-gradient(40% 40% at 18% 30%, color-mix(in srgb, var(--sand), transparent 10%), transparent 70%),
-    radial-gradient(36% 36% at 78% 70%, color-mix(in srgb, var(--ix-accent), transparent 86%), transparent 72%);
+    radial-gradient(120% 120% at 50% 65%, color-mix(in srgb, #000, transparent 75%), transparent 60%),
+    linear-gradient(to bottom, color-mix(in srgb, #000, transparent 85%), transparent 20%);
+  mix-blend-mode: multiply;
 }
 
-/* 2) 가는 그리드(데이터 감성) */
-.bs-hero__bg::before{
-  content:"";
-  position:absolute; inset:0;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--fg), transparent 97%) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--fg), transparent 97%) 1px, transparent 1px);
-  background-size: 24px 24px; /* 그리드 간격 */
-  mask-image: radial-gradient(80% 80% at 50% 50%, #000 0%, transparent 70%);
-  opacity:.8;
+/* 3행 타이핑 고정 */
+.bs-hero__title{
+  display:grid; grid-template-rows: 1fr auto 1fr;
+  height: clamp(180px, 24vh, 260px);
+  line-height:1.1; text-align:center; margin:0;
 }
+.bs-hero__line{ grid-column:1; z-index:1; }
+.bs-hero__line--fixed-top{ grid-row:1; align-self:end;   justify-self:start; font-size: clamp(18px, 2.4vw, 26px); font-weight:700; }
+.bs-hero__line--typing{
+  grid-row:2; align-self:center; justify-self:center;
+  font-size: clamp(36px, 6.2vw, 78px); font-weight:800;
+  position: relative; padding-bottom:.15em;
+}
+.bs-hero__line--typing::after{
+  content:""; position:absolute; left:0; bottom:0; height:3px;
+  width:0%; background: var(--accent);
+  animation: underlineGrow 1.4s ease forwards;
+}
+@keyframes underlineGrow{ 0%{width:0;opacity:0} 40%{opacity:1} 100%{width:100%;opacity:1} }
+.bs-hero__line--fixed-bottom{ grid-row:3; align-self:start; justify-self:end; font-size: clamp(18px, 2.4vw, 26px); font-weight:700; }
 
-/* 3) 미세 노이즈(시각적 입자감) */
-.bs-hero__bg::after{
-  content:"";
-  position:absolute; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
-  mix-blend-mode: soft-light;
-  opacity:.6;
-}
-
-/* ----------------------------
-   4) 소셜 아이콘 (index만 살짝 강조)
------------------------------ */
-.bs-social{
-  justify-content: flex-start; /* 좌측 정렬로 무게중심 */
-  margin-top: clamp(12px, 2vw, 18px);
-}
+/* 소셜 아이콘(축소) */
+.bs-social{ margin-top:10px; display:flex; gap:8px; justify-content:center; }
 .bs-social__link{
-  width: 42px; height: 42px;
-  border-radius: 12px;
-  border-color: color-mix(in srgb, var(--fg), transparent 78%);
-}
-.bs-social__link:hover{
-  background: color-mix(in srgb, var(--ix-accent), transparent 80%);
-  transform: translateY(-3px);
+  width:28px; height:28px; display:grid; place-items:center;
+  border:1px solid color-mix(in srgb, var(--fg), transparent 80%);
+  border-radius:8px; text-decoration:none; font-size:15px;
 }
 
-/* ----------------------------
-   5) 스크롤 인디케이터 (히어로 하단)
------------------------------ */
+/* 요약 패널(프로필 카드 대체) */
+.ix-hero-pane{
+  width: clamp(360px, 34vw, 620px);
+  padding: clamp(18px, 3vw, 34px);
+  background: color-mix(in srgb, var(--bg), var(--fg) 5%);
+  border: 1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  border-radius: 24px;
+  backdrop-filter: blur(4px);
+}
+.ix-hero-pane__kicker{ font-size:.95rem; opacity:.75; margin-bottom:10px; }
+.ix-hero-pane__title{ font-size: clamp(20px, 2.4vw, 26px); margin:0 0 8px; font-weight:800; }
+.ix-hero-pane__desc{ margin:0 0 16px; opacity:.92; line-height:1.55; }
+.ix-hero-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+/* 하단 스크롤 인디케이터 */
 .ix-scroll-ind{
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  translate: -50% 0;
-  width: 24px; height: 36px;
-  border: 1.5px solid color-mix(in srgb, var(--fg), transparent 70%);
-  border-radius: 16px;
-  opacity:.75;
+  position:absolute; left:50%; bottom:18px; translate:-50% 0;
+  width:24px; height:36px; border:1.5px solid color-mix(in srgb, var(--fg), transparent 70%);
+  border-radius:16px; opacity:.75;
 }
 .ix-scroll-ind::after{
-  content:"";
-  position:absolute; left:50%; top:8px;
-  width: 4px; height: 8px; border-radius: 3px;
-  background: var(--fg);
-  translate: -50% 0;
-  animation: ixScroll 1.6s ease-in-out infinite;
+  content:""; position:absolute; left:50%; top:8px; width:4px; height:8px; border-radius:3px;
+  background: var(--fg); translate:-50% 0; animation: ixScroll 1.6s ease-in-out infinite;
 }
-@keyframes ixScroll{
-  0%{ transform: translateY(0); opacity:1; }
-  60%{ transform: translateY(12px); opacity:.2; }
-  100%{ transform: translateY(0); opacity:1; }
-}
+@keyframes ixScroll{ 0%{ transform: translateY(0); opacity:1 } 60%{ transform: translateY(12px); opacity:.2 } 100%{ transform: translateY(0); opacity:1 } }
 
-/* ----------------------------
-   6) 반응형 타이포 강약 (index만 약간 더 세게)
------------------------------ */
-.bs-hero__line--fixed-top,
-.bs-hero__line--fixed-bottom{ font-weight: 700; }
-.bs-hero__line--typing{ font-weight: 800; }
-
-@media (max-width: 768px){
-  .bs-hero__line--fixed-top,
-  .bs-hero__line--fixed-bottom{ opacity:.95 }
-  .bs-hero__line--typing{ border-bottom-width: 2px }
-}
-
-/* ----------------------------
-   7) 접근성 대비 (다크/라이트 모두)
------------------------------ */
-:root[data-theme="light"] .ix-hero-pane{
-  /* 라이트에서 대비를 조금 더 */
-  border-color: color-mix(in srgb, var(--fg), transparent 78%);
+/* 모바일 여백 */
+@media (max-width: 900px){
+  .bs-hero__title{ height: clamp(160px, 24vh, 220px); }
+  .ix-hero-pane{ width: min(92vw, 560px); }
 }

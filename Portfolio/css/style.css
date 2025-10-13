@@ -1,0 +1,4 @@
+<!-- 전역 공통 -->
+<link rel="stylesheet" href="assets/css/main.css">
+<!-- ✅ 인덱스 전용 (이 파일이 main.css의 일부 토큰을 “안전하게” 오버라이드) -->
+<link rel="stylesheet" href="assets/css/index.css">

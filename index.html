@@ -10,6 +10,9 @@
   <meta name="description" content="데이터 기반 사고를 시각적으로 표현하는 PM형 포트폴리오. 프로젝트·데이터 인사이트·브랜딩·성장 일지로 통합 역량을 보여줍니다.">
   <meta name="keywords" content="강반석, 포트폴리오, 데이터분석, PM, 마케팅, 브랜딩">
   <meta name="theme-color" content="#0f0f0f">
+  <!-- body 끝나기 직전에 로드 -->
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
 
   <!-- [파비콘/아이콘] 내부 assets 사용 (필요 시 경로 교체) -->
   <link rel="icon" href="assets/favicon/favicon-32.png" sizes="32x32">
@@ -156,149 +159,5 @@
       <a class="bs-footer__top" href="#top" aria-label="맨 위로 이동">↑</a>
     </div>
   </footer>
-
-  <!-- =========================
-       전역/인덱스 스크립트 (외부 라이브러리 없음)
-  ========================== -->
-  <script>
-  /* --------------------------------------
-     헬퍼
-  --------------------------------------- */
-  const $ = (sel, root=document) => root.querySelector(sel);
-
-  /* --------------------------------------
-     테마(다크/라이트) 토글
-  --------------------------------------- */
-  (function themeInit(){
-    const btn = $('#themeToggle');
-    const doc = document.documentElement;
-    const theme = doc.getAttribute('data-theme') || 'dark';
-    const set = (mode) => {
-      doc.setAttribute('data-theme', mode);
-      localStorage.setItem('bs-theme', mode);
-      if(btn){
-        btn.setAttribute('aria-pressed', String(mode==='dark'));
-        btn.querySelector('.icon').textContent = mode==='dark' ? '🌙' : '☀️';
-      }
-    };
-    set(theme);
-    if(btn){
-      btn.addEventListener('click', ()=>{
-        const next = (doc.getAttribute('data-theme')==='dark') ? 'light' : 'dark';
-        set(next);
-      });
-    }
-  })();
-
-  /* --------------------------------------
-     히어로 3행 타이핑 (저는 / [타이핑] / 입니다)
-     - 수정: #typingTarget[data-roles]에 직무 콤마로 나열
-  --------------------------------------- */
-  (function typingInit(){
-    const el = $('#typingTarget');
-    if(!el) return;
-    const roles = (el.getAttribute('data-roles') || '').split(',').map(s=>s.trim()).filter(Boolean);
-    if(roles.length === 0) return;
-
-    let idx = 0, pos = 0, dir = 1; // 1: 타이핑, -1: 백스페이스
-    const speedType = 85, speedBack = 45, holdAfterType = 1200, holdAfterErase = 300;
-
-    function loop(){
-      const current = roles[idx];
-
-      if(dir === 1){
-        pos++; el.textContent = current.slice(0, pos);
-        if(pos === current.length){ dir = -1; return setTimeout(loop, holdAfterType); }
-        return setTimeout(loop, speedType);
-      }else{
-        pos--; el.textContent = current.slice(0, Math.max(0,pos));
-        if(pos === 0){ dir = 1; idx = (idx+1) % roles.length; return setTimeout(loop, holdAfterErase); }
-        return setTimeout(loop, speedBack);
-      }
-    }
-    loop();
-  })();
-
-  /* --------------------------------------
-     인덱스 전용: 헤더 투명 → 스크롤 시 배경 활성
-  --------------------------------------- */
-  (function headerScrollState(){
-    const root = document.body;
-    const onScroll = () => {
-      if(window.scrollY > 8) root.classList.add('scrolled');
-      else root.classList.remove('scrolled');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, {passive:true});
-  })();
-
-  /* --------------------------------------
-     프로필 3장 자동 슬라이더(켄번스+슬라이드)
-     - data-interval(ms)로 속도 조정
-     - 호버 시 일시정지, 버튼으로 토글
-  --------------------------------------- */
-  (function profileSlider(){
-    const fig = document.querySelector('.ix-profile');
-    if(!fig) return;
-
-    const imgs = Array.from(fig.querySelectorAll('.ix-profile__img'));
-    if(imgs.length <= 1) return;
-
-    const btn  = fig.querySelector('.ix-profile__toggle');
-    const interval = Number(fig.getAttribute('data-interval')) || 3000;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let idx = imgs.findIndex(i => i.classList.contains('is-active'));
-    if(idx < 0) idx = 0;
-    let playing = true;
-    let timer = null;
-
-    function show(next){
-      const cur = imgs[idx];
-      const nxt = imgs[next];
-      if(cur === nxt) return;
-
-      cur.classList.remove('is-active');
-      cur.classList.add('is-leaving');      // 나감 이펙트
-      nxt.classList.add('is-active');       // 진입 이펙트
-      setTimeout(()=> cur.classList.remove('is-leaving'), 650);
-
-      idx = next;
-    }
-    const nextIndex = () => (idx + 1) % imgs.length;
-
-    function tick(){ show(nextIndex()); schedule(); }
-    function schedule(){ clearTimeout(timer); if(playing){ timer = setTimeout(tick, interval); } }
-
-    schedule();
-
-    // 호버 시 일시정지/재개
-    fig.addEventListener('mouseenter', ()=>{ playing = false; clearTimeout(timer); if(btn) btn.setAttribute('aria-pressed','true'); });
-    fig.addEventListener('mouseleave', ()=>{ playing = true; schedule(); if(btn) btn.setAttribute('aria-pressed','false'); });
-
-    // 버튼 토글
-    if(btn){
-      btn.addEventListener('click', ()=>{
-        playing = !playing;
-        btn.setAttribute('aria-pressed', String(!playing)); // true=일시정지 상태
-        if(playing) schedule(); else clearTimeout(timer);
-      });
-    }
-
-    // 모션 민감 사용자 배려
-    if(prefersReduced){
-      imgs.forEach(img => img.style.transition = 'opacity .2s linear');
-    }
-  })();
-
-  /* --------------------------------------
-     푸터 연도 자동 갱신
-  --------------------------------------- */
-  (function yearInit(){
-    const y = new Date().getFullYear();
-    const el = document.getElementById('year');
-    if(el) el.textContent = y;
-  })();
-  </script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+__pycache__/
+node_modules/
+.env
+.env.*

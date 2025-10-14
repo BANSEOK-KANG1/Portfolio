@@ -113,6 +113,32 @@ function attachOpenEvents(){
   });
 }
 attachOpenEvents();
+// 시트 열고 닫을 때 바디 스크롤 잠금
+function lockScroll(on){
+  document.body.classList.toggle('is-sheet-open', !!on);
+}
+function openSheet(p){  // 기존 함수 내부의 마지막 부분 교체
+  imgEl.src=''; imgEl.removeAttribute('src');
+  if(p.img){ imgEl.src=p.img; imgEl.alt=p.title; imgEl.onerror=()=>imgEl.removeAttribute('src'); }
+  titleEl.textContent = p.title || '(제목 없음)';
+  tagsEl.innerHTML = (p.tags||[]).map(t=>`<li>#${t}</li>`).join('');
+  descEl.textContent = p.desc || '';
+  metaEl.innerHTML = `
+    <li><strong>기간:</strong> ${p.period||'-'}</li>
+    <li><strong>맡은 일:</strong> ${p.role||'-'}</li>
+  `;
+  linkEl.href = p.link || '#';
+
+  sheet.removeAttribute('hidden');
+  sheet.setAttribute('aria-hidden','false');
+  lockScroll(true);
+  sheet.querySelector('.pj-sheet__close').focus();
+}
+function closeSheet(){
+  sheet.setAttribute('hidden','');
+  sheet.setAttribute('aria-hidden','true');
+  lockScroll(false);
+}
 
 // 닫기/ESC/배경 클릭
 closeEls.forEach(el=> el.addEventListener('click', closeSheet));

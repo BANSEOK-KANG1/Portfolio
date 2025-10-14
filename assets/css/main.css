@@ -138,3 +138,5 @@ body::after{
 /* 푸터 */
 .bs-footer{ padding: 36px 0; color: color-mix(in srgb, var(--fg), transparent 20%); }
 .bs-footer__top{ float:right; text-decoration:none; }
+
+body.is-sheet-open{ overflow:hidden; }

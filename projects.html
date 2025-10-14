@@ -71,29 +71,32 @@
   </main>
 
   <!-- 상세 시트(오버레이) -->
-  <div id="pjSheet" class="pj-sheet" hidden aria-hidden="true">
-    <div class="pj-sheet__backdrop" data-close></div>
-    <article class="pj-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="pjTitle">
-      <button class="pj-sheet__close" type="button" aria-label="닫기" data-close>×</button>
+<div id="pjSheet" class="pj-sheet" hidden aria-hidden="true">
+  <div class="pj-sheet__backdrop" data-close></div>
 
-      <div class="pj-sheet__media">
-        <img id="pjImg" alt="" />
-      </div>
+  <article class="pj-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="pjTitle">
+    <button class="pj-sheet__close" type="button" aria-label="닫기" data-close>×</button>
 
+    <!-- 왼쪽: 이미지 -->
+    <div class="pj-sheet__media">
+      <img id="pjImg" alt="">
+    </div>
+
+    <!-- 오른쪽: 텍스트(헤더+본문을 하나로) -->
+    <section class="pj-sheet__body">
       <header class="pj-sheet__head">
         <h2 id="pjTitle"></h2>
         <ul id="pjTags" class="tags"></ul>
       </header>
 
-      <section class="pj-sheet__body">
-        <p id="pjDesc" class="pj-desc"></p>
-        <ul class="pj-meta" id="pjMeta"></ul>
-        <div class="pj-actions">
-          <a id="pjLink" class="bs-btn bs-btn--accent" target="_blank" rel="noopener">프로젝트 바로가기</a>
-        </div>
-      </section>
-    </article>
-  </div>
+      <p id="pjDesc" class="pj-desc"></p>
+      <ul class="pj-meta" id="pjMeta"></ul>
+      <div class="pj-actions">
+        <a id="pjLink" class="bs-btn bs-btn--accent" target="_blank" rel="noopener">프로젝트 바로가기</a>
+      </div>
+    </section>
+  </article>
+</div>
 
   <footer class="bs-footer">
     <div class="bs-container">

@@ -11,26 +11,22 @@ window.$ = window.$ || ((s, r = document) => r.querySelector(s));
 
 /* 테마 토글(아이콘 전환 + data-theme 저장) */
 (function(){
-  const btn = $('#themeToggle');
-  const doc = document.documentElement;
-
-  const set = (mode) => {
-    doc.setAttribute('data-theme', mode);
-    try{ localStorage.setItem('bs-theme', mode); }catch(e){}
-    if(btn){
-      btn.setAttribute('aria-pressed', String(mode==='dark'));
-      const icon = btn.querySelector('.icon');
-      if(icon) icon.textContent = mode==='dark' ? '🌙' : '☀️';
-    }
-  };
-
-  set(doc.getAttribute('data-theme') || 'dark');
-  if(btn){
-    btn.addEventListener('click', ()=>{
-      const next = (doc.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
-      set(next);
-    });
+  const DOC = document.documentElement;
+  function get() { return DOC.getAttribute('data-theme') || localStorage.getItem('bs-theme') || 'light'; }
+  function set(m){
+    DOC.setAttribute('data-theme', m);
+    try{ localStorage.setItem('bs-theme', m); }catch(e){}
+    const btn = document.getElementById('themeToggle');
+    if(btn){ btn.setAttribute('aria-pressed', String(m==='dark')); btn.textContent = (m==='dark') ? '🌙' : '☀️'; btn.title = (m==='dark'?'다크 모드':'라이트 모드'); }
   }
+  set(get());
+  window.addEventListener('DOMContentLoaded', ()=>{
+    const btn = document.getElementById('themeToggle');
+    if(btn && !btn.dataset.bound){
+      btn.dataset.bound='1';
+      btn.addEventListener('click', ()=> set(get()==='dark'?'light':'dark'), {passive:true});
+    }
+  });
 })();
 
 /* 헤더 스크롤 상태 (배경 농도 살짝) */

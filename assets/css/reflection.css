@@ -1,26 +1,300 @@
-.page--reflection .rf-hero{
-  padding: calc(var(--header-h) + 24px) 0 10px;
-  background: color-mix(in srgb, var(--bg), var(--fg) 2%);
+/* ===== 성장 일지 전용 ===== */
+/* 페이지 스코프 색상 오버라이드 */
+:root[data-theme="light"] .page--reflection{
+  --bg: #f6f1e7;          /* 크림빛 배경 */
+  --fg: #3b2e22;          /* 진한 브라운 텍스트 */
+  --sand: #eadfcf;        /* 샌드 보조 */
+  --accent: #a67c37;      /* 기존 포인트와 일관 */
 }
-.rf-title{font-size:clamp(28px,5vw,40px);font-weight:900;margin:0 0 6px;}
-.rf-sub{color:color-mix(in srgb,var(--fg),transparent 15%);margin:0;}
+:root[data-theme="dark"] .page--reflection{
+  /* 다크는 기존 토큰 유지 (필요시 보정) */
+  --bg: #0f0f0f;
+  --fg: #e9e4d8;
+  --sand: #2a2722;
+}
+.page--reflection{ color: var(--fg); }
 
-.rf-list{padding:10px 0 56px;}
+:root{
+  --rf-accent: var(--accent);
+  --rf-radius: 16px;
+}
+
+/* 히어로 */
+.rf-hero{
+  padding: clamp(48px,6vw,72px) 0 16px;
+  background:
+    radial-gradient(60% 40% at 75% 0%, color-mix(in srgb, var(--rf-accent), transparent 90%) 0, transparent 60%),
+    color-mix(in srgb, var(--bg), var(--fg) 2%);
+  border-bottom: 1px solid color-mix(in srgb, var(--fg), transparent 86%);
+}
+.rf-title{ font: 900 clamp(26px,4.6vw,40px)/1.15 var(--font-sans); margin:0 0 6px; }
+.rf-sub{ opacity:.9; line-height:1.6; margin:0; }
+
+/* 월별 요약 스택바 */
+.rf-summary{
+  margin-top: 18px;
+  border: 1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  border-radius: var(--rf-radius);
+  padding: 10px;
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  overflow-x: auto;
+}
+
+/* 바디 그리드 */
+.rf-body{ padding: 24px 0 64px; }
+.rf-grid{
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: clamp(16px,3vw,28px);
+}
+@media (max-width: 980px){
+  .rf-grid{ grid-template-columns: 1fr; }
+}
+
+/* 사이드 카드 */
 .rf-card{
-  border:1px solid color-mix(in srgb,var(--fg),transparent 84%);
-  background:color-mix(in srgb,var(--bg),var(--fg) 3%);
-  border-radius:16px; padding:16px; margin-bottom:14px;
-  transition:transform .18s ease,box-shadow .18s ease;
+  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  border-radius: var(--rf-radius);
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  padding: 12px;
 }
-.rf-card:hover{transform:translateY(-4px);
-  box-shadow:0 10px 30px color-mix(in srgb,var(--fg),transparent 90%);
+.rf-card + .rf-card{ margin-top: 12px; }
+.rf-card__head{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  margin-bottom: 10px;
 }
-.rf-card h2{margin:0 0 4px;font-size:20px;font-weight:800;}
-.rf-card time{font-size:13px;opacity:.7;}
-.rf-card p{margin:6px 0 10px;}
-.rf-tags{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap;}
-.rf-tags li{
-  padding:4px 8px;border-radius:999px;font-size:12px;
-  background:color-mix(in srgb,var(--bg),var(--fg) 4%);
-  border:1px solid color-mix(in srgb,var(--fg),transparent 82%);
+.rf-card__title{ font-weight:800; margin:0; }
+
+/* 월 내비 */
+.rf-month-nav{ display:flex; align-items:center; gap:8px; }
+.rf-month-label{ font-weight:700; min-width: 148px; text-align:center; }
+.rf-icon-btn{
+  width:28px;height:28px;border-radius:8px;border:1px solid color-mix(in srgb, var(--fg), transparent 82%);
+  background: transparent; cursor:pointer;
 }
+.rf-icon-btn:hover{ background: color-mix(in srgb, var(--rf-accent), transparent 90%); }
+
+/* 달력 */
+.rf-calendar{
+  display:grid; grid-template-columns: repeat(7, 1fr);
+  gap:6px;
+}
+.rf-cal-head, .rf-cal-day{
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size: 13px;
+}
+.rf-cal-head{ opacity:.6; }
+.rf-cal-day{
+  border:1px solid color-mix(in srgb, var(--fg), transparent 88%);
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  position:relative; cursor:pointer;
+}
+.rf-cal-day.is-out{ opacity:.35; pointer-events:none; }
+.rf-cal-day:hover{ outline:2px solid color-mix(in srgb, var(--rf-accent), transparent 40%); }
+.rf-cal-day.is-selected{ outline:2px solid var(--rf-accent); }
+
+/* 날짜의 카테고리 점(최대 4개) */
+.rf-dots{
+  position:absolute; left:50%; bottom:6px; transform:translateX(-50%);
+  display:flex; gap:3px;
+}
+.dot{ width:6px; height:6px; border-radius:50%; display:inline-block; }
+.dot--분석{ background:#2f80ed; }
+.dot--마케팅{ background:#27ae60; }
+.dot--ab{ background:#f2994a; }
+.dot--pm{ background:#c4a46a; }
+.dot--기획{ background:#8e44ad; }
+.dot--리서치{ background:#e74c3c; }
+
+.rf-legend{ display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; font-size:12px; opacity:.85; }
+
+/* 칩 필터 */
+.rf-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.rf-chip{
+  padding:6px 10px; border-radius:999px; cursor:pointer;
+  border:1px solid color-mix(in srgb, var(--fg), transparent 80%);
+  background:transparent;
+  font-size:13px;
+}
+.rf-chip.is-on{
+  background: var(--rf-accent);
+  color:#111;
+  border-color: color-mix(in srgb, #000, transparent 70%);
+}
+
+/* 리스트 */
+.rf-list__head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom: 12px;
+}
+.rf-active-filters{ display:flex; gap:6px; flex-wrap:wrap; }
+.rf-stats{ opacity:.85; }
+
+.rf-cards{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* 카드 */
+.rf-card-post{
+  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  border-radius: var(--rf-radius);
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  overflow:hidden;
+  display:flex; flex-direction:column; gap:10px;
+  padding: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.rf-card-post:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--fg), transparent 92%);
+}
+.rf-post-head{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+.rf-post-title{ font-weight:800; margin:0; font-size:16px; line-height:1.35; }
+.rf-post-date{ opacity:.7; font-size:12px; white-space:nowrap; }
+.rf-post-desc{ margin:0; opacity:.92; line-height:1.55; font-size:14px; }
+
+.rf-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+.rf-tag{ font-size:12px; border-radius:999px; padding:4px 8px;
+  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+}
+
+/* 링크 버튼 */
+.rf-links{ display:flex; gap:8px; margin-top:2px; }
+.rf-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 12px; border-radius:10px;
+  background: var(--rf-accent); color:#111; text-decoration:none; font-weight:700;
+  border:1px solid color-mix(in srgb, #000, transparent 70%);
+  box-shadow: 0 1px 0 color-mix(in srgb, #000, transparent 75%);
+  transition: transform .15s ease, box-shadow .2s ease, background .15s ease;
+}
+.rf-btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,.25); }
+
+/* 요약 스파크(카드 우측 상단) */
+.rf-spark{ width:110px; height:32px; }
+
+.rf-center{ text-align:center; }
+.hl{ color: var(--accent); font-weight: 900; }
+.rf-title{ letter-spacing: .2px; }
+.rf-sub b{ font-weight: 900; }
+
+/* ===== 인사이트 카드 ===== */
+.rf-insights{ display:grid; gap:12px; grid-template-columns: 1fr 1fr; margin-top:12px; }
+@media (max-width: 980px){ .rf-insights{ grid-template-columns: 1fr; } }
+.rf-card--insight .rf-card__hint{ opacity:.7; }
+
+/* ===== 히트맵 ===== */
+.rf-heatmap svg{ width:100%; height:auto; display:block; }
+.rf-hm-label{ font-size:11px; opacity:.8; fill: currentColor; }
+
+/* 색 단계(라이트/다크 모두 대비 확보) */
+:root[data-theme="light"]{
+  --hm0: color-mix(in srgb, var(--bg), var(--fg) 6%);
+  --hm1: color-mix(in srgb, var(--accent), transparent 85%);
+  --hm2: color-mix(in srgb, var(--accent), transparent 70%);
+  --hm3: color-mix(in srgb, var(--accent), transparent 50%);
+  --hm4: color-mix(in srgb, var(--accent), transparent 35%);
+  --hm5: color-mix(in srgb, var(--accent), transparent 20%);
+}
+:root[data-theme="dark"]{
+  --hm0: color-mix(in srgb, var(--bg), var(--fg) 8%);
+  --hm1: color-mix(in srgb, var(--accent), transparent 88%);
+  --hm2: color-mix(in srgb, var(--accent), transparent 72%);
+  --hm3: color-mix(in srgb, var(--accent), transparent 56%);
+  --hm4: color-mix(in srgb, var(--accent), transparent 40%);
+  --hm5: color-mix(in srgb, var(--accent), transparent 24%);
+}
+
+/* ===== 레이더 ===== */
+.rf-radar svg{ width:100%; height:auto; display:block; }
+.rf-radar .axis{ stroke: color-mix(in srgb, var(--fg), transparent 80%); stroke-width:1; }
+.rf-radar .grid{ stroke: color-mix(in srgb, var(--fg), transparent 88%); stroke-width:.8; }
+.rf-radar .shape{ fill: color-mix(in srgb, var(--accent), transparent 80%); stroke: var(--accent); stroke-width:2; filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--fg), transparent 92%)); }
+.rf-radar .pt{ fill: var(--accent); }
+
+/* ===== 필터 전환 애니메이션 ===== */
+.rf-cards.is-swapping{ opacity:.6; transform: scale(.99); transition: transform .15s ease, opacity .15s ease; }
+.rf-cards.done-swapping{ opacity:1; transform: none; transition: transform .2s ease, opacity .2s ease; }
+
+/* 리스트 카드 등장 */
+@keyframes rfFadeUp {
+  from{ opacity:0; transform: translateY(6px); }
+  to{ opacity:1; transform: none; }
+}
+.rf-card-post{ animation: rfFadeUp .25s ease both; }
+
+/* ===== Heatmap cells ===== */
+.hm-cell {
+  transition: transform .25s ease, opacity .25s ease, filter .2s ease;
+}
+.hm-cell:hover { transform: scale(1.08); filter: brightness(1.06); }
+
+/* ===== Radar ===== */
+.radar-grid   { stroke: color-mix(in srgb, var(--fg), transparent 82%); }
+.radar-axis   { stroke: color-mix(in srgb, var(--fg), transparent 86%); }
+.radar-stroke {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  transition: stroke-dashoffset 800ms ease-out;
+}
+.radar-shape  {
+  fill: color-mix(in srgb, var(--accent), white 82%);
+  stroke: none;
+  transform-origin: center;
+  opacity: .85;
+}
+.radar-dot    { fill: var(--accent); transition: opacity .25s ease; }
+
+/* ‘숨쉬기’ 펄스 */
+@keyframes radarBreath {
+  0%, 100% { transform: scale(1);   opacity: .85; }
+  50%      { transform: scale(1.04); opacity: .92; }
+}
+.radar-pulse { animation: radarBreath 2.8s ease-in-out infinite; }
+
+/* 두 보드(히트맵/레이더)가 카드 안에 있을 때 보기 좋게 */
+.rf-board svg { max-width: 100%; display: block; }
+
+/* ===== 3-up boards (summary + heatmap + radar) ===== */
+.rf-boards { padding: 18px 0 10px; }
+.rf-boards__grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: clamp(12px, 2.6vw, 20px);
+}
+@media (max-width: 1200px){
+  .rf-boards__grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 720px){
+  .rf-boards__grid{ grid-template-columns: 1fr; }
+}
+
+.rf-board{
+  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  padding: 10px 10px 12px;
+}
+.rf-board__head h3{ margin: 2px 6px 8px; font-weight: 900; }
+
+.rf-board__canvas{
+  /* 고정된 높이(보이는 면적 확보) + 내부 SVG는 width:100% */
+  min-height: 210px;           /* 모든 보드의 공통 높이 */
+  display: grid; place-items: center;
+}
+.rf-board svg{ width: 100%; height: auto; display:block; }
+
+/* Board별 미세 보정 */
+#rfSummary svg{ max-height: 190px; }
+#rfHeatmap  svg{ max-height: 190px; }
+#rfRadar    svg{ max-height: 190px; }
+
+/* 다크·라이트 모두 가독성 유지 */
+.rf-board .rf-hm-label{ fill: currentColor; font-size: 11px; opacity:.8; }

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>연락처 | 강반석 포트폴리오</title>
+  <meta name="description" content="문의, 협업 제안, 네트워킹을 위한 연락 페이지.">
+
+  <script>
+    (function(){try{
+      const saved = localStorage.getItem("bs-theme");
+      if(saved) document.documentElement.setAttribute("data-theme", saved);
+    }catch(e){}})();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/contact.css" />
+</head>
+
+<body id="top" class="page page--contact">
+  <header id="site-header" class="bs-header">
+    <div class="bs-container">
+      <a href="index.html" class="bs-logo">
+        <span class="logo-main">BanSeok</span>
+        <span class="logo-sub">Portfolio</span>
+      </a>
+      <nav class="bs-nav">
+        <ul class="bs-nav__list">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="projects.html">프로젝트</a></li>
+          <li><a href="data-insight.html">데이터 인사이트</a></li>
+          <li><a href="branding.html">브랜딩</a></li>
+          <li><a href="reflection.html">성장 일지</a></li>
+          <li><a class="is-active" href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <button id="themeToggle" class="theme-toggle"><span class="icon">🌙</span></button>
+
+  <main class="bs-main">
+    <section class="ct-hero">
+      <div class="bs-container">
+        <h1 class="ct-title">연락하기</h1>
+        <p class="ct-sub">협업·문의·아이디어 제안 모두 환영합니다.<br>
+        아래 양식 또는 SNS를 통해 메시지를 남겨주세요.</p>
+      </div>
+    </section>
+
+    <section class="ct-body">
+      <div class="bs-container ct-grid">
+        <!-- 폼 -->
+        <form id="contactForm" class="ct-form">
+          <label>이름<input type="text" id="name" required></label>
+          <label>이메일<input type="email" id="email" required></label>
+          <label>메시지<textarea id="message" rows="5" required></textarea></label>
+          <button class="bs-btn bs-btn--accent" type="submit">보내기</button>
+          <p id="formMsg" class="form-msg" aria-live="polite"></p>
+        </form>
+
+        <!-- 사이드 -->
+        <aside class="ct-info">
+          <h2>Social Links</h2>
+          <ul>
+            <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></li>
+            <li><a href="mailto:hello@banseok.kr">Email</a></li>
+          </ul>
+
+          <h2>위치</h2>
+          <div class="map-wrap">
+            <iframe title="Map" style="border:0;width:100%;height:220px;border-radius:12px;"
+              loading="lazy"
+              allowfullscreen
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.1225894058287!2d126.977969!3d37.566535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca310b4a343bb%3A0xd3cddda7993e6f8e!2z7ISc7Jq47Yq567OE7IucIOuMgOyWkeyngOyngOyngOygkA!5e0!3m2!1sko!2skr!4v1710000000000">
+            </iframe>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bs-footer">
+    <div class="bs-container">
+      <p class="bs-footer__brand">© <span id="year"></span> banseok. 통합은 힘입니다.</p>
+      <a href="#top" class="bs-footer__top">↑</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/contact.js" defer></script>
+</body>
+</html>

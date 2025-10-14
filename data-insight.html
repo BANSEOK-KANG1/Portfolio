@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>데이터 인사이트 | 강반석 포트폴리오</title>
+  <meta name="description" content="지표·트렌드·세그먼트 분석을 인터랙티브하게 탐색합니다.">
+
+  <!-- 저장된 테마 즉시 적용 -->
+  <script>
+    (function(){try{
+      const saved = localStorage.getItem("bs-theme");
+      if(saved){ document.documentElement.setAttribute("data-theme", saved); }
+    }catch(e){}})();
+  </script>
+
+  <!-- 전역/페이지 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/data-insight.css" />
+</head>
+
+<body id="top" class="page page--insight">
+  <!-- 헤더(전역) -->
+  <header id="site-header" class="bs-header" role="banner" aria-label="상단 내비게이션">
+    <div class="bs-container">
+      <a href="index.html" class="bs-logo" aria-label="강반석 포트폴리오 홈">
+        <span class="logo-main">BanSeok</span>
+        <span class="logo-sub">Portfolio</span>
+      </a>
+      <nav id="site-nav" class="bs-nav" role="navigation" aria-label="주요 메뉴">
+        <ul class="bs-nav__list">
+          <li><a class="bs-nav__link" href="index.html">홈</a></li>
+          <li><a class="bs-nav__link" href="projects.html">프로젝트</a></li>
+          <li><a class="bs-nav__link is-active" href="data-insight.html">데이터 인사이트</a></li>
+          <li><a class="bs-nav__link" href="branding.html">브랜딩</a></li>
+          <li><a class="bs-nav__link" href="reflection.html">성장 일지</a></li>
+          <li><a class="bs-nav__link" href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 테마 토글(아이콘만) -->
+  <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">
+    <span class="icon" aria-hidden="true">🌙</span>
+  </button>
+
+  <main id="main" class="bs-main" role="main">
+    <!-- HERO -->
+    <section class="di-hero" aria-label="데이터 인사이트 소개">
+      <div class="bs-container">
+        <h1 class="di-title">데이터 인사이트</h1>
+        <p class="di-sub">주요 지표와 트렌드를 한눈에. 기간·세그먼트를 조절해 즉시 비교하세요.</p>
+      </div>
+    </section>
+
+    <!-- 컨트롤 바: 기간 / 세그먼트 / 검색 / 다운로드 -->
+    <section class="di-controls" aria-label="필터">
+      <div class="bs-container di-controls__inner">
+        <label class="di-field">
+          <span>시작</span>
+          <input id="diFrom" type="date" />
+        </label>
+        <label class="di-field">
+          <span>종료</span>
+          <input id="diTo" type="date" />
+        </label>
+
+        <label class="di-field">
+          <span>세그먼트</span>
+          <select id="diSegment">
+            <option value="all">전체</option>
+            <option value="ios">iOS</option>
+            <option value="android">Android</option>
+            <option value="web">Web</option>
+          </select>
+        </label>
+
+        <label class="di-search">
+          <span class="di-search__icon" aria-hidden="true">🔎</span>
+          <input id="diQuery" type="search" placeholder="이벤트/메모 검색…" />
+        </label>
+
+        <div class="di-actions">
+          <button id="diReset" class="bs-btn bs-btn--ghost" type="button">초기화</button>
+          <button id="diDownload" class="bs-btn bs-btn--accent" type="button">CSV 다운로드</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI 카드 -->
+    <section class="di-kpis" aria-label="핵심 지표">
+      <div class="bs-container di-kpis__grid">
+        <article class="kpi">
+          <h3>세션</h3>
+          <p class="kpi__value" id="kpiSessions">—</p>
+          <p class="kpi__delta" id="deltaSessions">—</p>
+        </article>
+        <article class="kpi">
+          <h3>전환율</h3>
+          <p class="kpi__value" id="kpiConv">—</p>
+          <p class="kpi__delta" id="deltaConv">—</p>
+        </article>
+        <article class="kpi">
+          <h3>매출</h3>
+          <p class="kpi__value" id="kpiRevenue">—</p>
+          <p class="kpi__delta" id="deltaRevenue">—</p>
+        </article>
+        <article class="kpi">
+          <h3>이탈률</h3>
+          <p class="kpi__value" id="kpiBounce">—</p>
+          <p class="kpi__delta" id="deltaBounce">—</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 차트 3종 -->
+    <section class="di-charts" aria-label="차트">
+      <div class="bs-container di-charts__grid">
+        <!-- 트렌드(라인) -->
+        <article class="chart-card">
+          <header><h3>세션 트렌드</h3></header>
+          <canvas id="chartTrend" width="600" height="300" aria-label="세션 트렌드 차트"></canvas>
+        </article>
+
+        <!-- 카테고리(바) -->
+        <article class="chart-card">
+          <header><h3>채널별 세션</h3></header>
+          <canvas id="chartBar" width="600" height="300" aria-label="채널별 세션 막대차트"></canvas>
+        </article>
+
+        <!-- 구 성(도넛) -->
+        <article class="chart-card">
+          <header><h3>기기 비중</h3></header>
+          <canvas id="chartDonut" width="420" height="420" aria-label="기기 비중 도넛차트"></canvas>
+        </article>
+      </div>
+    </section>
+
+    <!-- 데이터 테이블 -->
+    <section class="di-table" aria-label="원본 데이터">
+      <div class="bs-container">
+        <div class="table-wrap">
+          <table id="diTable">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>세그먼트</th>
+                <th>세션</th>
+                <th>전환수</th>
+                <th>전환율</th>
+                <th>매출(₩)</th>
+                <th>이탈률</th>
+                <th>메모</th>
+              </tr>
+            </thead>
+            <tbody><!-- JS 렌더 --></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <footer id="site-footer" class="bs-footer" role="contentinfo">
+    <div class="bs-container">
+      <p class="bs-footer__brand">© <span id="year"></span> banseok. 통합은 힘입니다.</p>
+      <a class="bs-footer__top" href="#top" aria-label="맨 위로 이동">↑</a>
+    </div>
+  </footer>
+
+  <!-- 전역/페이지 JS -->
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/data-insight.js" defer></script>
+</body>
+</html>

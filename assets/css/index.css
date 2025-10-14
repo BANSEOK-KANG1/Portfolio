@@ -69,14 +69,27 @@
 .bs-hero__line{ grid-column:1; z-index:1; }
 .bs-hero__line--fixed-top{ grid-row:1; align-self:end;   justify-self:start; font-size: clamp(18px, 2.4vw, 26px); font-weight:700; }
 .bs-hero__line--typing{
-  position: relative; padding-bottom: .15em;
+  grid-row:2; align-self:center; justify-self:center;
+  font-size: clamp(36px, 6.2vw, 78px);
+  font-weight: 800;
+  display: inline-block;          /* ← 핵심: 텍스트 폭만큼만 */
+  position: relative;
+  padding-bottom: .15em;
 }
 .bs-hero__line--typing::after{
-  content:""; position:absolute; left:0; bottom:0; height:3px;
-  width:0; background: var(--accent);
-  animation: underlineGrow 1.4s ease forwards; /* 글자 나오며 같이 자람 */
+  content:"";
+  position:absolute; left:0; bottom:0; height:3px; width:100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
 }
-@keyframes underlineGrow{ 0%{width:0;opacity:0} 40%{opacity:1} 100%{width:100%;opacity:1} }
+.bs-hero__line--typing.restart-underline::after{
+  animation: underlineGrow 1.1s ease forwards;
+}
+@keyframes underlineGrow{0%   { transform: scaleX(0); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; } }
 .bs-hero__line--fixed-bottom{ grid-row:3; align-self:start; justify-self:end; font-size: clamp(18px, 2.4vw, 26px); font-weight:700; }
 
 /* 소셜 아이콘(축소) */

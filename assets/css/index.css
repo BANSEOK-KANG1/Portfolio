@@ -102,16 +102,18 @@
 
 /* 요약 패널(프로필 카드 대체) */
 .ix-hero-pane{
-  width: clamp(360px, 28vw, 520px);   /* 기존 34vw→28vw, 620→520 상한 */
-  padding: clamp(16px, 2.4vw, 28px);  /* 패딩도 살짝 줄임 */
-  background: color-mix(in srgb, var(--bg), var(--fg) 6%);
-  border: 1px solid color-mix(in srgb, var(--fg), transparent 85%);
+  width: clamp(320px, 26vw, 460px);   /* ← 더 좁게 */
+  padding: clamp(16px, 2.4vw, 28px);
+  background: color-mix(in srgb, var(--bg), var(--fg) 8%);
+  border: 1px solid color-mix(in srgb, var(--fg), transparent 82%);
   border-radius: 24px;
   backdrop-filter: blur(4px);
+
+  align-self: start;                             /* 그리드 기준 위쪽 정렬 */
+  margin-top: clamp(10px, 3vh, 28px);           /* ← 살짝 아래로 */
 }
-.ix-hero-pane__kicker{ font-size:.95rem; opacity:.75; margin-bottom:10px; }
 .ix-hero-pane__title{ margin: 0 0 6px; font-size: clamp(20px, 2.2vw, 24px); }
-.ix-hero-pane__desc { margin: 0 0 14px; line-height: 1.5; }
+.ix-hero-pane__desc { margin: 0 0 12px; line-height: 1.5; }
 .ix-hero-actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
 /* 하단 스크롤 인디케이터 */

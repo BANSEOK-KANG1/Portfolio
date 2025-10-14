@@ -1,333 +1,254 @@
-// ============================
-// data-insight.js — 외부 라이브러리 없이 차트/필터/테이블
-// ============================
+/* =======================
+   데이터 인사이트 전용 JS (Chart.js 스케폴드 포함)
+======================= */
 
-const $  = (s, r=document)=>r.querySelector(s);
-const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+// 모달에서 재사용할 Chart 인스턴스
+let __chartInstance = null;
 
-/* ---------------------------
-   예시 데이터 생성
-   - 날짜: 최근 30일
-   - 세그먼트: ios/android/web
----------------------------- */
-function generateMock(days=30){
-  const today = new Date();
-  const data = [];
-  for(let i=days-1;i>=0;i--){
-    const d = new Date(today); d.setDate(d.getDate()-i);
-    const date = d.toISOString().slice(0,10);
-    const segs = ['ios','android','web'];
-    segs.forEach(seg=>{
-      const base = 500 + Math.round(200*Math.sin((days-i)/5) + Math.random()*120);
-      const sessions = Math.max(50, base + (seg==='web'?60:seg==='ios'?20:-20));
-      const conv = Math.max(2, Math.round(sessions*(0.025 + (seg==='ios'?0.006:0) + (Math.random()*0.008-0.004))));
-      const revenue = conv * (20000 + (seg==='ios'?5000:0) + Math.round(Math.random()*8000));
-      const bounce = Math.min(0.7, Math.max(0.25, 0.4 + (Math.random()*0.1-0.05) + (seg==='web'?0.04:0)));
-      const memo = (Math.random()<0.05) ? '프로모션' : '';
-      data.push({date, segment:seg, sessions, conversions:conv, revenue, bounce, memo});
-    });
+// 가짜 데이터(모달용). 필요시 실제 데이터로 대체
+const INSIGHT_DATA = {
+  i1: {
+    title: '검색 트렌드 리포트 2025Q1',
+    tags: ['트렌드','검색데이터'],
+    // 이미지 대신 라인차트 스케폴드
+    chart: {
+      type: 'line',
+      data: {
+        labels: ['01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+          label: '키워드A',
+          data: [48, 52, 61, 59, 66, 71],
+          tension: 0.35,
+          fill: false
+        },{
+          label: '키워드B',
+          data: [30, 33, 35, 42, 40, 46],
+          tension: 0.35,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { ticks: { precision: 0 } } }
+      }
+    },
+    desc: '검색량/연관어/계절성 데이터를 결합, 사회 관심사 흐름과 잠재 수요를 도출했습니다.',
+    meta: [
+      ['데이터 소스', 'Google Trends · 네이버 데이터랩'],
+      ['분석 포인트', '수요 전조지표, 시차/상관, 키워드 클러스터'],
+      ['형식', 'PDF 리포트 + 시트']
+    ],
+    link: '#'
+  },
+  i2: {
+    title: '광고 효율 대시보드',
+    tags: ['마케팅','성과분석'],
+    chart: {
+      type: 'bar',
+      data: {
+        labels: ['검색광고','SNS피드','동영상','디스플레이'],
+        datasets: [{
+          label: 'CTR(%)',
+          data: [4.2, 2.8, 3.4, 1.9],
+          yAxisID: 'y1'
+        },{
+          label: '전환율(%)',
+          data: [2.1, 1.2, 1.6, 0.8],
+          yAxisID: 'y2'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          y1: { type: 'linear', position: 'left', min: 0, ticks: { callback:v=>v+'%' } },
+          y2: { type: 'linear', position: 'right', min: 0, grid: { drawOnChartArea: false }, ticks: { callback:v=>v+'%' } }
+        }
+      }
+    },
+    desc: '채널별 CTR/전환율/ROAS를 비교해 예산 재배분 레버리지를 도출했습니다.',
+    meta: [
+      ['지표', '노출 · 클릭 · 전환 · CPA · ROAS'],
+      ['인사이트', '모바일 피드형 CTR↑, 검색브랜드 전환율↑'],
+      ['형식', '인터랙티브 대시보드']
+    ],
+    link: '#'
+  },
+  i3: {
+    title: '유저 리텐션 분석',
+    tags: ['사용자행동','리텐션'],
+    chart: {
+      type: 'line',
+      data: {
+        labels: ['D1','D3','D7','D14','D21','D30'],
+        datasets: [{
+          label: '리텐션(%)',
+          data: [42, 33, 27, 21, 18, 15],
+          tension: 0.3,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { suggestedMin: 0, suggestedMax: 60, ticks: { callback:v=>v+'%' } } }
+      }
+    },
+    desc: '코호트별 잔존율을 기반으로 리텐션을 세분화하고, 재방문 경로를 시각화했습니다.',
+    meta: [
+      ['코호트', '가입 주차 기준'],
+      ['핵심', 'D1/D7/D30 잔존 · 재활성 큐'],
+      ['형식', '히트맵 · 퍼널']
+    ],
+    link: '#'
+  },
+  i4: {
+    title: '랜딩 A/B 테스트',
+    tags: ['AB테스트','가설검증'],
+    chart: {
+      type: 'bar',
+      data: {
+        labels: ['A','B'],
+        datasets: [{
+          label: '전환율(%)',
+          data: [3.1, 4.9]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display:false } },
+        scales: { y: { suggestedMin: 0, suggestedMax: 6, ticks: { callback:v=>v+'%' } } }
+      }
+    },
+    desc: '히어로 문구/CTA 대비 실험을 설계하고 통계적 유의성(α=0.05)으로 판단했습니다.',
+    meta: [
+      ['실험 대상', '신규 유입 랜딩'],
+      ['결과', '변형B의 전환율 +8.2%p(유의)'],
+      ['형식', '테스트 리포트']
+    ],
+    link: '#'
+  },
+  i5: {
+    title: '통찰 노트: 구매 장벽',
+    tags: ['인사이트','레버리지'],
+    // 이 항목은 이미지를 계속 활용하고 싶다면 chart 속성을 생략하고 img를 사용 가능
+    img: 'assets/img/insight/insight-5.jpg',
+    desc: '퍼널 이탈 구간을 진단하고 질문/카피/보장 정책으로 장벽을 낮추는 방안을 제시합니다.',
+    meta: [
+      ['퍼널', '노출 → 클릭 → 상세 체류 → 장바구니 → 결제'],
+      ['Quick Win', 'FAQ/보장정책 · 간결한 체크아웃'],
+      ['형식', '텍스트 노트']
+    ],
+    link: '#'
   }
-  return data;
-}
-
-const RAW = generateMock(30);
-
-/* ---------------------------
-   상태/필터
----------------------------- */
-const state = {
-  from: null,
-  to:   null,
-  segment: 'all',
-  query: ''
 };
 
-function applyFilters(rows){
-  return rows.filter(r=>{
-    const okSeg = (state.segment==='all' || r.segment===state.segment);
-    const okFrom = !state.from || r.date >= state.from;
-    const okTo = !state.to || r.date <= state.to;
-    const okQ = !state.query || (r.memo||'').toLowerCase().includes(state.query.toLowerCase());
-    return okSeg && okFrom && okTo && okQ;
+// 유틸
+const $ = (s, r=document)=>r.querySelector(s);
+const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+
+/* ---------- 필터칩 ---------- */
+(function filterChips(){
+  const chips = $$('.chip-list .chip');
+  const cards = $$('.insight-card');
+
+  function apply(cat){
+    cards.forEach(card=>{
+      const on = (cat==='all') || card.dataset.cat===cat;
+      card.style.display = on ? '' : 'none';
+    });
+  }
+  chips.forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chips.forEach(c=>c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      apply(chip.dataset.cat);
+    });
   });
-}
-
-/* ---------------------------
-   KPI 계산
----------------------------- */
-function computeKPI(rows){
-  const byDate = {};
-  rows.forEach(r=>{
-    if(!byDate[r.date]) byDate[r.date] = {sessions:0, conversions:0, revenue:0, bounce:0, cnt:0};
-    byDate[r.date].sessions += r.sessions;
-    byDate[r.date].conversions += r.conversions;
-    byDate[r.date].revenue += r.revenue;
-    byDate[r.date].bounce += r.bounce; // 평균 위해 합산
-    byDate[r.date].cnt += 1;
-  });
-
-  const days = Object.keys(byDate).sort();
-  if(days.length===0) return { sessions:0, conv:0, revenue:0, bounce:0, delta:{} };
-
-  const last = days[days.length-1];
-  const prev = days[days.length-2] || last;
-
-  const sum = d => byDate[d];
-
-  const S = sum(last).sessions;
-  const C = sum(last).conversions;
-  const R = sum(last).revenue;
-  const B = sum(last).bounce / sum(last).cnt;
-
-  const Sp = sum(prev).sessions;
-  const Cp = sum(prev).conversions;
-  const Rp = sum(prev).revenue;
-  const Bp = sum(prev).bounce / sum(prev).cnt;
-
-  const pct = (a,b)=> (b===0?0: ((a-b)/b*100));
-
-  return {
-    sessions: S,
-    conv: (C/Math.max(1,S))*100,
-    revenue: R,
-    bounce: B*100,
-    delta: {
-      sessions: pct(S,Sp),
-      conv: pct(C/Math.max(1,S), Cp/Math.max(1,Sp)),
-      revenue: pct(R,Rp),
-      bounce: pct(B,Bp)
-    },
-    series: days.map(d=>({
-      date: d,
-      sessions: byDate[d].sessions,
-      revenue:  byDate[d].revenue
-    }))
-  };
-}
-
-/* ---------------------------
-   테이블 렌더 + CSV
----------------------------- */
-function formatNumber(n){ return n.toLocaleString('ko-KR'); }
-function formatPct(n){ return `${n.toFixed(1)}%`; }
-
-function renderTable(rows){
-  const tb = $('#diTable tbody');
-  tb.innerHTML = rows.map(r=>`
-    <tr>
-      <td>${r.date}</td>
-      <td>${r.segment}</td>
-      <td>${formatNumber(r.sessions)}</td>
-      <td>${formatNumber(r.conversions)}</td>
-      <td>${formatPct(r.conversions/Math.max(1,r.sessions)*100)}</td>
-      <td>${formatNumber(r.revenue)}</td>
-      <td>${formatPct(r.bounce*100)}</td>
-      <td>${r.memo||''}</td>
-    </tr>
-  `).join('');
-}
-
-function downloadCSV(rows){
-  const header = ['date','segment','sessions','conversions','conversion_rate','revenue','bounce_rate','memo'];
-  const lines = [header.join(',')].concat(rows.map(r=>{
-    const cr = (r.conversions/Math.max(1,r.sessions))*100;
-    return [r.date,r.segment,r.sessions,r.conversions,cr.toFixed(2),r.revenue,(r.bounce*100).toFixed(2),`"${(r.memo||'').replace(/"/g,'""')}"`].join(',');
-  }));
-  const blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'data-insight.csv'; a.click();
-  URL.revokeObjectURL(url);
-}
-
-/* ---------------------------
-   캔버스 차트 유틸(바닐라)
----------------------------- */
-function makeCtx(id){ const c = $(id); const ctx = c.getContext('2d'); const dpr = window.devicePixelRatio||1; c.width*=dpr; c.height*=dpr; ctx.scale(dpr,dpr); return ctx; }
-
-function clearCanvas(ctx){
-  const c = ctx.canvas;
-  ctx.clearRect(0,0,c.width, c.height);
-  // 라이트/다크 대비를 위해 반투명 배경
-  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg');
-  ctx.globalAlpha = 0.02; ctx.fillRect(0,0,c.width, c.height); ctx.globalAlpha = 1;
-}
-
-/* 라인 차트 */
-function drawLine(ctx, labels, values, {label='값', color='#888'}={}){
-  clearCanvas(ctx);
-  const {width:W,height:H} = ctx.canvas;
-  const pL=42,pR=16,pT=16,pB=28;
-  const x0 = pL, x1 = W/dpr - pR, y0 = pT, y1 = H/dpr - pB;
-
-  // 축
-  ctx.strokeStyle = 'rgba(127,127,127,.35)'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(x0,y1); ctx.lineTo(x1,y1); ctx.moveTo(x0,y0); ctx.lineTo(x0,y1); ctx.stroke();
-
-  const max = Math.max(...values)*1.12 || 1;
-  const min = 0;
-
-  // 영역
-  ctx.beginPath();
-  values.forEach((v,i)=>{
-    const x = x0 + (x1-x0)*(i/(values.length-1||1));
-    const y = y1 - (y1-y0)*((v-min)/(max-min));
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  });
-  ctx.strokeStyle = color; ctx.lineWidth=2.2; ctx.stroke();
-
-  // 넓은 영역 살짝
-  const grd = ctx.createLinearGradient(0,y0,0,y1);
-  grd.addColorStop(0, color+'33'); grd.addColorStop(1, color+'05');
-  ctx.lineTo(x1,y1); ctx.lineTo(x0,y1); ctx.closePath();
-  ctx.fillStyle = grd; ctx.fill();
-
-  // 라벨 간략화(끝 1개)
-  const last = values[values.length-1]||0;
-  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg'); ctx.font='12px system-ui';
-  ctx.fillText(`${label}: ${last.toLocaleString('ko-KR')}`, x0+6, y0+16);
-}
-
-/* 막대 차트 */
-function drawBar(ctx, labels, values, {color='#888'}={}){
-  clearCanvas(ctx);
-  const {width:W,height:H} = ctx.canvas;
-  const pL=42,pR=16,pT=16,pB=28;
-  const x0 = pL, x1 = W/dpr - pR, y0 = pT, y1 = H/dpr - pB;
-
-  ctx.strokeStyle = 'rgba(127,127,127,.35)'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(x0,y1); ctx.lineTo(x1,y1); ctx.moveTo(x0,y0); ctx.lineTo(x0,y1); ctx.stroke();
-
-  const max = Math.max(...values)*1.1 || 1;
-  const bw = (x1-x0)/values.length*0.68;
-
-  values.forEach((v,i)=>{
-    const x = x0 + (x1-x0)*(i/values.length)+ ((x1-x0)/values.length - bw)/2;
-    const y = y1 - (y1-y0)*(v/max);
-    ctx.fillStyle = color;
-    ctx.fillRect(x,y,bw,y1-y);
-  });
-
-  // 간단한 범례
-  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg'); ctx.font='12px system-ui';
-  ctx.fillText('채널', x0+6, y0+16);
-}
-
-/* 도넛 차트 */
-function drawDonut(ctx, labels, values, colors){
-  clearCanvas(ctx);
-  const {width:W,height:H} = ctx.canvas;
-  const cx = (W/dpr)/2, cy = (H/dpr)/2, r = Math.min(cx,cy)-10;
-  const total = values.reduce((a,b)=>a+b,0) || 1;
-  let start = -Math.PI/2;
-
-  values.forEach((v,i)=>{
-    const ang = v/total * Math.PI*2;
-    ctx.beginPath();
-    ctx.moveTo(cx,cy);
-    ctx.arc(cx,cy,r,start,start+ang);
-    ctx.closePath();
-    ctx.fillStyle = colors[i%colors.length];
-    ctx.fill();
-    start += ang;
-  });
-
-  // 구멍
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.beginPath(); ctx.arc(cx,cy,r*0.62,0,Math.PI*2); ctx.fill();
-  ctx.globalCompositeOperation = 'source-over';
-
-  // 라벨
-  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg');
-  ctx.font='13px system-ui';
-  const lines = labels.map((l,i)=>`${l}: ${(values[i]/total*100).toFixed(1)}%`);
-  lines.forEach((t,i)=> ctx.fillText(t, 12, 18+16*i));
-}
-
-/* ---------------------------
-   렌더 파이프라인
----------------------------- */
-function renderAll(){
-  const filtered = applyFilters(RAW);
-
-  // KPI
-  const k = computeKPI(filtered);
-  $('#kpiSessions').textContent = k.sessions.toLocaleString('ko-KR');
-  $('#kpiConv').textContent     = `${k.conv.toFixed(2)}%`;
-  $('#kpiRevenue').textContent  = k.revenue.toLocaleString('ko-KR');
-  $('#kpiBounce').textContent   = `${k.bounce.toFixed(1)}%`;
-  const dset = [
-    ['deltaSessions', k.delta.sessions],
-    ['deltaConv',     k.delta.conv],
-    ['deltaRevenue',  k.delta.revenue],
-    ['deltaBounce',   k.delta.bounce]
-  ];
-  dset.forEach(([id,v])=>{
-    const el = $('#'+id); const sign = (v>=0?'+':'');
-    el.textContent = `${sign}${v.toFixed(1)}%`;
-    el.classList.toggle('pos', v>=0); el.classList.toggle('neg', v<0);
-  });
-
-  // 차트 데이터
-  const labels = k.series.map(s=>s.date);
-  const sessions = k.series.map(s=>s.sessions);
-
-  // 트렌드(라인)
-  drawLine(makeCtx('#chartTrend'), labels, sessions, {label:'세션', color:'#B68B44'});
-
-  // 바: 채널별 세션 집계
-  const chAgg = {Direct:0, Organic:0, Ads:0, Social:0};
-  filtered.forEach(r=>{
-    // 랜덤 채널 할당(데모)
-    const keys = Object.keys(chAgg);
-    const key = keys[(r.sessions + r.conversions + r.revenue) % keys.length];
-    chAgg[key] += r.sessions;
-  });
-  const barLabels = Object.keys(chAgg);
-  const barVals = barLabels.map(k=>chAgg[k]);
-  drawBar(makeCtx('#chartBar'), barLabels, barVals, {color:'#8E7C66'});
-
-  // 도넛: 기기 비중
-  const segAgg = {iOS:0, Android:0, Web:0};
-  filtered.forEach(r=>{
-    if(r.segment==='ios') segAgg.iOS += r.sessions;
-    else if(r.segment==='android') segAgg.Android += r.sessions;
-    else segAgg.Web += r.sessions;
-  });
-  drawDonut(makeCtx('#chartDonut'), Object.keys(segAgg), Object.values(segAgg), ['#C8A25E','#A67C37','#6b6b6b']);
-
-  // 테이블
-  renderTable(filtered);
-}
-
-/* ---------------------------
-   초기값/이벤트
----------------------------- */
-(function init(){
-  // 기본 기간: 최근 14일
-  const today = new Date().toISOString().slice(0,10);
-  const from = new Date(); from.setDate(from.getDate()-13);
-  $('#diFrom').value = from.toISOString().slice(0,10);
-  $('#diTo').value   = today;
-
-  state.from = $('#diFrom').value;
-  state.to   = $('#diTo').value;
-
-  $('#diFrom').addEventListener('change', e=>{ state.from = e.target.value||null; renderAll(); });
-  $('#diTo').addEventListener('change',   e=>{ state.to   = e.target.value||null; renderAll(); });
-  $('#diSegment').addEventListener('change', e=>{ state.segment = e.target.value; renderAll(); });
-  $('#diQuery').addEventListener('input', e=>{ state.query = e.target.value.trim(); renderAll(); });
-
-  $('#diReset').addEventListener('click', ()=>{
-    $('#diFrom').value = from.toISOString().slice(0,10);
-    $('#diTo').value   = today;
-    $('#diSegment').value = 'all';
-    $('#diQuery').value = '';
-    state.from = $('#diFrom').value; state.to = $('#diTo').value; state.segment='all'; state.query='';
-    renderAll();
-  });
-
-  $('#diDownload').addEventListener('click', ()=> downloadCSV(applyFilters(RAW)));
-
-  renderAll();
 })();
+
+/* ---------- 시트(모달) ---------- */
+(function sheet(){
+  const sheet = $('#insightSheet');
+  const closeTargets = $$('[data-close]', sheet);
+  const imgEl  = $('#isImg', sheet);
+  const chartEl= $('#isChart', sheet);
+  const titleEl= $('#isTitle', sheet);
+  const tagsEl = $('#isTags', sheet);
+  const descEl = $('#isDesc', sheet);
+  const metaEl = $('#isMeta', sheet);
+  const linkEl = $('#isLink', sheet);
+
+  function lockScroll(on){ document.body.classList.toggle('is-sheet-open', !!on); }
+
+  function renderChart(cfg){
+    // 이전 차트 파괴
+    if(__chartInstance){ __chartInstance.destroy(); __chartInstance = null; }
+    chartEl.hidden = false;  chartEl.removeAttribute('aria-hidden');
+    imgEl.hidden   = true;   imgEl.setAttribute('aria-hidden','true');
+
+    const ctx = chartEl.getContext('2d');
+    __chartInstance = new Chart(ctx, {
+      type: cfg.type,
+      data: cfg.data,
+      options: cfg.options || { responsive:true, maintainAspectRatio:false }
+    });
+  }
+
+  function showImage(src, alt){
+    if(__chartInstance){ __chartInstance.destroy(); __chartInstance = null; }
+    imgEl.hidden = false;  imgEl.removeAttribute('aria-hidden');
+    chartEl.hidden = true; chartEl.setAttribute('aria-hidden','true');
+    imgEl.src = src || '';
+    imgEl.alt = alt || '';
+  }
+
+  function open(id){
+    const item = INSIGHT_DATA[id];
+    if(!item) return;
+
+    // 미디어 선택: chart 우선, 없으면 이미지
+    if(item.chart && window.Chart){
+      renderChart(item.chart);
+    }else{
+      showImage(item.img, item.title);
+    }
+
+    titleEl.textContent = item.title || '(제목 없음)';
+    tagsEl.innerHTML = (item.tags||[]).map(t=>`<li>#${t}</li>`).join('');
+    descEl.textContent = item.desc || '';
+    metaEl.innerHTML = (item.meta||[]).map(([k,v])=>`<li><strong>${k}:</strong> ${v}</li>`).join('');
+    linkEl.href = item.link || '#';
+
+    sheet.hidden = false;
+    sheet.setAttribute('aria-hidden','false');
+    lockScroll(true);
+    $('.is-sheet__close', sheet).focus();
+  }
+
+  function close(){
+    sheet.hidden = true;
+    sheet.setAttribute('aria-hidden','true');
+    lockScroll(false);
+  }
+
+  // 카드 → 열기
+  $$('.insight-card').forEach(card=>{
+    const id = card.dataset.id;
+    const openFn = ()=> open(id);
+    card.addEventListener('click', openFn);
+    card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openFn(); }});
+  });
+
+  // 닫기
+  closeTargets.forEach(el=> el.addEventListener('click', close));
+  window.addEventListener('keydown', e=>{ if(e.key==='Escape' && !sheet.hidden) close(); });
+})();
+
+/* ---------- 푸터 연도 ---------- */
+(function(){ const y=$('#year'); if(y) y.textContent=new Date().getFullYear(); })();

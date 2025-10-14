@@ -1,127 +1,130 @@
-/* ============================
-   branding.css — 브랜딩 전용
-============================ */
+/* ============ 토큰 & 리셋 ============ */
+:root{
+  --bg: #f6f4ef;
+  --fg: #191919;
+  --accent: #a67c37;          /* 라이트 포인트 */
+  --sand: #e9e4d8;
+  --header-h: 68px;
 
-/* HERO */
-.br-hero{
-  padding: calc(var(--header-h) + 24px) 0 10px;
-  background: color-mix(in srgb, var(--bg), var(--fg) 2%);
+  --radius: 14px;
+  --shadow: 0 12px 30px color-mix(in srgb, var(--fg), transparent 92%);
+  --grid: linear-gradient(to right, color-mix(in srgb,var(--fg), transparent 96%) 1px, transparent 1px),
+          linear-gradient(to bottom, color-mix(in srgb,var(--fg), transparent 96%) 1px, transparent 1px);
+  --grid-size: 24px 24px;
 }
-.br-title{
-  margin: 0 0 6px;
-  font-size: clamp(28px, 5vw, 40px);
-  font-weight: 900;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font: 400 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+  color:var(--fg); background:var(--bg);
+  background-image: var(--grid); background-size: var(--grid-size);
 }
-.br-sub{
-  margin: 0 0 4px;
-  color: color-mix(in srgb, var(--fg), transparent 15%);
+img{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+.container{width:min(1120px, 92vw); margin:0 auto}
+
+/* 다크 테마 */
+body.theme--dark{
+  --bg:#0f0f0f; --fg:#eee; --accent:#c4a46a; --sand:#191919;
+  --grid: linear-gradient(to right, color-mix(in srgb,var(--fg), transparent 94%) 1px, transparent 1px),
+          linear-gradient(to bottom, color-mix(in srgb,var(--fg), transparent 94%) 1px, transparent 1px);
 }
 
-/* SECTION HEADER */
-.br-sec-head{ margin: 12px 0 10px; }
-.br-sec-head h2{ margin:0; font-size: clamp(20px, 3.2vw, 24px); font-weight: 800; }
-.br-sec-head p{ margin:6px 0 0; color: color-mix(in srgb, var(--fg), transparent 15%); }
+/* ============ Header ============ */
+.site-header{
+  position:sticky; top:0; z-index:20; background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  border-bottom:1px solid color-mix(in srgb,var(--fg), transparent 85%);
+  backdrop-filter: blur(6px);
+}
+.nav-row{display:flex; align-items:center; gap:16px; height:var(--header-h)}
+.logo{font-weight:700}
+.logo b{font-weight:900}
+.nav ul{display:flex; gap:22px; list-style:none; margin:0; padding:0}
+.nav a{padding:8px 6px; border-radius:8px}
+.nav a.is-active{color:var(--accent); font-weight:800}
+.theme-toggle{margin-left:auto; border:0; background:#0000; font-size:20px; cursor:pointer}
 
-/* PILLARS */
-.br-pillars{ padding: 10px 0 26px; }
-.br-pillar-list{
-  display:grid; gap:12px; grid-template-columns: repeat(12,1fr);
+/* ============ Hero ============ */
+.hero{position:relative; text-align:center; padding: calc(var(--header-h) + 90px) 0 80px; overflow:hidden}
+.hero-bg{position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(70% 40% at 50% 0%, color-mix(in srgb,var(--accent), transparent 88%) 0%, transparent 70%),
+    linear-gradient(0deg, color-mix(in srgb,var(--bg), var(--fg) 2%), color-mix(in srgb,var(--bg), var(--fg) 2%));
 }
-.br-pillar{
-  grid-column: span 3;
-  padding:14px; border-radius:16px;
-  border:1px solid color-mix(in srgb, var(--fg), transparent 86%);
-  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-}
-.br-pillar h3{ margin:0 0 6px; font-size:18px; font-weight:800; }
-.br-pillar p{ margin:0; opacity:.9; }
-@media (max-width: 920px){ .br-pillar{ grid-column: span 6; } }
-@media (max-width: 600px){ .br-pillar{ grid-column: span 12; } }
+.hero-inner{position:relative}
+.title{font-size: clamp(30px, 5vw, 48px); margin:0 0 12px; font-weight:900}
+.subtitle{margin:0 auto 14px; width:min(860px, 92vw)}
+.hl{background: linear-gradient(to right, var(--accent), color-mix(in srgb,var(--accent),white 28%)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.tool-badges{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:0; margin:14px 0 0; list-style:none}
+.tool-badges li{border:1px solid color-mix(in srgb,var(--fg), transparent 82%); background: color-mix(in srgb,var(--bg), var(--fg) 3%); padding:6px 10px; border-radius:999px; font-size:13.5px}
 
-/* COLORS */
-.br-colors{ padding: 6px 0 26px; }
-.br-color-grid{
-  display:grid; gap:12px; grid-template-columns: repeat(6,1fr);
-}
-.br-color-card{
-  grid-column: span 2;
-  padding:10px; border-radius:14px;
-  border:1px solid color-mix(in srgb, var(--fg), transparent 86%);
-  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-}
-.br-color-card .swatch{
-  width:100%; aspect-ratio: 4 / 3; border-radius:10px;
-  background: var(--c);
-  border:1px solid color-mix(in srgb, var(--fg), transparent 80%);
-  margin-bottom:8px;
-}
-.br-color-card dl{ margin:0; display:flex; justify-content:space-between; font-size:14px; }
-.br-color-card dt{ opacity:.7; }
-.br-color-card.dark{ background: #0E0E10; color:#EAE6DC; }
-@media (max-width: 920px){ .br-color-grid{ grid-template-columns: repeat(4,1fr);} .br-color-card{ grid-column: span 2;} }
-@media (max-width: 600px){ .br-color-grid{ grid-template-columns: repeat(2,1fr);} .br-color-card{ grid-column: span 2;} }
+/* ============ Focus Cards ============ */
+.focus{padding:48px 0 24px}
+.sec-title{font-weight:900; font-size: clamp(20px, 3.5vw, 28px); margin:0 0 10px}
+.focus-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background: color-mix(in srgb,var(--bg), var(--fg) 3%); border:1px solid color-mix(in srgb,var(--fg), transparent 82%); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); transition: transform .18s ease, box-shadow .18s ease}
+.card:hover{transform:translateY(-4px); box-shadow:0 16px 34px color-mix(in srgb,var(--fg), transparent 90%)}
+.card h3{margin:0 0 6px; font-weight:900}
 
-/* TYPE */
-.br-type{ padding: 6px 0 26px; }
-.br-type-grid{
-  display:grid; gap:10px; grid-template-columns: repeat(12,1fr);
-}
-.t{ grid-column: span 12; padding:10px; border-radius:12px; background: color-mix(in srgb, var(--bg), var(--fg) 2%); border:1px solid color-mix(in srgb, var(--fg), transparent 88%); }
-.t-display{ font-size:40px; line-height:48px; font-weight:900; }
-.t-h1{ font-size:32px; line-height:40px; font-weight:800; }
-.t-h2{ font-size:24px; line-height:32px; font-weight:800; }
-.t-h3{ font-size:20px; line-height:28px; font-weight:800; }
-.t-body{ font-size:16px; line-height:24px; }
-.t-caption{ font-size:13px; line-height:18px; opacity:.8; }
+/* ============ Growth Charts ============ */
+.growth{padding:56px 0}
+.sec-desc{margin:0 0 18px}
+.growth-grid{display:grid; gap:24px; grid-template-columns:1.1fr 1fr}
+@media (max-width: 980px){ .growth-grid{grid-template-columns:1fr} }
 
-/* LOGOS */
-.br-logos{ padding: 6px 0 26px; }
-.br-logo-grid{
-  display:grid; gap:12px; grid-template-columns: repeat(12,1fr);
+/* Bars */
+.bars{display:grid; gap:14px}
+.bar{
+  position:relative; height:18px; border-radius:999px; overflow:hidden;
+  background: color-mix(in srgb,var(--bg), var(--fg) 5%);
+  border:1px solid color-mix(in srgb,var(--fg), transparent 85%);
 }
-.logo-card{ grid-column: span 4; text-align:center; }
-.logo-mock{
-  height:140px; border-radius:14px; display:grid; place-items:center; font-weight:900;
-  border:1px solid color-mix(in srgb, var(--fg), transparent 82%);
-  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+.bar .label{position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:13.5px; z-index:2}
+.bar .fill{
+  position:absolute; inset:0 auto 0 0; width:0%;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb,var(--accent),white 18%));
+  border-radius:999px; transition: width 1.4s cubic-bezier(.2,.9,.15,1);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb,#000, transparent 85%);
 }
-.logo-mock.vertical{ writing-mode: vertical-rl; }
-.logo-mock.mono{ color:#111; background:#fff; }
-.logo-card figcaption{ margin-top:6px; opacity:.8; font-size:14px; }
-@media (max-width: 920px){ .logo-card{ grid-column: span 6; } }
-@media (max-width: 600px){ .logo-card{ grid-column: span 12; } }
+.bar.active .fill{ width:var(--val, 0%) }
 
-/* CAMPAIGN */
-.br-campaign{ padding: 6px 0 30px; }
-.camp-grid{
-  list-style:none; margin:0; padding:0;
-  display:grid; gap:14px; grid-template-columns: repeat(12,1fr);
+/* Lines */
+.lines{
+  border:1px dashed color-mix(in srgb,var(--fg), transparent 86%);
+  border-radius:var(--radius);
+  padding:8px;
+  background: color-mix(in srgb,var(--bg), var(--fg) 3%);
+  height: 280px;           /* ← 고정 높이 (필요시 240~320 조절) */
 }
-.camp-card{ grid-column: span 4; border:1px solid color-mix(in srgb, var(--fg), transparent 82%); border-radius:16px; overflow:hidden; background: color-mix(in srgb, var(--bg), var(--fg) 3%); }
-.camp-media{ display:block; aspect-ratio: 16 / 9; overflow:hidden; }
-.camp-media img{ width:100%; height:100%; object-fit:cover; transition: transform .7s cubic-bezier(.25,1,.5,1); }
-.camp-card:hover .camp-media img{ transform: scale(1.05); }
-.camp-body{ padding:12px; }
-.camp-body h3{ margin:0 0 4px; font-size:18px; font-weight:800; }
-.camp-body p{ margin:0; opacity:.9; }
-@media (max-width: 920px){ .camp-card{ grid-column: span 6; } }
-@media (max-width: 600px){ .camp-card{ grid-column: span 12; } }
 
-/* GUIDES & DOWNLOADS */
-.br-guides{ padding: 10px 0 56px; }
-.br-guides__inner{
-  display:grid; gap:14px; grid-template-columns: 2fr 1fr;
+#sparkCanvas{
+  width: 100%;             /* 레이아웃 크기 */
+  height: 100%;            /* 레이아웃 크기 */
+  display: block;
 }
-.br-checklist, .br-downloads{
-  border:1px solid color-mix(in srgb, var(--fg), transparent 82%);
-  border-radius:16px; padding:14px;
-  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-}
-.br-checklist h2, .br-downloads h2{ margin:0 0 8px; font-size:18px; font-weight:800; }
-.br-checklist ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
-.br-checklist label{ margin-left:6px; }
-.br-downloads a{ display:inline-block; margin-right:8px; margin-top:4px; }
+/* ============ Process SVG ============ */
+.process{padding:54px 0}
+.svg-wrap{border:1px solid color-mix(in srgb,var(--fg), transparent 86%); border-radius:var(--radius); background: color-mix(in srgb,var(--bg), var(--fg) 3%); padding:12px}
+.proc-svg{width:100%; height:auto; color: color-mix(in srgb,var(--fg), transparent 10%)}
+.node text{font:600 12px var(--font-sans, system-ui)}
+.node-bg{fill: color-mix(in srgb,var(--bg), var(--fg) 7%)}
+.loop-stroke{stroke-dasharray: 1200; stroke-dashoffset: 1200; transition: stroke-dashoffset 1.8s ease-out}
 
-@media (max-width: 920px){
-  .br-guides__inner{ grid-template-columns: 1fr; }
-}
+/* ============ Script Interview ============ */
+.script{padding:54px 0}
+.script-list{list-style:decimal-leading-zero; padding-left:1.3em; margin:10px 0 0}
+.script-list li{opacity:0; transform: translateY(8px); transition:.5s ease}
+.script-list li.reveal{opacity:1; transform:none}
+
+/* ============ CTA ============ */
+.cta{padding:68px 0; text-align:center; background: radial-gradient(60% 60% at 30% 10%, color-mix(in srgb,var(--accent), transparent 88%) 0%, transparent 70%)}
+.cta-inner{max-width:760px}
+.cta-title{margin:0 0 6px; font-size: clamp(22px, 4vw, 32px); font-weight:900}
+.btn-accent{display:inline-block; margin-top:10px; padding:12px 20px; border-radius:12px; background:var(--accent); color:#111; font-weight:700; box-shadow:0 2px 0 color-mix(in srgb,#000, transparent 75%); transition:transform .18s ease, box-shadow .18s ease}
+.btn-accent:hover{transform: translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.24)}
+
+/* ============ Footer ============ */
+.site-footer{border-top:1px solid color-mix(in srgb,var(--fg), transparent 85%); padding:16px 0; text-align:center}
+
+/* 간단한 접근성 포커스 */
+a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px}

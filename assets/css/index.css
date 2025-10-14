@@ -54,22 +54,27 @@
 }
 
 /* 3행 타이핑 고정 */
+/* 타이핑 블록이 과도하게 넓어지지 않게 */
 .bs-hero__title{
-  display:grid; grid-template-rows: 1fr auto 1fr;
+  width: clamp(420px, 42vw, 680px);
+  margin: 0; 
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
   height: clamp(180px, 24vh, 260px);
-  line-height:1.1; text-align:center; margin:0;
+  line-height: 1.08;           /* 약간 더 조밀하게 */
+  text-align: center;
+  text-wrap: balance;          /* 긴 단어가 있어도 균형맞게 줄바꿈 */
 }
+
 .bs-hero__line{ grid-column:1; z-index:1; }
 .bs-hero__line--fixed-top{ grid-row:1; align-self:end;   justify-self:start; font-size: clamp(18px, 2.4vw, 26px); font-weight:700; }
 .bs-hero__line--typing{
-  grid-row:2; align-self:center; justify-self:center;
-  font-size: clamp(36px, 6.2vw, 78px); font-weight:800;
-  position: relative; padding-bottom:.15em;
+  position: relative; padding-bottom: .15em;
 }
 .bs-hero__line--typing::after{
   content:""; position:absolute; left:0; bottom:0; height:3px;
-  width:0%; background: var(--accent);
-  animation: underlineGrow 1.4s ease forwards;
+  width:0; background: var(--accent);
+  animation: underlineGrow 1.4s ease forwards; /* 글자 나오며 같이 자람 */
 }
 @keyframes underlineGrow{ 0%{width:0;opacity:0} 40%{opacity:1} 100%{width:100%;opacity:1} }
 .bs-hero__line--fixed-bottom{ grid-row:3; align-self:start; justify-self:end; font-size: clamp(18px, 2.4vw, 26px); font-weight:700; }
@@ -84,16 +89,16 @@
 
 /* 요약 패널(프로필 카드 대체) */
 .ix-hero-pane{
-  width: clamp(360px, 34vw, 620px);
-  padding: clamp(18px, 3vw, 34px);
-  background: color-mix(in srgb, var(--bg), var(--fg) 5%);
+  width: clamp(360px, 28vw, 520px);   /* 기존 34vw→28vw, 620→520 상한 */
+  padding: clamp(16px, 2.4vw, 28px);  /* 패딩도 살짝 줄임 */
+  background: color-mix(in srgb, var(--bg), var(--fg) 6%);
   border: 1px solid color-mix(in srgb, var(--fg), transparent 85%);
   border-radius: 24px;
   backdrop-filter: blur(4px);
 }
 .ix-hero-pane__kicker{ font-size:.95rem; opacity:.75; margin-bottom:10px; }
-.ix-hero-pane__title{ font-size: clamp(20px, 2.4vw, 26px); margin:0 0 8px; font-weight:800; }
-.ix-hero-pane__desc{ margin:0 0 16px; opacity:.92; line-height:1.55; }
+.ix-hero-pane__title{ margin: 0 0 6px; font-size: clamp(20px, 2.2vw, 24px); }
+.ix-hero-pane__desc { margin: 0 0 14px; line-height: 1.5; }
 .ix-hero-actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
 /* 하단 스크롤 인디케이터 */

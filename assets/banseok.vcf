@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Kang;BanSeok;;;
+FN:강반석
+NICKNAME:banseok
+ORG:BanSeok Portfolio
+TITLE:PM · 데이터 분석 · 그로스 마케팅
+EMAIL;TYPE=INTERNET;TYPE=WORK:banseok.kang2486@gmail.com
+TEL;TYPE=CELL;TYPE=VOICE:+82-10-9630-2486
+ADR;TYPE=WORK:;;봉천동;서울특별시;;;
+URL;TYPE=GITHUB:https://github.com/banseok
+URL;TYPE=NOTION:https://www.notion.so
+URL;TYPE=BLOG:https://tistory.com
+PHOTO;VALUE=URI:https://example.com/assets/img/profile/pfmain.jpg
+NOTE:데이터 기반 기획·실험·실행을 연결하는 실행형 PM. 빠르게 배우고 일관되게 실행합니다.
+REV:20251015T000000Z
+END:VCARD

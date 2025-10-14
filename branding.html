@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>브랜딩 | 강반석 포트폴리오</title>
+  <meta name="description" content="브랜드 전략·아이덴티티·캠페인 자산을 한눈에 확인할 수 있는 브랜딩 시스템 페이지.">
+
+  <!-- 저장된 테마 즉시 적용 -->
+  <script>
+    (function(){try{
+      const saved = localStorage.getItem("bs-theme");
+      if(saved){ document.documentElement.setAttribute("data-theme", saved); }
+    }catch(e){}})();
+  </script>
+
+  <!-- 전역/브랜딩 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/branding.css" />
+</head>
+
+<body id="top" class="page page--branding">
+  <!-- 헤더(전역) -->
+  <header id="site-header" class="bs-header" role="banner">
+    <div class="bs-container">
+      <a href="index.html" class="bs-logo" aria-label="강반석 포트폴리오 홈">
+        <span class="logo-main">BanSeok</span>
+        <span class="logo-sub">Portfolio</span>
+      </a>
+      <nav id="site-nav" class="bs-nav" role="navigation" aria-label="주요 메뉴">
+        <ul class="bs-nav__list">
+          <li><a class="bs-nav__link" href="index.html">홈</a></li>
+          <li><a class="bs-nav__link" href="projects.html">프로젝트</a></li>
+          <li><a class="bs-nav__link" href="data-insight.html">데이터 인사이트</a></li>
+          <li><a class="bs-nav__link is-active" href="branding.html">브랜딩</a></li>
+          <li><a class="bs-nav__link" href="reflection.html">성장 일지</a></li>
+          <li><a class="bs-nav__link" href="contact.html">연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 테마 토글 -->
+  <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">
+    <span class="icon" aria-hidden="true">🌙</span>
+  </button>
+
+  <main id="main" class="bs-main" role="main">
+    <!-- HERO -->
+    <section class="br-hero" aria-label="브랜딩 소개">
+      <div class="bs-container">
+        <h1 class="br-title">브랜딩 시스템</h1>
+        <p class="br-sub">전략 → 아이덴티티 → 실행까지, **일관성**으로 신뢰를 설계합니다.</p>
+      </div>
+    </section>
+
+    <!-- BRAND PILLARS -->
+    <section class="br-pillars" aria-label="브랜드 핵심 가치">
+      <div class="bs-container">
+        <ul class="br-pillar-list" role="list">
+          <li class="br-pillar">
+            <h3>데이터 기반</h3>
+            <p>정량·정성 인사이트를 결합해 의사결정의 정확도를 높입니다.</p>
+          </li>
+          <li class="br-pillar">
+            <h3>명료한 메시지</h3>
+            <p>최소한의 단어로 최대의 의미를 전달합니다.</p>
+          </li>
+          <li class="br-pillar">
+            <h3>일관된 경험</h3>
+            <p>채널·포맷을 넘어 동일한 톤 &amp; 무드를 유지합니다.</p>
+          </li>
+          <li class="br-pillar">
+            <h3>측정 가능한 성과</h3>
+            <p>브랜드 KPI를 설정하고 캠페인-성과를 연결합니다.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- COLOR SYSTEM -->
+    <section class="br-colors" aria-label="컬러 시스템">
+      <div class="bs-container">
+        <header class="br-sec-head">
+          <h2>컬러 시스템</h2>
+          <p>라이트/다크 테마에서 대비·가독성을 검증했습니다.</p>
+        </header>
+
+        <div class="br-color-grid">
+          <!-- 라이트 모의 카드 -->
+          <div class="br-color-card light">
+            <div class="swatch" style="--c: var(--bg)"></div>
+            <dl><dt>배경</dt><dd>var(--bg)</dd></dl>
+          </div>
+          <div class="br-color-card light">
+            <div class="swatch" style="--c: var(--fg)"></div>
+            <dl><dt>전경</dt><dd>var(--fg)</dd></dl>
+          </div>
+          <div class="br-color-card light">
+            <div class="swatch" style="--c: var(--accent)"></div>
+            <dl><dt>포인트</dt><dd>var(--accent)</dd></dl>
+          </div>
+
+          <!-- 다크 미리보기 -->
+          <div class="br-color-card dark">
+            <div class="swatch" style="--c: #0E0E10"></div>
+            <dl><dt>Dark BG</dt><dd>#0E0E10</dd></dl>
+          </div>
+          <div class="br-color-card dark">
+            <div class="swatch" style="--c: #EAE6DC"></div>
+            <dl><dt>Dark FG</dt><dd>#EAE6DC</dd></dl>
+          </div>
+          <div class="br-color-card dark">
+            <div class="swatch" style="--c: #C8A25E"></div>
+            <dl><dt>Dark Accent</dt><dd>#C8A25E</dd></dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPO SCALE -->
+    <section class="br-type" aria-label="타이포그래피">
+      <div class="bs-container">
+        <header class="br-sec-head">
+          <h2>타이포 스케일</h2>
+          <p>정보 계층을 명확히 보여주는 제목/본문/캡션 체계.</p>
+        </header>
+        <div class="br-type-grid">
+          <div class="t t-display">Display — 40/48</div>
+          <div class="t t-h1">H1 — 32/40</div>
+          <div class="t t-h2">H2 — 24/32</div>
+          <div class="t t-h3">H3 — 20/28</div>
+          <div class="t t-body">Body — 16/24 : 구조는 단순하고 메시지는 일관되게.</div>
+          <div class="t t-caption">Caption — 13/18 : 주석/보조 설명</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO LOCKUPS -->
+    <section class="br-logos" aria-label="로고 락업">
+      <div class="bs-container">
+        <header class="br-sec-head">
+          <h2>로고 락업</h2>
+          <p>가로/세로/모노 버전과 최소 여백, 오용 예시 포함.</p>
+        </header>
+
+        <div class="br-logo-grid">
+          <!-- 실제 로고 이미지를 교체하세요 -->
+          <figure class="logo-card">
+            <div class="logo-mock">LOGO</div>
+            <figcaption>Primary (가로)</figcaption>
+          </figure>
+          <figure class="logo-card">
+            <div class="logo-mock vertical">LOGO</div>
+            <figcaption>Secondary (세로)</figcaption>
+          </figure>
+          <figure class="logo-card">
+            <div class="logo-mock mono">LOGO</div>
+            <figcaption>Monochrome</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMPAIGN HIGHLIGHTS -->
+    <section class="br-campaign" aria-label="캠페인 하이라이트">
+      <div class="bs-container">
+        <header class="br-sec-head">
+          <h2>캠페인</h2>
+          <p>성과 중심의 대표 사례를 시각적으로 요약합니다.</p>
+        </header>
+
+        <ul class="camp-grid" role="list">
+          <!-- 썸네일은 16:9 권장 -->
+          <li class="camp-card">
+            <a class="camp-media" href="#">
+              <img loading="lazy" src="assets/img/profile/profile-1.jpg" alt="캠페인 썸네일 1">
+            </a>
+            <div class="camp-body">
+              <h3>UGC 해시태그 캠페인</h3>
+              <p>참여 3만+, 브랜드 검색량 48%↑</p>
+            </div>
+          </li>
+          <li class="camp-card">
+            <a class="camp-media" href="#">
+              <img loading="lazy" src="assets/img/profile/profile-2.jpg" alt="캠페인 썸네일 2">
+            </a>
+            <div class="camp-body">
+              <h3>리브랜딩 론칭</h3>
+              <p>인지도 +26%p, 전환율 +9%p</p>
+            </div>
+          </li>
+          <li class="camp-card">
+            <a class="camp-media" href="#">
+              <img loading="lazy" src="assets/img/profile/profile-3.jpg" alt="캠페인 썸네일 3">
+            </a>
+            <div class="camp-body">
+              <h3>온·오프 통합 프로모션</h3>
+              <p>오프라인 유입률 +31%</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- GUIDELINES & DOWNLOAD -->
+    <section class="br-guides" aria-label="가이드라인 & 다운로드">
+      <div class="bs-container br-guides__inner">
+        <div class="br-checklist">
+          <h2>브랜드 가이드 체크리스트</h2>
+          <ul>
+            <li><input type="checkbox" id="g1"><label for="g1">최소 여백/최소 크기 준수</label></li>
+            <li><input type="checkbox" id="g2"><label for="g2">색상 대비(AA 이상) 검증</label></li>
+            <li><input type="checkbox" id="g3"><label for="g3">타이포 스케일 일관성</label></li>
+            <li><input type="checkbox" id="g4"><label for="g4">로고 오용 금지 사례 공유</label></li>
+            <li><input type="checkbox" id="g5"><label for="g5">에셋 버전 관리(파일명 규칙)</label></li>
+          </ul>
+        </div>
+
+        <aside class="br-downloads">
+          <h2>브랜드 에셋 다운로드</h2>
+          <a class="bs-btn bs-btn--accent" href="#" download>로고 패키지 (.zip)</a>
+          <a class="bs-btn bs-btn--ghost" href="#" download>가이드 PDF</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="bs-footer" role="contentinfo">
+    <div class="bs-container">
+      <p class="bs-footer__brand">© <span id="year"></span> banseok. 통합은 힘입니다.</p>
+      <a class="bs-footer__top" href="#top" aria-label="맨 위로 이동">↑</a>
+    </div>
+  </footer>
+
+  <!-- 전역/브랜딩 JS -->
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/branding.js" defer></script>
+</body>
+</html>

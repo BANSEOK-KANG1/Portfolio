@@ -1,0 +1,72 @@
+/* ============================
+   data-insight.css — 인사이트 전용
+============================ */
+
+.page--insight .di-hero{
+  padding: calc(var(--header-h) + 24px) 0 10px;
+  background: color-mix(in srgb, var(--bg), var(--fg) 2%);
+}
+.di-title{ margin:0 0 6px; font-size: clamp(28px, 5vw, 40px); font-weight: 900; }
+.di-sub{ margin:0 0 4px; color: color-mix(in srgb, var(--fg), transparent 15%); }
+
+/* 컨트롤 바 */
+.di-controls{ position: sticky; top: var(--header-h); z-index: 5; }
+.di-controls__inner{
+  display:grid; grid-template-columns: repeat(12,1fr); gap:10px; align-items:center;
+  padding: 12px 0 14px;
+  backdrop-filter: blur(6px);
+}
+.di-field{ grid-column: span 2; display:flex; flex-direction:column; gap:6px; }
+.di-field input, .di-field select{
+  padding:8px 10px; border-radius:10px;
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%); color:var(--fg);
+  border:1px solid color-mix(in srgb, var(--fg), transparent 82%);
+}
+.di-search{ grid-column: span 4; display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px;
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%); border: 1px solid color-mix(in srgb, var(--fg), transparent 85%);
+}
+.di-search input{ width:100%; background:transparent; border:0; outline:0; color:var(--fg); }
+.di-actions{ grid-column: span 2; display:flex; gap:8px; justify-content:flex-end; }
+
+/* KPI 카드 */
+.di-kpis{ padding: 6px 0 8px; }
+.di-kpis__grid{
+  display:grid; grid-template-columns: repeat(12,1fr); gap: 12px;
+}
+.kpi{
+  grid-column: span 3; border:1px solid color-mix(in srgb, var(--fg), transparent 84%);
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%); border-radius:16px; padding:12px;
+}
+.kpi h3{ margin:0 0 4px; font-size:14px; opacity:.8; }
+.kpi__value{ margin:2px 0; font-size:24px; font-weight: 900; }
+.kpi__delta{ margin:0; font-size:13px; opacity:.8; }
+.kpi__delta.pos{ color: #0a8f3a; }
+.kpi__delta.neg{ color: #b6463c; }
+@media (max-width: 900px){ .kpi{ grid-column: span 6; } }
+@media (max-width: 600px){ .kpi{ grid-column: span 12; } }
+
+/* 차트 카드 */
+.di-charts{ padding: 10px 0 10px; }
+.di-charts__grid{
+  display:grid; grid-template-columns: repeat(12,1fr); gap: 12px;
+}
+.chart-card{
+  grid-column: span 6; border:1px solid color-mix(in srgb, var(--fg), transparent 84%);
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%); border-radius:16px; padding:12px;
+}
+.chart-card header h3{ margin:0 0 8px; font-size:16px; font-weight:800; }
+.chart-card canvas{ width:100%; height:auto; display:block; }
+.chart-card:nth-child(3){ grid-column: span 12; max-width: 720px; }
+@media (max-width: 900px){
+  .chart-card{ grid-column: span 12; }
+}
+
+/* 테이블 */
+.di-table{ padding: 10px 0 56px; }
+.table-wrap{ overflow:auto; border-radius:12px;
+  border:1px solid color-mix(in srgb, var(--fg), transparent 84%);
+  background: color-mix(in srgb, var(--bg), var(--fg) 2%);
+}
+#diTable{ border-collapse: collapse; width:100%; min-width: 720px; }
+#diTable th, #diTable td{ padding:10px; border-bottom:1px solid color-mix(in srgb, var(--fg), transparent 88%); text-align:left; }
+#diTable th{ background: color-mix(in srgb, var(--bg), var(--fg) 3%); position: sticky; top:0; }

@@ -1,0 +1,26 @@
+.page--reflection .rf-hero{
+  padding: calc(var(--header-h) + 24px) 0 10px;
+  background: color-mix(in srgb, var(--bg), var(--fg) 2%);
+}
+.rf-title{font-size:clamp(28px,5vw,40px);font-weight:900;margin:0 0 6px;}
+.rf-sub{color:color-mix(in srgb,var(--fg),transparent 15%);margin:0;}
+
+.rf-list{padding:10px 0 56px;}
+.rf-card{
+  border:1px solid color-mix(in srgb,var(--fg),transparent 84%);
+  background:color-mix(in srgb,var(--bg),var(--fg) 3%);
+  border-radius:16px; padding:16px; margin-bottom:14px;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.rf-card:hover{transform:translateY(-4px);
+  box-shadow:0 10px 30px color-mix(in srgb,var(--fg),transparent 90%);
+}
+.rf-card h2{margin:0 0 4px;font-size:20px;font-weight:800;}
+.rf-card time{font-size:13px;opacity:.7;}
+.rf-card p{margin:6px 0 10px;}
+.rf-tags{list-style:none;display:flex;gap:6px;margin:0;padding:0;flex-wrap:wrap;}
+.rf-tags li{
+  padding:4px 8px;border-radius:999px;font-size:12px;
+  background:color-mix(in srgb,var(--bg),var(--fg) 4%);
+  border:1px solid color-mix(in srgb,var(--fg),transparent 82%);
+}

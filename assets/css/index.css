@@ -15,14 +15,22 @@
 }
 
 /* 내부 레이아웃(2열, 중앙 정렬) */
+/* 기존 .bs-hero__inner를 다음으로 교체 */
 .bs-hero__inner{
-  width: min(1200px, 94vw); margin: 0 auto;
+  width: min(1200px, 94vw); 
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center; justify-items: center;
+  /* 왼쪽(타이핑) 최소 420, 최대 680 / 오른쪽(패널) 최소 360, 최대 520 */
+  grid-template-columns: minmax(420px, 680px) minmax(360px, 520px);
+  align-items: center;
+  justify-content: center;   /* 전체를 가운데 정렬 */
   gap: clamp(20px, 4vw, 48px);
 }
-@media (max-width: 900px){ .bs-hero__inner{ grid-template-columns: 1fr; } }
+@media (max-width: 900px){
+  .bs-hero__inner{
+    grid-template-columns: 1fr;
+  }
+}
 
 /* 풀 배경 이미지 스택 */
 .hero-bg{ position:absolute; inset:0; z-index:-1; overflow:hidden; }

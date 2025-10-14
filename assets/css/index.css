@@ -104,10 +104,11 @@
 .ix-hero-pane{
   width: clamp(320px, 26vw, 460px);   /* ← 더 좁게 */
   padding: clamp(16px, 2.4vw, 28px);
-  background: color-mix(in srgb, var(--bg), var(--fg) 8%);
   border: 1px solid color-mix(in srgb, var(--fg), transparent 82%);
   border-radius: 24px;
-  backdrop-filter: blur(4px);
+  color: #c8a25e;
+  backdrop-filter: blur(3px);
+  ;
 
   align-self: start;                             /* 그리드 기준 위쪽 정렬 */
   margin-top: clamp(10px, 3vh, 28px);           /* ← 살짝 아래로 */
@@ -132,4 +133,41 @@
 @media (max-width: 900px){
   .bs-hero__title{ height: clamp(160px, 24vh, 220px); }
   .ix-hero-pane{ width: min(92vw, 560px); }
+}
+
+/* ============================
+   히어로 타이핑 텍스트: 대비용 아웃라인
+   - 라이트(검은 글자) → 흰색 테두리
+   - 다크(밝은 글자)   → 검은 테두리
+   - text-stroke + text-shadow 폴백 병행
+============================ */
+
+/* 테마별 테두리 색 변수 */
+:root[data-theme="light"] { --hero-stroke-color: #c8a25e; }
+:root[data-theme="dark"]  { --hero-stroke-color: #cdba98; }
+
+/* 기본(“저는”, “입니다”)은 얇게, 타이핑 라인은 조금 더 두껍게 */
+.bs-hero__title .bs-hero__line{
+ 
+  /* 폴백: 다중 그림자(얇은 외곽선) */
+  text-shadow:
+    0  1px 0 var(--hero-stroke-color),
+    0 -1px 0 var(--hero-stroke-color),
+    1px  0 0 var(--hero-stroke-color),
+   -1px  0 0 var(--hero-stroke-color),
+    1px  1px 0 var(--hero-stroke-color),
+   -1px  1px 0 var(--hero-stroke-color),
+    1px -1px 0 var(--hero-stroke-color),
+   -1px -1px 0 var(--hero-stroke-color);
+}
+
+/* 가운데 타이핑 라인은 살짝 더 두껍게 */
+.bs-hero__title .bs-hero__line--typing{
+  --hero-stroke-width: 0.8px;
+  -webkit-text-stroke: var(--hero-stroke-width) var(--hero-stroke-color);
+}
+
+/* 밑줄 애니메이션은 유지 (겹침 방지용 보정 살짝) */
+.bs-hero__line--typing::after{
+  bottom: -0.02em; /* 글자 외곽선과 겹치는 느낌 줄이기 */
 }

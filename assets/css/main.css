@@ -59,34 +59,45 @@ body::after{
 
 /* ===== 헤더/내비 ===== */
 .bs-header{
-  position: fixed; top:0; left:0; right:0; z-index:1000;
-  height: var(--header-h);
-  background: color-mix(in srgb, var(--bg), transparent 8%);
-  backdrop-filter: saturate(1.1) blur(8px);
-  border-bottom: 1px solid color-mix(in srgb, var(--fg), transparent 90%);
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index: 40;
+  height: var(--header-h,68px);
+  display: flex; align-items: center;
+  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid color-mix(in srgb,var(--fg),transparent 85%);
 }
 .bs-header .bs-container{
-  height: 100%;
-  display:flex; align-items:center; gap:16px;
+  display:flex; justify-content:space-between; align-items:center;
+  width:100%; padding:0 4vw;
 }
 
 /* 로고 */
 .bs-logo{
-  text-decoration:none; display:flex; align-items:baseline; gap:6px;
+  font-weight:900;
+  font-size:20px;
+  color:var(--fg);
+  text-decoration:none;
 }
-.logo-main{
-  font-weight: 900;
-  font-size: 1.55rem; /* 5px 키움 반영 */
-  background: linear-gradient(90deg, var(--accent), #e8d3a0);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+.bs-logo .logo-main{color:var(--accent);}
+.bs-logo .logo-sub{color:color-mix(in srgb,var(--fg),transparent 35%);}
+.bs-nav__list{
+  display:flex;gap:24px;list-style:none;margin:0;padding:0;
 }
-.logo-sub{ font-size:1.15rem; color: color-mix(in srgb, var(--fg), transparent 40%); }
-
+.bs-nav__list a{
+  text-decoration:none;
+  color:color-mix(in srgb,var(--fg),transparent 20%);
+  font-weight:600;
+  transition:color .2s ease;
+}
+.bs-nav__list a:hover,
+.bs-nav__list a.is-active{
+  color:var(--accent);
+}
 /* 내비 우측 정렬 */
 .bs-nav{ margin-left: auto; }
-.bs-nav__list{
-  display:flex; gap:18px; list-style:none; margin:0; padding:0;
-}
+
 .bs-nav__link{
   display:inline-block; padding:10px 12px;
   border-radius: 12px; text-decoration:none; color: var(--fg);
@@ -120,7 +131,8 @@ body::after{
 }
 .bs-btn--accent{ background: var(--accent); color:#111; border:1px solid color-mix(in srgb, #000, transparent 70%); }
 .bs-btn--accent:hover{ transform: translateY(-2px); }
-.bs-btn--ghost{ background: transparent; color: var(--fg); border:1px solid color-mix(in srgb, var(--fg), transparent 82%); }
+.bs-btn--ghost{ background: transparent; color:#eee6d8; border:1px solid color-mix(in srgb, var(--fg), transparent 82%); }
+
 .bs-btn--ghost:hover{ transform: translateY(-2px); }
 
 /* 푸터 */

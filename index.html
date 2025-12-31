@@ -1,137 +1,189 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <!-- 문서 기본 -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- 메타 -->
-  <title>강반석 포트폴리오 | 데이터 기반 PM형 포트폴리오</title>
-  <meta name="description" content="데이터 기반 사고를 시각적으로 표현하는 PM형 포트폴리오. 프로젝트·데이터 인사이트·브랜딩·성장 일지로 통합 역량을 보여줍니다.">
-  <meta name="theme-color" content="#0E0E10" />
+  <title>강반석 포트폴리오 | Data · Product · Decision Quality</title>
+  <meta name="description" content="데이터로 판단 기준을 만들고 구조로 의사결정을 안정화하는 PM 포트폴리오. 대표 포트폴리오 2개를 사이트로 먼저 보고, 상세는 Notion으로 연결합니다." />
+  <meta name="theme-color" content="#0b0d10" />
 
-  <!-- FOUC 방지: 저장된 테마를 즉시 적용 -->
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+  <!-- FOUC 방지: 저장된 테마 즉시 적용 -->
   <script>
-    (function(){ try{
-      const saved = localStorage.getItem("bs-theme");
-      if(saved){ document.documentElement.setAttribute("data-theme", saved); }
-    }catch(e){} })();
+    (function(){
+      try{
+        const saved = localStorage.getItem("bs-theme");
+        if(saved){ document.documentElement.setAttribute("data-theme", saved); }
+      }catch(e){}
+    })();
   </script>
 
-  <!-- 전역·인덱스 CSS -->
+  <!-- CSS (인라인 금지) -->
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/index.css" />
+  <link rel="stylesheet" href="assets/css/portfolio.css" />
 </head>
 
-<body id="top" class="page page--home">
-  <!-- =========================
-       고정 헤더
-  ========================== -->
-  <header id="site-header" class="bs-header" role="banner" aria-label="상단 내비게이션">
-    <div class="bs-container">
-      <!-- 로고(그라디언트 텍스트) -->
-      <a href="index.html" class="bs-logo" aria-label="강반석 포트폴리오 홈">
-        <span class="logo-main">BanSeok</span>
-        <span class="logo-sub">Portfolio</span>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html" aria-label="홈으로">
+        <span class="brand__name">Banseok Kang</span>
+        <span class="brand__role">PM · Product Ops</span>
       </a>
 
-      <!-- 내비(우측 정렬) -->
-      <nav id="site-nav" class="bs-nav" role="navigation" aria-label="주요 메뉴">
-        <ul class="bs-nav__list">
-          <li><a class="bs-nav__link is-active" href="index.html">홈</a></li>
-          <li><a class="bs-nav__link" href="projects.html">프로젝트</a></li>
-          <li><a class="bs-nav__link" href="data-insight.html">데이터 인사이트</a></li>
-          <li><a class="bs-nav__link" href="branding.html">브랜딩</a></li>
-          <li><a class="bs-nav__link" href="reflection.html">성장 일지</a></li>
-          <li><a class="bs-nav__link" href="contact.html">연락처</a></li>
-        </ul>
+      <nav class="topbar__nav" aria-label="주요 메뉴">
+        <a class="navlink" href="#featured">Portfolio</a>
+        <a class="navlink" href="#contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">🌙</button>
       </nav>
     </div>
   </header>
 
-  <!-- 우측 상단 고정 테마 토글(아이콘만) -->
-  <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">
-    <span class="icon" aria-hidden="true">🌙</span>
-  </button>
-
-  <!-- =========================
-       메인 히어로 (풀 배경 + 3행 타이핑 + 요약 패널)
-  ========================== -->
-  <main id="main" class="bs-main" role="main">
-    <section id="hero" class="bs-hero bs-hero--full" aria-label="인트로">
-      <!-- 풀 배경 이미지 스택 -->
-      <div class="hero-bg" aria-hidden="true">
-        <!-- 이미지 경로 교체 권장 -->
-        <img class="hero-bg__img is-active" src="assets/img/profile/profile-1.jpg" alt="">
-        <img class="hero-bg__img"           src="assets/img/profile/profile-2.jpg" alt="">
-        <img class="hero-bg__img"           src="assets/img/profile/profile-3.jpg" alt="">
-        <!-- 가독성용 비네트 -->
-        <div class="hero-bg__vignette"></div>
+  <!-- Hero -->
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero__bg" aria-hidden="true">
+        <img src="assets/img/hero.jpg" alt="" loading="lazy">
       </div>
 
-      <div class="bs-hero__inner">
-        <!-- 좌: 3행 타이핑 (1=왼쪽, 2=가운데, 3=오른쪽 고정) -->
-        <h1 class="bs-hero__title">
-          <span class="bs-hero__line bs-hero__line--fixed-top" aria-hidden="true">저는</span>
+      <div class="container hero__inner">
+        <div class="hero__copy reveal">
+          <p class="kicker">Data · Product · Decision Quality</p>
 
-          <!-- data-roles에 직무 목록을 콤마(,)로 나열 -->
-          <span id="typingTarget"
-                class="bs-hero__line bs-hero__line--typing"
-                role="status" aria-live="polite"
-                data-roles="데이터 분석가,프로젝트 매니저,마케터">데이터 분석가</span>
+          <h1 class="title">
+            데이터로 <span class="accent">판단 기준</span>을 만들고<br>
+            구조로 <span class="accent">의사결정</span>을 안정화합니다.
+          </h1>
 
-          <span class="bs-hero__line bs-hero__line--fixed-bottom" aria-hidden="true">입니다</span>
-
-          <!-- 소셜 아이콘(이모지) -->
-          <div class="bs-social" aria-label="소셜 링크">
-            <a class="bs-social__link" href="https://github.com/" aria-label="GitHub">🐙</a>
-            <a class="bs-social__link" href="mailto:your@mail.com" aria-label="이메일">✉️</a>
-            <a class="bs-social__link" href="https://instagram.com/" aria-label="인스타그램">📷</a>
-            <a class="bs-social__link" href="https://banseok-data-analysis.tistory.com/" aria-label="블로그">📝</a>
-            <a class="bs-social__link" href="https://www.notion.so/" aria-label="노션">📓</a>
-          </div>
-        </h1>
-
-        <!-- 우: 요약 패널 -->
-        <aside class="ix-hero-pane" aria-label="요약 정보">
-          <div class="ix-hero-pane__kicker">데이터 중심 · PM형 포트폴리오</div>
-          <h2 class="ix-hero-pane__title">구조는 단순하게, 메시지는 일관되게</h2>
-          <p class="ix-hero-pane__desc">
-            프로젝트 → 데이터 인사이트 → 브랜딩 → 성장 일지로 이어지는 ‘사고 파이프라인’을 시각화합니다.
-            라이트/다크 테마와 반응형 구조는 정보 몰입을 돕습니다.
+          <p class="subtitle">
+            퍼널·리텐션·전환율로 문제를 정의하고, “무엇을 만들까”보다
+            “무엇을 오해하지 말아야 할까”를 먼저 고정합니다.
           </p>
-          <div class="ix-hero-actions">
-            <a class="bs-btn bs-btn--accent" href="projects.html">프로젝트 보러가기</a>
-            <a class="bs-btn bs-btn--ghost" href="data-insight.html">데이터 인사이트</a>
-          </div>
-        </aside>
-      </div>
 
-      <!-- 하단 스크롤 인디케이터 -->
-      <div class="ix-scroll-ind" aria-hidden="true"></div>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#featured">대표 포트폴리오 2개 보기</a>
+            <a class="btn btn--ghost" href="#contact">연락하기</a>
+          </div>
+
+          <ul class="chips" aria-label="핵심 역량">
+            <li>Problem Definition</li>
+            <li>Metric QA</li>
+            <li>Experiment Design</li>
+            <li>Documentation</li>
+          </ul>
+        </div>
+
+        <figure class="hero__portrait reveal">
+          <img src="assets/img/portrait.jpg" alt="강반석 프로필 사진" loading="lazy">
+          <figcaption>강반석 · PM / Product Ops</figcaption>
+        </figure>
+      </div>
     </section>
 
-    <!-- 선택: 소개 섹션(원하면 유지/수정) -->
-    <section id="about" class="bs-section" aria-label="소개">
-      <div class="bs-container">
-        <h2 class="bs-section__title">데이터 기반 PM형 포트폴리오</h2>
-        <p class="bs-section__desc">
-          데이터로 사고하고, 시각으로 소통합니다. 구조는 단순하고, 메시지는 일관되며, 실행으로 증명합니다.
-        </p>
+    <!-- Featured: 대표 2개 -->
+    <section id="featured" class="featured">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>주요 포트폴리오</h2>
+            <p>사이트에서 먼저 보고, 상세는 Notion으로 연결합니다.</p>
+          </div>
+
+          <!-- “사이트로 접속” 버튼(요청 반영) -->
+          <div class="section-head__actions">
+            <a class="btn btn--ghost" href="pm.html">PM 페이지</a>
+            <a class="btn btn--ghost" href="intern.html">Intern 페이지</a>
+          </div>
+        </div>
+
+        <div class="grid-portfolio">
+          <!-- PM 카드 -->
+          <article class="p-card reveal">
+            <div class="p-card__media">
+              <img src="assets/img/pmsusme.png" alt="PM 이력서 썸네일" loading="lazy">
+            </div>
+
+            <div class="p-card__body">
+              <h3>PM 이력서</h3>
+              <p>퍼널·리텐션·전환율로 문제를 정의하고, 경험 구조 조정으로 지표를 움직입니다.</p>
+
+              <ul class="mini-meta">
+                <li>핵심: 가입→첫 행동 전환</li>
+                <li>레버: 흐름/맥락/단계 수</li>
+              </ul>
+
+              <div class="p-card__btns">
+                <a class="btn btn--primary" href="pm.html">사이트에서 보기</a>
+                <a class="btn btn--ghost" target="_blank" rel="noopener"
+                   href="https://www.notion.so/2cc2c27d7e468077ad0ee6eed83406f1">
+                  Notion 보기
+                </a>
+                <a class="btn btn--ghost" target="_blank" rel="noopener" href="강반석 pm 이력서.pdf">PDF</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Intern 카드 -->
+          <article class="p-card reveal">
+            <div class="p-card__media">
+              <img src="assets/img/intern.png" alt="인턴 이력서 썸네일" loading="lazy">
+            </div>
+
+            <div class="p-card__body">
+              <h3>인턴 이력서</h3>
+              <p>문서화·QA 관점으로 의사결정 품질을 높이고, 오해 가능성을 선제적으로 차단합니다.</p>
+
+              <ul class="mini-meta">
+                <li>문서: 전제/한계/오해 방지</li>
+                <li>QA: 재현 조건/엣지 케이스</li>
+              </ul>
+
+              <div class="p-card__btns">
+                <a class="btn btn--primary" href="intern.html">사이트에서 보기</a>
+                <a class="btn btn--ghost" target="_blank" rel="noopener" href="#">
+                  Notion 보기
+                </a>
+                <a class="btn btn--ghost" target="_blank" rel="noopener" href="인턴_지원_이력서.pdf">PDF</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact__card card reveal">
+          <div class="contact__copy">
+            <h2>연락하기</h2>
+            <p>협업/인터뷰/프로젝트 관련 대화 환영합니다. 가장 빠른 채널로 연결해요.</p>
+          </div>
+
+          <div class="contact__actions">
+            <a class="btn btn--primary" href="mailto:kangbs2486@gmail.com">Email</a>
+            <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://github.com/BANSEOK-KANG1">GitHub</a>
+            <a class="btn btn--ghost" target="_blank" rel="noopener" href="#">Notion</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- 푸터 -->
-  <footer id="site-footer" class="bs-footer" role="contentinfo">
-    <div class="bs-container">
-      <p class="bs-footer__brand">© <span id="year"></span> banseok. 통합은 힘입니다.</p>
-      <a class="bs-footer__top" href="#top" aria-label="맨 위로 이동">↑</a>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <small>© <span id="year"></span> Banseok Kang. All rights reserved.</small>
+      <a class="to-top" href="#top">↑ Top</a>
     </div>
   </footer>
 
-  <!-- 전역 JS / 인덱스 전용 JS -->
+  <!-- JS -->
   <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/index.js" defer></script>
+  <script src="assets/js/portfolio.js" defer></script>
 </body>
 </html>

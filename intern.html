@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Intern | 강반석 포트폴리오</title>
+  <meta name="description" content="문서화·QA·Product Ops 관점에서 PM 의사결정 품질을 높이는 인턴 포트폴리오." />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+  <script>
+    (function(){
+      try{
+        const saved = localStorage.getItem("bs-theme");
+        if(saved){ document.documentElement.setAttribute("data-theme", saved); }
+      }catch(e){}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/portfolio.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html" aria-label="홈으로">
+        <span class="brand__name">Banseok Kang</span>
+        <span class="brand__role">Documentation / QA / Product Ops</span>
+      </a>
+
+      <nav class="topbar__nav" aria-label="주요 메뉴">
+        <a class="navlink" href="index.html#featured">Portfolio</a>
+        <a class="navlink" href="#frame">QA Frame</a>
+        <a class="navlink" href="#evidence">Evidence</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Page hero -->
+    <section class="page-hero">
+      <div class="container page-hero__inner">
+        <div class="page-hero__copy reveal">
+          <p class="kicker">Intern Resume</p>
+          <h1 class="page-title">
+            빠른 실행보다<br>
+            <span class="accent">잘못된 판단을 예방</span>하는<br>
+            구조를 먼저 만듭니다.
+          </h1>
+
+          <p class="page-subtitle">
+            지표·가설·결정의 전제를 문서로 고정하고, 재현 조건/엣지 케이스로 리스크를 줄입니다.
+          </p>
+
+          <div class="page-hero__cta">
+            <a class="btn btn--primary" href="#frame">QA 프레임 보기</a>
+            <a class="btn btn--ghost" href="인턴_지원_이력서.pdf" target="_blank" rel="noopener">PDF 열기</a>
+            <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">Notion</a>
+          </div>
+
+          <ul class="chips" aria-label="핵심 키워드">
+            <li>Documentation</li>
+            <li>Spec & QA</li>
+            <li>Risk Control</li>
+            <li>Decision Quality</li>
+          </ul>
+        </div>
+
+        <aside class="page-hero__side card reveal">
+          <h2 class="side-title">내가 잘하는 것</h2>
+          <p class="side-desc">결론을 내리기보다, 결론의 범위를 제한해 의사결정 오류를 줄입니다.</p>
+          <div class="side-list">
+            <div class="side-item">
+              <span class="side-label">문서화</span>
+              <span class="side-value">전제·한계·오해 방지 명시</span>
+            </div>
+            <div class="side-item">
+              <span class="side-label">QA</span>
+              <span class="side-value">재현 조건 / 엣지 케이스</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- QA Frame -->
+    <section id="frame" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>QA 사고 프레임 (요약)</h2>
+            <p>“버그 체크리스트”가 아니라 “의사결정 안전장치”로서의 QA.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="mini-card card reveal">
+            <h3>지표 해석 QA</h3>
+            <p>단일 지표로 결론을 내리지 않도록 제한 조건을 명시합니다.</p>
+          </article>
+          <article class="mini-card card reveal">
+            <h3>엣지 케이스</h3>
+            <p>비정상 값/왜곡 유입/논쟁성 반응 등 예외 조건을 고정합니다.</p>
+          </article>
+          <article class="mini-card card reveal">
+            <h3>오해 차단</h3>
+            <p>“하지 말아야 할 해석”을 문서로 정의해 조직 리스크를 줄입니다.</p>
+          </article>
+        </div>
+
+        <div class="card reveal embed-card" style="margin-top:16px">
+          <div class="embed-head">
+            <h3>QA 사고 프레임 문서 PDF</h3>
+            <div class="embed-actions">
+              <a class="btn btn--ghost" href="QA_사고_프레임_문서.pdf" target="_blank" rel="noopener">새 탭에서 열기</a>
+            </div>
+          </div>
+          <div class="embed">
+            <iframe
+              title="QA Frame PDF"
+              src="QA_사고_프레임_문서.pdf"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evidence -->
+    <section id="evidence" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Evidence</h2>
+            <p>인턴 이력서 문서 및 연결 자료.</p>
+          </div>
+        </div>
+
+        <div class="card reveal embed-card">
+          <div class="embed-head">
+            <h3>인턴 지원 이력서 PDF</h3>
+            <div class="embed-actions">
+              <a class="btn btn--ghost" href="인턴_지원_이력서.pdf" target="_blank" rel="noopener">새 탭에서 열기</a>
+            </div>
+          </div>
+
+          <div class="embed">
+            <iframe
+              title="Intern Resume PDF"
+              src="인턴_지원_이력서.pdf"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <a class="btn btn--ghost reveal" href="index.html#featured">← 메인으로 돌아가기</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <small>© <span id="year"></span> Banseok Kang.</small>
+      <a class="to-top" href="#main">↑ Top</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/portfolio.js" defer></script>
+</body>
+</html>

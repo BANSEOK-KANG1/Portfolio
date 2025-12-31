@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>PM | 강반석 포트폴리오</title>
+  <meta name="description" content="퍼널·리텐션·전환율로 문제를 정의하고 경험 구조 조정으로 지표를 움직이는 PM 포트폴리오." />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+  <script>
+    (function(){
+      try{
+        const saved = localStorage.getItem("bs-theme");
+        if(saved){ document.documentElement.setAttribute("data-theme", saved); }
+      }catch(e){}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/portfolio.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html" aria-label="홈으로">
+        <span class="brand__name">Banseok Kang</span>
+        <span class="brand__role">PM / Product Ops</span>
+      </a>
+
+      <nav class="topbar__nav" aria-label="주요 메뉴">
+        <a class="navlink" href="index.html#featured">Portfolio</a>
+        <a class="navlink" href="#evidence">Evidence</a>
+        <a class="navlink" href="#links">Links</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Page hero -->
+    <section class="page-hero">
+      <div class="container page-hero__inner">
+        <div class="page-hero__copy reveal">
+          <p class="kicker">PM Resume</p>
+          <h1 class="page-title">
+            퍼널·리텐션·전환율로<br>
+            <span class="accent">문제 정의</span>를 하고,<br>
+            <span class="accent">경험 구조 조정</span>으로 해결합니다.
+          </h1>
+
+          <p class="page-subtitle">
+            “기능 추가”보다 “가치가 전달되는 순서와 맥락”을 먼저 설계합니다.
+          </p>
+
+          <div class="page-hero__cta">
+            <a class="btn btn--primary" href="#evidence">근거(페이지) 보기</a>
+            <a class="btn btn--ghost" href="강반석 pm 이력서.pdf" target="_blank" rel="noopener">PDF 열기</a>
+            <a class="btn btn--ghost" href="https://www.notion.so/2cc2c27d7e468077ad0ee6eed83406f1" target="_blank" rel="noopener">Notion</a>
+          </div>
+
+          <ul class="chips" aria-label="핵심 키워드">
+            <li>Funnel / CVR</li>
+            <li>Retention</li>
+            <li>North Star Metric</li>
+            <li>Trade-off</li>
+          </ul>
+        </div>
+
+        <aside class="page-hero__side card reveal">
+          <h2 class="side-title">한 줄 요약</h2>
+          <p class="side-desc">
+            지표 중 “대표 지표 1개”를 잡고, 그 지표를 움직이는 레버를 설계합니다.
+          </p>
+          <div class="side-list">
+            <div class="side-item">
+              <span class="side-label">Focus</span>
+              <span class="side-value">Problem → Metric → Decision</span>
+            </div>
+            <div class="side-item">
+              <span class="side-label">Style</span>
+              <span class="side-value">구조화 / 문서화 / 검증</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>핵심 역량</h2>
+            <p>“무엇을 만들까”보다 “무엇을 오해하지 말아야 할까”를 먼저 고정합니다.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="mini-card card reveal">
+            <h3>문제 정의</h3>
+            <p>현상(Fact)과 문제(Hypothesis)를 분리하고, 우선순위를 지표로 고정합니다.</p>
+          </article>
+          <article class="mini-card card reveal">
+            <h3>지표 설계</h3>
+            <p>대표 지표 1개 + 행동 지표 레버로 구성하고 착시 가능성을 함께 명시합니다.</p>
+          </article>
+          <article class="mini-card card reveal">
+            <h3>경험 구조 조정</h3>
+            <p>기능을 늘리기보다 가치 경험 이전 이탈 구간을 재설계합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evidence -->
+    <section id="evidence" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Evidence</h2>
+            <p>문서로 확인 가능한 근거를 중심으로 보여줍니다.</p>
+          </div>
+        </div>
+
+        <div class="card reveal embed-card">
+          <div class="embed-head">
+            <h3>PM 이력서 PDF</h3>
+            <div class="embed-actions">
+              <a class="btn btn--ghost" href="강반석 pm 이력서.pdf" target="_blank" rel="noopener">새 탭에서 열기</a>
+            </div>
+          </div>
+
+          <!-- 브라우저에 따라 PDF 미리보기가 막히면 버튼으로 열기 -->
+          <div class="embed">
+            <iframe
+              title="PM Resume PDF"
+              src="강반석 pm 이력서.pdf"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <section id="links" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Links</h2>
+            <p>상세 자료는 외부 링크로 연결합니다.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <article class="card reveal link-card">
+            <h3>Notion Portfolio</h3>
+            <p>프로젝트 상세, 문제 정의 템플릿, 산출물 모음.</p>
+            <a class="btn btn--primary" target="_blank" rel="noopener"
+               href="https://www.notion.so/2cc2c27d7e468077ad0ee6eed83406f1">Notion 열기</a>
+          </article>
+
+          <article class="card reveal link-card">
+            <h3>GitHub</h3>
+            <p>분석 코드, 실험 결과, README 문서.</p>
+            <a class="btn btn--ghost" target="_blank" rel="noopener"
+               href="https://github.com/BANSEOK-KANG1">GitHub 열기</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <section class="section">
+      <div class="container">
+        <a class="btn btn--ghost reveal" href="index.html#featured">← 메인으로 돌아가기</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <small>© <span id="year"></span> Banseok Kang.</small>
+      <a class="to-top" href="#main">↑ Top</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/portfolio.js" defer></script>
+</body>
+</html>

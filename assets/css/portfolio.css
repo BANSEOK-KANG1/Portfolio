@@ -348,3 +348,129 @@ html[data-theme="light"] .port-card__media .badge{
 }
 .to-top{ color: var(--muted); }
 .to-top:hover{ color: var(--text); }
+/* ===== Page template (pm.html / intern.html) ===== */
+.page-hero{
+  padding: 56px 0 26px;
+}
+.page-hero__inner{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 900px){
+  .page-hero__inner{ grid-template-columns: 1fr; }
+}
+
+.page-title{
+  margin: 8px 0 0;
+  font-size: clamp(30px, 4.2vw, 48px);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  word-break: keep-all;
+}
+.page-subtitle{
+  margin: 12px 0 0;
+  color: var(--muted);
+  max-width: 62ch;
+  word-break: keep-all;
+}
+
+.page-hero__cta{
+  margin-top: 16px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.section{
+  padding: 34px 0;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 14px;
+}
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns: 1fr; }
+}
+
+.mini-card{
+  padding: 16px;
+}
+.mini-card h3{
+  margin: 0 0 8px;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+.mini-card p{
+  margin:0;
+  color: var(--muted);
+  word-break: keep-all;
+}
+
+.page-hero__side{
+  padding: 16px;
+}
+.side-title{
+  margin:0 0 10px;
+  font-size: 16px;
+}
+.side-desc{
+  margin:0;
+  color: var(--muted);
+}
+.side-list{
+  margin-top: 14px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.side-item{
+  display:flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.side-label{ color: var(--muted); font-weight: 650; }
+.side-value{ color: var(--text); font-weight: 650; }
+
+.mini-meta{
+  margin: 2px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+.mini-meta li{ margin: 4px 0; }
+
+/* PDF embed card */
+.embed-card{
+  padding: 16px;
+}
+.embed-head{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.embed-head h3{ margin:0; font-size: 16px; }
+.embed{
+  border-radius: 14px;
+  overflow:hidden;
+  border: 1px solid var(--line);
+  background: var(--panel2);
+}
+.embed iframe{
+  width: 100%;
+  height: min(78vh, 760px);
+  border: 0;
+  display:block;
+}
+
+.link-card{
+  padding: 16px;
+}
+.link-card h3{ margin:0 0 8px; }
+.link-card p{ margin:0 0 12px; color: var(--muted); }

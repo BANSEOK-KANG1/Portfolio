@@ -1,121 +1,181 @@
-/* Contact — 페이지 색 보정(라이트에서 베이지 톤) */
-:root[data-theme="light"] .page--contact{
-  --bg: #f6f1e7;
-  --fg: #3b2e22;
-  --sand: #eadfcf;
-  --accent: #a67c37;
-}
-.page--contact{ color: var(--fg); }
+/* Contact — 메인 테마(main.css)와 완벽한 일원화 */
+/* 기존의 베이지톤 강제 컬러 속성을 삭제하고 글로벌 CSS 변수를 상속받습니다. */
 
-/* Hero */
-.ct-hero{
-  padding: clamp(46px, 7vw, 72px) 0 18px;
-  background:
-    radial-gradient(60% 40% at 85% 0%, color-mix(in srgb, var(--accent), transparent 90%) 0, transparent 60%),
-    color-mix(in srgb, var(--bg), var(--fg) 2%);
-  border-bottom: 1px solid color-mix(in srgb, var(--fg), transparent 86%);
-}
-.ct-title{ font: 900 clamp(26px,4.6vw,40px)/1.15 var(--font-sans); margin:0 0 6px; letter-spacing:.2px;}
-.ct-sub{ opacity:.9; margin:0; }
-
-/* 프로필 + 패널 */
-.ct-profile{ padding: 22px 0 10px; }
-.ct-profile__grid{
-  display:grid;
-  grid-template-columns: 320px 1fr;
-  gap: clamp(16px,3vw,28px);
-}
-@media (max-width: 900px){
-  .ct-profile__grid{ grid-template-columns: 1fr; }
+.page--contact { 
+  color: var(--text); 
 }
 
-.ct-avatar{
-  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
-  border-radius: 18px; overflow:hidden;
-  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-  display:block; margin:0;
-  aspect-ratio: 3/4;    /* 세로형 */
+/* Hero 영역 텍스트 및 레이아웃 */
+.ct-hero {
+  padding: clamp(60px, 8vh, 100px) 0 20px;
+  text-align: center;
 }
-.ct-avatar img{
-  width:100%; height:100%; object-fit:cover; display:block;
+.ct-title { 
+  font: 800 clamp(32px, 5vw, 48px)/1.2 'Pretendard', sans-serif; 
+  margin: 0 0 16px; 
+  letter-spacing: -0.02em;
+}
+.ct-sub { 
+  opacity: 0.8; 
+  margin: 0 auto; 
+  max-width: 600px;
+  font-size: clamp(16px, 2vw, 18px);
+}
+.hl { color: var(--accent); }
+
+/* 프로필 + 패널 그리드 */
+.ct-profile { padding: 40px 0 20px; }
+.ct-profile__grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: clamp(24px, 4vw, 40px);
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .ct-profile__grid { grid-template-columns: 1fr; }
 }
 
-/* 카드 공통 */
-.ct-card{
-  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-  padding: 14px;
+/* 아바타 카드 (Bento 스타일) */
+.ct-avatar {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  display: flex;
 }
-.ct-card__head{
-  display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;
+.ct-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
-.ct-card__title{ font-weight:900; margin:0; }
-.ct-actions{ display:flex; gap:8px; }
-.ct-btn{
-  padding:8px 12px; border-radius:10px; border:1px solid color-mix(in srgb, var(--fg), transparent 80%);
-  background: transparent; cursor:pointer; font-weight:700;
+.ct-avatar:hover img {
+  transform: scale(1.03);
 }
-.ct-btn:hover{ background: color-mix(in srgb, var(--accent), transparent 90%); }
 
-/* 연락처 리스트 */
-.ct-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
-.ct-item{
-  display:grid; grid-template-columns: 28px 1fr auto; gap:10px;
-  align-items:center;
-  padding:10px;
-  border:1px solid color-mix(in srgb, var(--fg), transparent 90%);
-  border-radius:12px;
-  background: color-mix(in srgb, var(--bg), var(--fg) 2.5%);
+/* 연락처 패널 내부 조정 */
+.ct-card { padding: clamp(20px, 4vw, 32px); }
+.ct-card__head {
+  display: flex; 
+  align-items: flex-start; 
+  justify-content: space-between; 
+  gap: 16px; 
+  margin-bottom: 24px;
 }
-.ct-item__icon{ font-size:18px; line-height:1; }
-.ct-item__body strong{ display:block; font-weight:800; margin-bottom:2px; }
-.ct-links{ display:flex; gap:10px; flex-wrap:wrap; }
-.ct-links a{ text-decoration:underline; }
+.ct-card__title { 
+  font-weight: 800; 
+  font-size: 24px; 
+  margin: 0; 
+}
+.ct-muted { 
+  opacity: 0.7; 
+  margin: 4px 0 0 0; 
+  font-size: 14px; 
+}
 
-.ct-copy{
-  border:1px solid color-mix(in srgb, var(--fg), transparent 80%);
-  background:transparent; border-radius:8px; padding:6px 8px; cursor:pointer;
+/* 연락처 리스트 스타일링 */
+.ct-list { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+  display: grid; 
+  gap: 12px; 
 }
-.ct-copy:hover{ background: color-mix(in srgb, var(--accent), transparent 90%); }
+.ct-item {
+  display: grid; 
+  grid-template-columns: 36px 1fr auto; 
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel2);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.ct-item:hover {
+  border-color: color-mix(in srgb, var(--accent), transparent 50%);
+  background: var(--panel);
+}
+.ct-item__icon { 
+  font-size: 20px; 
+  line-height: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-item__body strong { 
+  display: block; 
+  font-weight: 700; 
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px; 
+}
+.ct-item__body a, .ct-item__body span {
+  font-weight: 600;
+  font-size: 16px;
+}
+.ct-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.ct-links a { 
+  text-decoration: none; 
+  color: var(--accent);
+  transition: opacity 0.2s ease;
+}
+.ct-links a:hover { opacity: 0.7; }
 
 /* 폼 영역 */
-.ct-form{ padding: 10px 0 64px; }
-.ct-form__card{ @apply ct-card; } /* 설명용. 실제로 아래 동일 값 다시 지정 */
-.ct-form__card{
-  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
-  border-radius: 18px; background: color-mix(in srgb, var(--bg), var(--fg) 3%);
-  padding: 14px;
+.ct-form { padding: 20px 0 80px; }
+.ct-form__grid {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px;
+  margin-bottom: 20px;
 }
-.ct-muted{ opacity:.85; margin:0; }
+@media (max-width: 720px) {
+  .ct-form__grid { grid-template-columns: 1fr; }
+}
 
-.ct-form__grid{
-  display:grid; grid-template-columns: 1fr 1fr; gap:10px;
+.ct-field { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+  margin-bottom: 20px;
 }
-@media (max-width: 720px){
-  .ct-form__grid{ grid-template-columns: 1fr; }
+.ct-field > span { 
+  font-weight: 600; 
+  font-size: 14px;
+  color: var(--muted);
 }
-.ct-field{ display:flex; flex-direction:column; gap:6px; }
-.ct-field > span{ font-weight:700; }
-.ct-field input, .ct-field textarea{
-  border:1px solid color-mix(in srgb, var(--fg), transparent 85%);
-  background: color-mix(in srgb, var(--bg), var(--fg) 2%);
-  color: var(--fg);
-  border-radius:10px; padding:10px 12px; outline:none;
+.ct-field input, .ct-field textarea {
+  border: 1px solid var(--line);
+  background: var(--panel2);
+  color: var(--text);
+  border-radius: 12px; 
+  padding: 14px 16px; 
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.ct-field input:focus, .ct-field textarea:focus{
+.ct-field input:focus, .ct-field textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 75%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 80%);
+  background: var(--bg);
+}
+.ct-field textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
-.ct-form__actions{
-  display:flex; align-items:center; gap:10px; margin-top:10px;
+.ct-form__actions {
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+  margin-top: 10px;
 }
-.ct-form__status{ font-weight:700; opacity:.9; }
+.ct-form__status { 
+  font-weight: 600; 
+  font-size: 14px;
+  color: var(--accent); 
+}
 
-.ct-copyline{ opacity:.85; }
-
-/* 버튼(공통 토큰 재사용) */
-.bs-btn{ display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:10px; border:1px solid color-mix(in srgb, #000, transparent 70%); }
-.bs-btn--accent{ background: var(--accent); color:#111; box-shadow: 0 1px 0 color-mix(in srgb, #000, transparent 75%); }
-.bs-btn--accent:hover{ transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,.25); }
+/* 복사 버튼(ct-copy)을 공통 btn 스타일로 통합했으므로 불필요한 레거시 삭제 */

@@ -1,190 +1,423 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>강반석 | Performance Marketing · Product · Decision Design</title>
+    <meta
+      name="description"
+      content="퍼널·리텐션·전환율을 기준으로 문제를 정의하고, 실험 가능한 구조와 문서화로 의사결정 품질을 높이는 강반석의 포트폴리오 홈입니다."
+    />
+    <meta property="og:title" content="강반석 | Performance Marketing · Product · Decision Design" />
+    <meta
+      property="og:description"
+      content="퍼포먼스 마케팅, 프로덕트 사고, 데이터 해석을 하나의 실행 구조로 연결합니다."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://banseok-kang1.github.io/Portfolio/assets/img/portrait.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/css/renewal-home.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
 
-  <title>강반석 포트폴리오 | Data · Product · Decision Quality</title>
-  <meta name="description" content="데이터로 판단 기준을 만들고 구조로 의사결정을 안정화하는 PM 포트폴리오. 대표 포트폴리오 2개를 사이트로 먼저 보고, 상세는 Notion으로 연결합니다." />
-  <meta name="theme-color" content="#0b0d10" />
+    <header class="site-header" id="top">
+      <div class="shell">
+        <div class="topbar">
+          <a class="brand" href="#top" aria-label="강반석 포트폴리오 홈으로 이동">
+            <span class="brand-mark">BK</span>
+            <span class="brand-copy">
+              <strong>강반석</strong>
+              <small>Performance Marketing · Product · Data</small>
+            </span>
+          </a>
 
-  <!-- Pretendard -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="메뉴 열기"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
 
-  <!-- FOUC 방지: 저장된 테마 즉시 적용 -->
-  <script>
-    (function(){
-      try{
-        const saved = localStorage.getItem("bs-theme");
-        if(saved){ document.documentElement.setAttribute("data-theme", saved); }
-      }catch(e){}
-    })();
-  </script>
-
-  <!-- CSS (인라인 금지) -->
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/portfolio.css" />
-</head>
-
-<body>
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="index.html" aria-label="홈으로">
-    <span class="brand__name">Banseok Kang</span>
-    <span class="brand__role">PM / Product Ops</span>
-      </a>  
-
-      <nav class="topbar__nav" aria-label="주요 메뉴">
-        <a class="navlink" href="#featured">Portfolio</a>
-        <a class="navlink" href="#contact">Contact</a>
-        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">🌙</button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="hero__bg" aria-hidden="true">
-        <img src="assets/img/hero.jpg" alt="" loading="lazy">
+          <nav class="primary-nav" id="primary-nav" aria-label="주요 탐색">
+            <ul>
+              <li><a href="#selected-work">대표 작업</a></li>
+              <li><a href="#focus">집중 영역</a></li>
+              <li><a href="#system">작업 방식</a></li>
+              <li><a href="#resources">자료 모음</a></li>
+              <li><a href="./contact.html">연락하기</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
+    </header>
 
-      <div class="container hero__inner">
-        <div class="hero__copy reveal">
-          <p class="kicker">Data · Product · Decision Quality</p>
+    <main id="main">
+      <section class="hero section">
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Performance Marketing · Product Strategy · Decision Quality</p>
+            <h1>데이터로 문제를 정의하고, 실행 가능한 의사결정 구조를 설계합니다.</h1>
+            <p class="hero-text">
+              퍼널·리텐션·전환율을 기준으로 핵심 문제를 찾고, 문서화·실험 설계·QA 프레임으로
+              오해 비용을 줄입니다. 기능을 늘리기보다 가치가 전달되는 순서와 판단 기준을 먼저 고정합니다.
+            </p>
 
-          <h1 class="title">
-          데이터로 <span class="accent">판단 기준</span>을 만들고<br>
-          구조로 <span class="accent">의사결정</span>을<br>
-         안정화합니다.
-</h1>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#selected-work">대표 케이스 보기</a>
+              <a class="button button-secondary" href="./pm.html">PM 상세 포트폴리오</a>
+            </div>
 
-          <p class="subtitle">
-            퍼널·리텐션·전환율로 문제를 정의하고, “무엇을 만들까”보다
-            “무엇을 오해하지 말아야 할까”를 먼저 고정합니다.
-          </p>
-
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#featured">대표 포트폴리오 2개 보기</a>
-            <a class="btn btn--ghost" href="#contact">연락하기</a>
+            <ul class="hero-tags" aria-label="핵심 역량">
+              <li>Problem Definition</li>
+              <li>Funnel / CVR</li>
+              <li>Metric QA</li>
+              <li>Experiment Design</li>
+              <li>Documentation</li>
+              <li>Retention Thinking</li>
+            </ul>
           </div>
 
-          <ul class="chips" aria-label="핵심 역량">
-            <li>Problem Definition</li>
-            <li>Metric QA</li>
-            <li>Experiment Design</li>
-            <li>Documentation</li>
-          </ul>
+          <aside class="hero-panel reveal" aria-label="강반석 소개 카드">
+            <div class="profile-card">
+              <img
+                src="https://banseok-kang1.github.io/Portfolio/assets/img/portrait.jpg"
+                alt="강반석 프로필 사진"
+                class="profile-image"
+              />
+              <div class="profile-body">
+                <p class="profile-role">강반석 · Product / Growth / Data</p>
+                <h2>문제 정의에서 실행 구조까지 연결하는 사람</h2>
+                <p>
+                  PM, 퍼포먼스 마케팅, 데이터 분석의 언어를 따로 쓰지 않고 하나의 판단 체계로 연결합니다.
+                  그래서 보고서가 끝이 아니라 다음 액션까지 이어집니다.
+                </p>
+              </div>
+              <dl class="signal-grid">
+                <div>
+                  <dt>관점</dt>
+                  <dd>문제 정의</dd>
+                </div>
+                <div>
+                  <dt>지표</dt>
+                  <dd>퍼널 · 리텐션</dd>
+                </div>
+                <div>
+                  <dt>실행</dt>
+                  <dd>실험 · 개선</dd>
+                </div>
+                <div>
+                  <dt>안전장치</dt>
+                  <dd>문서화 · QA</dd>
+                </div>
+              </dl>
+            </div>
+          </aside>
         </div>
+      </section>
 
-        <figure class="hero__portrait reveal">
-          <img src="assets/img/portrait.jpg" alt="강반석 프로필 사진" loading="lazy">
-          <figcaption>강반석 · PM / Product Ops</figcaption>
-        </figure>
-      </div>
-    </section>
+      <section class="proof-band section-tight">
+        <div class="shell proof-grid reveal">
+          <article>
+            <span class="proof-label">대표 포지션</span>
+            <strong>Product / PM</strong>
+            <p>문제 정의, 지표 설계, 의사결정 구조화</p>
+          </article>
+          <article>
+            <span class="proof-label">확장 영역</span>
+            <strong>Performance Marketing</strong>
+            <p>채널 성과 해석, 전환 레버 탐색, 콘텐츠 KPI 재정의</p>
+          </article>
+          <article>
+            <span class="proof-label">작업 스타일</span>
+            <strong>Structure Before Speed</strong>
+            <p>빠르게 실행하기보다 잘못된 판단을 먼저 차단</p>
+          </article>
+          <article>
+            <span class="proof-label">산출물</span>
+            <strong>Web · PDF · Notion</strong>
+            <p>짧게 읽히는 웹과 깊게 읽히는 근거 자료를 분리 운영</p>
+          </article>
+        </div>
+      </section>
 
-    <!-- Featured: 대표 2개 -->
-    <section id="featured" class="featured">
-      <div class="container">
-        <div class="section-head reveal">
+      <section class="section" id="selected-work">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Selected Work</p>
+            <h2>지금 가장 먼저 봐야 할 대표 작업</h2>
+            <p>
+              현재 포트폴리오에 흩어진 자료를 채용 담당자·협업자가 빠르게 판단할 수 있도록
+              우선순위 순서대로 재배치했습니다.
+            </p>
+          </div>
+
+          <div class="work-grid">
+            <article class="work-card reveal">
+              <div class="thumb-wrap">
+                <img
+                  src="https://banseok-kang1.github.io/Portfolio/assets/img/pmsusme.png"
+                  alt="PM 이력서 썸네일"
+                />
+              </div>
+              <div class="work-body">
+                <p class="work-kicker">PM Case Study 01</p>
+                <h3>경험 순서 재설계로 전환 문제를 다시 정의</h3>
+                <p>
+                  전환율 하락을 기능 부족이 아니라 가치 인지 이전 이탈 문제로 재정의하고,
+                  가입 후 첫 행동까지의 흐름을 재설계한 사례입니다.
+                </p>
+                <ul class="mini-list">
+                  <li>North Star: 가입 → 첫 행동 전환율</li>
+                  <li>관점: Funnel · Retention · Trade-off</li>
+                  <li>결론: 기능 추가보다 초기 경험 구조 조정 우선</li>
+                </ul>
+                <div class="card-actions">
+                  <a href="./pm.html">PM 페이지에서 보기</a>
+                  <a href="./%EA%B0%95%EB%B0%98%EC%84%9D%20pm%20%EC%9D%B4%EB%A0%A5%EC%84%9C.pdf">PM PDF 보기</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card reveal">
+              <div class="thumb-wrap">
+                <img
+                  src="https://banseok-kang1.github.io/Portfolio/assets/img/pmsusme.png"
+                  alt="PM 케이스 스터디 썸네일"
+                />
+              </div>
+              <div class="work-body">
+                <p class="work-kicker">PM Case Study 02</p>
+                <h3>조회수 중심 KPI를 참여율 중심 기준으로 전환</h3>
+                <p>
+                  숫자가 커 보이는 지표보다 실제 가치에 가까운 대표 지표를 다시 정의해,
+                  콘텐츠 전략과 해석 방식 자체를 전환한 사례입니다.
+                </p>
+                <ul class="mini-list">
+                  <li>North Star: 참여율</li>
+                  <li>보조 지표: 댓글 반응, 완주율, 조합별 안정성</li>
+                  <li>핵심 학습: KPI는 숫자가 아니라 판단 기준</li>
+                </ul>
+                <div class="card-actions">
+                  <a href="./pm.html">관련 케이스 보기</a>
+                  <a href="./data-insight.html">데이터 인사이트 보기</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card reveal">
+              <div class="thumb-wrap thumb-neutral">
+                <div class="icon-card" aria-hidden="true">QA</div>
+              </div>
+              <div class="work-body">
+                <p class="work-kicker">Decision QA</p>
+                <h3>‘의사결정 오해’를 줄이기 위한 QA 사고 프레임</h3>
+                <p>
+                  버그 체크리스트가 아니라, 지표 해석 오류·엣지 케이스·인과 착시를 줄이기 위한
+                  6가지 점검 프레임을 문서화한 작업입니다.
+                </p>
+                <ul class="mini-list">
+                  <li>대표 지표 단일 해석 방지</li>
+                  <li>엣지 케이스와 관측 오류 선제 점검</li>
+                  <li>결론보다 적용 범위와 한계 명시</li>
+                </ul>
+                <div class="card-actions">
+                  <a href="./intern.html">Intern / QA 페이지 보기</a>
+                  <a href="./QA_%EC%82%AC%EA%B3%A0_%ED%94%84%EB%A0%88%EC%9E%84_%EB%AC%B8%EC%84%9C.pdf">QA 프레임 PDF 보기</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="work-card reveal">
+              <div class="thumb-wrap thumb-neutral">
+                <div class="icon-card" aria-hidden="true">INSIGHT</div>
+              </div>
+              <div class="work-body">
+                <p class="work-kicker">Insight Archive</p>
+                <h3>데이터 인사이트 · 브랜딩 · 성장 로그를 한 축으로 재정리</h3>
+                <p>
+                  예전 포트폴리오에 있던 데이터 인사이트, 브랜딩 소개, 성장 일지를
+                  보조 자료로 묶어 관심 분야와 학습 궤적이 보이도록 구성했습니다.
+                </p>
+                <ul class="mini-list">
+                  <li>데이터 리포트와 대시보드</li>
+                  <li>브랜딩/자기소개 보조 자료</li>
+                  <li>장기 학습 흐름과 아카이브</li>
+                </ul>
+                <div class="card-actions">
+                  <a href="./branding.html">브랜딩 보기</a>
+                  <a href="./reflection.html">성장 일지 보기</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section muted-section" id="focus">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Core Focus</p>
+            <h2>제가 반복해서 잘하는 일</h2>
+            <p>
+              도구 나열보다 판단의 품질을 드러내는 관점 위주로 정리했습니다.
+              그래서 어떤 팀에 들어가도 재사용 가능한 역량이 보입니다.
+            </p>
+          </div>
+
+          <div class="focus-grid">
+            <article class="focus-card reveal">
+              <span class="focus-number">01</span>
+              <h3>문제 정의를 먼저 고정</h3>
+              <p>
+                현상과 문제를 분리하고, 무엇이 진짜 리스크인지 먼저 구분합니다.
+                이 단계가 흔들리면 이후 실험과 지표 해석이 전부 엇나갑니다.
+              </p>
+            </article>
+            <article class="focus-card reveal">
+              <span class="focus-number">02</span>
+              <h3>대표 지표와 행동 레버를 분리</h3>
+              <p>
+                대표 지표는 판단 기준으로, 행동 지표는 움직이는 손잡이로 다룹니다.
+                그래서 숫자가 움직였을 때 왜 움직였는지 추적이 가능합니다.
+              </p>
+            </article>
+            <article class="focus-card reveal">
+              <span class="focus-number">03</span>
+              <h3>속도보다 해석 오류를 줄임</h3>
+              <p>
+                엣지 케이스, 측정 한계, 인과 착시를 먼저 점검해 잘못된 결론의 비용을 낮춥니다.
+                실행은 그 다음입니다.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="system">
+        <div class="shell system-grid">
+          <div class="section-head reveal">
+            <p class="eyebrow">Operating System</p>
+            <h2>제가 일할 때 쓰는 기본 구조</h2>
+            <p>
+              PM, 마케팅, 데이터 업무를 따로 보지 않고 하나의 루프로 연결합니다.
+              이렇게 해야 보고서가 쌓이지 않고 실제 액션으로 이어집니다.
+            </p>
+          </div>
+
+          <ol class="timeline reveal">
+            <li>
+              <span>1</span>
+              <div>
+                <h3>Observe</h3>
+                <p>퍼널, 리텐션, 채널 성과, 사용자 반응에서 비정상 패턴을 관측합니다.</p>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <h3>Define</h3>
+                <p>무엇이 문제인지, 왜 중요한지, 어떤 지표가 대표해야 하는지 고정합니다.</p>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <h3>Validate</h3>
+                <p>행동 지표, 세그먼트, 엣지 케이스, 문서화로 해석 리스크를 점검합니다.</p>
+              </div>
+            </li>
+            <li>
+              <span>4</span>
+              <div>
+                <h3>Ship & Learn</h3>
+                <p>실행 후 결과를 해석하고, 다음 액션과 적용 범위를 함께 남깁니다.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="resources">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Resource Hub</p>
+            <h2>깊게 읽고 싶다면 여기서 이어집니다</h2>
+            <p>
+              홈은 빠르게 판단하는 화면, 상세 페이지와 문서는 근거를 확인하는 화면으로 역할을 분리했습니다.
+            </p>
+          </div>
+
+          <div class="resource-grid">
+            <a class="resource-card reveal" href="./pm.html">
+              <strong>PM 상세 포트폴리오</strong>
+              <span>문제 정의, 지표, 트레이드오프, 의사결정 사례</span>
+            </a>
+            <a class="resource-card reveal" href="./intern.html">
+              <strong>Intern / QA 페이지</strong>
+              <span>문서화, QA 프레임, 의사결정 리스크 관리</span>
+            </a>
+            <a class="resource-card reveal" href="./data-insight.html">
+              <strong>데이터 인사이트</strong>
+              <span>리포트, 대시보드, A/B 테스트 관점 정리</span>
+            </a>
+            <a class="resource-card reveal" href="./branding.html">
+              <strong>브랜딩 소개</strong>
+              <span>본인 소개와 포지셔닝 보조 자료</span>
+            </a>
+            <a class="resource-card reveal" href="./contact.html">
+              <strong>연락하기</strong>
+              <span>협업, 인터뷰, 프로젝트 문의 연결</span>
+            </a>
+            <a class="resource-card reveal" href="https://github.com/BANSEOK-KANG1/Portfolio">
+              <strong>GitHub Repository</strong>
+              <span>정적 사이트 구조와 문서의 원본 저장소</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cta-section">
+        <div class="shell cta-box reveal">
           <div>
-            <h2>주요 포트폴리오</h2>
-            <p>사이트에서 먼저 보고, 상세는 Notion으로 연결합니다.</p>
+            <p class="eyebrow">Next Step</p>
+            <h2>사이트를 본 뒤, 바로 대화로 이어지게 만들었습니다.</h2>
+            <p>
+              홈에서는 “무슨 사람인지”, 상세에서는 “어떻게 판단하는지”, 연락 페이지에서는 “어떻게 연결되는지”가
+              분리되어 보이도록 설계했습니다.
+            </p>
           </div>
-
-          <!-- “사이트로 접속” 버튼(요청 반영) -->
-          <div class="section-head__actions">
-            <a class="btn btn--ghost" href="pm.html">PM 페이지</a>
-            <a class="btn btn--ghost" href="intern.html">Intern 페이지</a>
+          <div class="cta-actions">
+            <a class="button button-primary" href="./contact.html">연락 페이지 열기</a>
+            <a class="button button-secondary" href="#top">맨 위로</a>
           </div>
         </div>
+      </section>
+    </main>
 
-        <div class="grid-portfolio">
-          <!-- PM 카드 -->
-          <article class="p-card reveal">
-            <div class="p-card__media">
-              <img src="assets/img/pmsusme.png" alt="PM 이력서 썸네일" loading="lazy">
-            </div>
-
-            <div class="p-card__body">
-              <h3>PM 이력서</h3>
-              <p>퍼널·리텐션·전환율로 문제를 정의하고, 경험 구조 조정으로 지표를 움직입니다.</p>
-
-              <ul class="mini-meta">
-                <li>핵심: 가입→첫 행동 전환</li>
-                <li>레버: 흐름/맥락/단계 수</li>
-              </ul>
-
-              <div class="p-card__btns">
-                <a class="btn btn--primary" href="pm.html">사이트에서 보기</a>
-                <a class="btn btn--ghost" target="_blank" rel="noopener"
-                   href="https://www.notion.so/2cc2c27d7e468077ad0ee6eed83406f1">
-                  Notion 보기
-                </a>
-                <a class="btn btn--ghost" target="_blank" rel="noopener" href="강반석 pm 이력서.pdf">PDF</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Intern 카드 -->
-          <article class="p-card reveal">
-            <div class="p-card__media">
-              <img src="assets/img/intern.png" alt="인턴 이력서 썸네일" loading="lazy">
-            </div>
-
-            <div class="p-card__body">
-              <h3>인턴 이력서</h3>
-              <p>문서화·QA 관점으로 의사결정 품질을 높이고, 오해 가능성을 선제적으로 차단합니다.</p>
-
-              <ul class="mini-meta">
-                <li>문서: 전제/한계/오해 방지</li>
-                <li>QA: 재현 조건/엣지 케이스</li>
-              </ul>
-
-              <div class="p-card__btns">
-                <a class="btn btn--primary" href="intern.html">사이트에서 보기</a>
-                <a class="btn btn--ghost" target="_blank" rel="noopener" href="#">
-                  Notion 보기
-                </a>
-                <a class="btn btn--ghost" target="_blank" rel="noopener" href="인턴_지원_이력서.pdf">PDF</a>
-              </div>
-            </div>
-          </article>
+    <footer class="site-footer">
+      <div class="shell footer-wrap">
+        <div>
+          <strong>강반석</strong>
+          <p>Performance Marketing · Product · Decision Design</p>
         </div>
+        <nav aria-label="푸터 링크">
+          <ul>
+            <li><a href="./pm.html">PM</a></li>
+            <li><a href="./intern.html">Intern</a></li>
+            <li><a href="./data-insight.html">Insight</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
       </div>
-    </section>
+    </footer>
 
-    <!-- Contact -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="contact__card card reveal">
-          <div class="contact__copy">
-            <h2>연락하기</h2>
-            <p>협업/인터뷰/프로젝트 관련 대화 환영합니다. 가장 빠른 채널로 연결해요.</p>
-          </div>
-
-          <div class="contact__actions">
-            <a class="btn btn--primary" href="mailto:kangbs2486@gmail.com">Email</a>
-            <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://github.com/BANSEOK-KANG1">GitHub</a>
-            <a class="btn btn--ghost" target="_blank" rel="noopener" href="#">Notion</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <small>© <span id="year"></span> Banseok Kang. All rights reserved.</small>
-      <a class="to-top" href="#top">↑ Top</a>
-    </div>
-  </footer>
-
-  <!-- JS -->
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/portfolio.js" defer></script>
-</body>
+    <script src="./assets/js/renewal-home.js"></script>
+  </body>
 </html>

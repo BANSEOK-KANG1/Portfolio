@@ -1,163 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>연락하기 | BanSeok Portfolio</title>
-  <meta name="theme-color" content="#0f0f0f" />
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/contact.css">
-  <script>
-    // 초기 테마 적용(FoUC 방지)
-    (function(){
-      try{
-        const saved = localStorage.getItem("bs-theme");
-        if(saved) document.documentElement.setAttribute("data-theme", saved);
-      }catch(e){}
-    })();
-  </script>
-</head>
-<body class="page page--contact" id="top">
-  <!-- 헤더 -->
-  <header class="bs-header" role="banner">
-    <div class="bs-container">
-      <a class="bs-logo" href="index.html" aria-label="홈으로">BanSeok Portfolio</a>
-      <nav class="bs-nav" aria-label="주요 메뉴">
-        <ul class="bs-nav__list">
-          <li><a href="index.html">홈</a></li>
-          <li><a href="projects.html">프로젝트</a></li>
-          <li><a href="data-insight.html">데이터 인사이트</a></li>
-          <li><a href="branding.html">브랜딩</a></li>
-          <li><a href="reflection.html">성장 일지</a></li>
-          <li><a class="is-active" href="contact.html">연락처</a></li>
-        </ul>
-      </nav>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="테마 전환">🌙</button>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연락하기 | 강반석 Portfolio</title>
+    <meta name="theme-color" content="#0f0f0f" />
+    
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <link rel="stylesheet" href="./assets/css/renewal-home.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/contact.css" />
 
-  <main class="bs-main" role="main">
-    <!-- Hero -->
-    <section class="ct-hero">
-      <div class="bs-container">
-        <h1 class="ct-title">함께 일할 준비가 된, <span class="hl">강반석</span>입니다</h1>
-        <p class="ct-sub">데이터 기반 기획·실험·실행을 연결합니다. 아래 정보로 편한 방법을 선택해주세요.</p>
-      </div>
-    </section>
+    <script>
+      // 초기 테마 적용(FoUC 방지)
+      (function(){
+        try{
+          const saved = localStorage.getItem("bs-theme");
+          if(saved) document.documentElement.setAttribute("data-theme", saved);
+        }catch(e){}
+      })();
+    </script>
+  </head>
+  <body class="page page--contact" id="top">
+    <a class="skip-link" href="#main">본문 바로가기</a>
 
-    <!-- 프로필 + 정보 -->
-    <section class="ct-profile">
-      <div class="bs-container ct-profile__grid">
-        <!-- 왼쪽: 사진 -->
-        <figure class="ct-avatar">
-          <!-- 당신의 실제 이미지 경로로 바꿔도 됩니다 -->
-          <img src="assets/img/profile/pfmain.jpg" alt="강반석 프로필 사진" loading="lazy"/>
-          <figcaption class="sr-only">프로필 사진</figcaption>
-        </figure>
+    <header class="site-header">
+      <div class="container">
+        <div class="topbar">
+          <a class="brand" href="./index.html" aria-label="강반석 포트폴리오 홈으로 이동">
+            <span class="brand-mark">BK</span>
+            <span class="brand-copy">
+              <strong>강반석</strong>
+              <small>Performance Marketing · Product · Data</small>
+            </span>
+          </a>
 
-        <!-- 오른쪽: 연락 패널 -->
-        <aside class="ct-card">
-          <header class="ct-card__head">
-            <h2 class="ct-card__title">연락처</h2>
-            <div class="ct-actions">
-              <button type="button" class="ct-btn" id="copyAll" aria-label="연락처 복사">복사</button>
-              <a class="ct-btn" href="assets/banseok.vcf" download>vCard</a>
-            </div>
-          </header>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="메뉴 열기">
+            <span></span><span></span><span></span>
+          </button>
 
-          <ul class="ct-list" id="contactList">
-            <li class="ct-item">
-              <span class="ct-item__icon" aria-hidden="true">📧</span>
-              <div class="ct-item__body">
-                <strong>이메일</strong>
-                <a href="mailto:banseok,kang2486@gmail.com" id="ctEmail">banseok.kang2486@gmail.com</a>
-              </div>
-              <button class="ct-copy" data-copy="#ctEmail" aria-label="이메일 복사">복사</button>
-            </li>
-
-            <li class="ct-item">
-              <span class="ct-item__icon" aria-hidden="true">📱</span>
-              <div class="ct-item__body">
-                <strong>전화</strong>
-                <a href="tel:+821096302486" id="ctPhone">+82 10-9630-2486</a>
-              </div>
-              <button class="ct-copy" data-copy="#ctPhone" aria-label="전화번호 복사">복사</button>
-            </li>
-
-            <li class="ct-item">
-              <span class="ct-item__icon" aria-hidden="true">📍</span>
-              <div class="ct-item__body">
-                <strong>주소</strong>
-                <span id="ctAddr">서울특별시 관악구 봉천동 </span>
-              </div>
-              <button class="ct-copy" data-copy="#ctAddr" aria-label="주소 복사">복사</button>
-            </li>
-
-            <li class="ct-item">
-              <span class="ct-item__icon" aria-hidden="true">🔗</span>
-              <div class="ct-item__body">
-                <strong>링크</strong>
-                <div class="ct-links">
-                  <a href="https://github.com/banseok" target="_blank" rel="noopener">GitHub</a>
-                  <a href="https://notion.so" target="_blank" rel="noopener">Notion</a>
-                  <a href="https://banseok-data-analysis.tistory.com/" target="_blank" rel="noopener">Tistory</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <!-- 문의 폼 -->
-    <section class="ct-form">
-      <div class="bs-container">
-        <div class="ct-form__card">
-          <header class="ct-card__head">
-            <h2 class="ct-card__title">메시지 보내기</h2>
-            <p class="ct-muted">답장은 보통 <b>영업일 1~2일</b> 내 드립니다.</p>
-          </header>
-
-          <form id="contactForm" novalidate>
-            <div class="ct-form__grid">
-              <label class="ct-field">
-                <span>이름</span>
-                <input type="text" name="name" required placeholder="홍길동" />
-              </label>
-              <label class="ct-field">
-                <span>이메일</span>
-                <input type="email" name="email" required placeholder="your@email.com" />
-              </label>
-            </div>
-
-            <label class="ct-field">
-              <span>제목</span>
-              <input type="text" name="subject" required placeholder="프로젝트 제안 / 협업 문의 등" />
-            </label>
-
-            <label class="ct-field">
-              <span>내용</span>
-              <textarea name="message" rows="6" required placeholder="간단한 배경과 목적을 적어주세요."></textarea>
-            </label>
-
-            <div class="ct-form__actions">
-              <button type="submit" class="bs-btn bs-btn--accent">보내기</button>
-              <span class="ct-form__status" id="formStatus" role="status" aria-live="polite"></span>
-            </div>
-          </form>
+          <nav class="primary-nav" id="primary-nav" aria-label="주요 탐색">
+            <ul>
+              <li><a href="./index.html">홈</a></li>
+              <li><a href="./pm.html">PM</a></li>
+              <li><a href="./data-insight.html">데이터 인사이트</a></li>
+              <li><a href="./intern.html">QA / Intern</a></li>
+              <li><a href="./contact.html" class="is-active">연락하기</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
-    </section>
-  </main>
+    </header>
 
-  <footer class="bs-footer" role="contentinfo">
-    <div class="bs-container">
-      <p class="ct-copyline">© <span id="year"></span> banseok — 꾸준함은 결국 결과가 됩니다.</p>
-      <a class="bs-footer__top" href="#top" aria-label="맨 위로">↑</a>
-    </div>
-  </footer>
+    <main id="main" class="bs-main">
+      <section class="ct-hero section">
+        <div class="container">
+          <p class="eyebrow reveal">Contact Me</p>
+          <h1 class="ct-title reveal">함께 일할 준비가 된,<br><span class="hl">강반석</span>입니다.</h1>
+          <p class="ct-sub reveal">데이터 기반 기획·실험·실행을 연결합니다. 아래 정보로 편한 방법을 선택해주세요.</p>
+        </div>
+      </section>
 
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/contact.js" defer></script>
-</body>
+      <section class="ct-profile section-tight">
+        <div class="container ct-profile__grid">
+          <figure class="ct-avatar card reveal">
+            <img src="./assets/img/portrait.jpg" alt="강반석 프로필 사진" loading="lazy"/>
+            <figcaption class="sr-only">프로필 사진</figcaption>
+          </figure>
+
+          <aside class="ct-card card reveal">
+            <header class="ct-card__head">
+              <h2 class="ct-card__title">연락처 정보</h2>
+              <div class="ct-actions">
+                <a class="btn" href="./assets/banseok.vcf" download>vCard 저장</a>
+              </div>
+            </header>
+
+            <ul class="ct-list" id="contactList">
+              <li class="ct-item">
+                <span class="ct-item__icon" aria-hidden="true">📧</span>
+                <div class="ct-item__body">
+                  <strong>이메일</strong>
+                  <a href="mailto:banseok.kang2486@gmail.com" id="ctEmail">banseok.kang2486@gmail.com</a>
+                </div>
+                <button class="ct-copy btn btn--ghost" data-copy="#ctEmail" aria-label="이메일 복사">복사</button>
+              </li>
+
+              <li class="ct-item">
+                <span class="ct-item__icon" aria-hidden="true">📱</span>
+                <div class="ct-item__body">
+                  <strong>전화</strong>
+                  <a href="tel:+821096302486" id="ctPhone">010-9630-2486</a>
+                </div>
+                <button class="ct-copy btn btn--ghost" data-copy="#ctPhone" aria-label="전화번호 복사">복사</button>
+              </li>
+
+              <li class="ct-item">
+                <span class="ct-item__icon" aria-hidden="true">📍</span>
+                <div class="ct-item__body">
+                  <strong>주소</strong>
+                  <span id="ctAddr">서울특별시 관악구 봉천동</span>
+                </div>
+              </li>
+
+              <li class="ct-item">
+                <span class="ct-item__icon" aria-hidden="true">🔗</span>
+                <div class="ct-item__body">
+                  <strong>링크</strong>
+                  <div class="ct-links">
+                    <a href="https://github.com/BANSEOK-KANG1" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://notion.so" target="_blank" rel="noopener noreferrer">Notion</a>
+                    <a href="https://banseok-data-analysis.tistory.com/" target="_blank" rel="noopener noreferrer">Tistory</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="ct-form section">
+        <div class="container">
+          <div class="ct-form__card card reveal">
+            <header class="ct-card__head">
+              <div>
+                <h2 class="ct-card__title">메시지 보내기</h2>
+                <p class="ct-muted">답장은 보통 영업일 1~2일 내로 드립니다.</p>
+              </div>
+            </header>
+
+            <form id="contactForm" novalidate>
+              <div class="ct-form__grid">
+                <label class="ct-field">
+                  <span>이름</span>
+                  <input type="text" name="name" required placeholder="홍길동" />
+                </label>
+                <label class="ct-field">
+                  <span>이메일</span>
+                  <input type="email" name="email" required placeholder="your@email.com" />
+                </label>
+              </div>
+
+              <label class="ct-field">
+                <span>제목</span>
+                <input type="text" name="subject" required placeholder="프로젝트 제안 / 협업 문의 등" />
+              </label>
+
+              <label class="ct-field">
+                <span>내용</span>
+                <textarea name="message" rows="6" required placeholder="간단한 배경과 목적을 적어주세요."></textarea>
+              </label>
+
+              <div class="ct-form__actions">
+                <button type="submit" class="btn btn--primary">메시지 보내기</button>
+                <span class="ct-form__status" id="formStatus" role="status" aria-live="polite"></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <div>
+          <strong>강반석</strong>
+          <p>Performance Marketing · Product · Decision Design</p>
+        </div>
+        <nav aria-label="푸터 링크">
+          <ul>
+            <li><a href="./pm.html">PM</a></li>
+            <li><a href="./intern.html">Intern</a></li>
+            <li><a href="./data-insight.html">Insight</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="./assets/js/main.js" defer></script>
+    <script src="./assets/js/contact.js" defer></script>
+    <script src="./assets/js/renewal-home.js" defer></script>
+  </body>
 </html>

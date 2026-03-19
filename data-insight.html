@@ -1,214 +1,329 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>데이터 인사이트 | BanSeok Portfolio</title>
-  <meta name="description" content="데이터로 사고하고, 사고를 구조화합니다. BanSeok의 데이터 인사이트.">
-  <meta name="theme-color" content="#0f0f0f">
-  <!-- Chart.js (스케폴드) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script> 
-  <!-- 전역 디자인 토큰/네비 스타일 -->
-  <link rel="stylesheet" href="assets/css/main.css">
-  <!-- 데이터 인사이트 전용 스타일 -->
-  <link rel="stylesheet" href="assets/css/data-insight.css">
-  <script>
-    // FOUC 방지: 저장된 테마 즉시 적용
-    (function(){try{const t=localStorage.getItem('bs-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-  </script>
-</head>
-<body class="page page--insight" id="top">
-  <!-- ===== 헤더(인덱스/프로젝트와 동일) ===== -->
-  <header class="bs-header" role="banner">
-    <div class="bs-container">
-      <a href="index.html" class="bs-logo" aria-label="BanSeok Portfolio 홈">
-        <span class="logo-main">BanSeok</span><span class="logo-sub"> Portfolio</span>
-      </a>
-      <nav class="bs-nav" aria-label="주요 메뉴">
-        <ul class="bs-nav__list">
-          <li><a href="index.html">홈</a></li>
-          <li><a href="projects.html">프로젝트</a></li>
-          <li><a class="is-active" href="data-insight.html">데이터 인사이트</a></li>
-          <li><a href="branding.html">브랜딩</a></li>
-          <li><a href="reflection.html">성장 일지</a></li>
-          <li><a href="contact.html">연락처</a></li>
-        </ul>
-      </nav>
-      <button id="themeToggle" class="theme-toggle" aria-pressed="false" aria-label="테마 전환">🌙</button>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>강반석 | Data Insight Evidence Hub</title>
+    <meta
+      name="description"
+      content="강반석의 데이터 인사이트 포트폴리오. 퍼포먼스 마케팅과 마케팅 분석 관점에서 문제 정의, 대표 지표, 분석 구조를 평가 가능하게 정리한 증거 허브입니다."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/portfolio-system.css" />
+    <link rel="stylesheet" href="./assets/css/data-insight-refresh.css" />
+  </head>
+  <body class="theme-growth" data-page="insight-hub">
+    <a class="skip-link" href="#main">본문 바로가기</a>
 
-  <main class="bs-main" id="main" role="main">
-    <!-- ===== Hero ===== -->
-    <section class="insight-hero">
-      <div class="insight-hero__bg" aria-hidden="true"></div>
-      <div class="bs-container">
-        <h1>데이터 인사이트</h1>
-        <p class="lead">
-          데이터로 사고하고, 사고를 구조화합니다.<br>
-          결과보다 <strong>해석의 과정</strong>을 보여줍니다.
-        </p>
-      </div>
-    </section>
+    <header class="site-header" id="top">
+      <div class="shell">
+        <div class="site-header__inner">
+          <a class="brand" href="./index.html" aria-label="강반석 포트폴리오 홈">
+            <span class="brand__mark">BK</span>
+            <span class="brand__copy">
+              <strong>강반석</strong>
+              <span>Marketing Evidence · Data Insight Hub</span>
+            </span>
+          </a>
 
-    <!-- ===== 카테고리 필터칩 ===== -->
-   <section class="insight-grid">
-  <div class="bs-container insight-grid__inner">
-    <!-- 카드 1: 표 스타일 미리보기 -->
-    <article class="insight-card" data-cat="trend" data-id="i1" tabindex="0" aria-label="검색 트렌드 리포트 2025Q1 열기">
-      <div class="insight-preview is-table" aria-hidden="true">
-        <!-- 간단한 표 스켈레톤 (인라인 SVG) -->
-        <svg viewBox="0 0 400 180" preserveAspectRatio="none">
-          <rect x="0" y="0" width="400" height="180" rx="8" class="sv-bg"/>
-          <!-- header -->
-          <rect x="16" y="16" width="100" height="18" rx="4" class="sv-cell"/>
-          <rect x="128" y="16" width="90"  height="18" rx="4" class="sv-cell"/>
-          <rect x="230" y="16" width="70"  height="18" rx="4" class="sv-cell"/>
-          <rect x="310" y="16" width="74"  height="18" rx="4" class="sv-cell"/>
-          <!-- rows -->
-          <g class="row">
-            <rect x="16"  y="50" width="120" height="14" rx="3" class="sv-cell"/>
-            <rect x="150" y="50" width="60"  height="14" rx="3" class="sv-cell"/>
-            <rect x="220" y="50" width="50"  height="14" rx="3" class="sv-cell"/>
-            <rect x="280" y="50" width="90"  height="14" rx="3" class="sv-cell"/>
-          </g>
-          <g class="row">
-            <rect x="16"  y="76" width="120" height="14" rx="3" class="sv-cell"/>
-            <rect x="150" y="76" width="60"  height="14" rx="3" class="sv-cell"/>
-            <rect x="220" y="76" width="50"  height="14" rx="3" class="sv-cell"/>
-            <rect x="280" y="76" width="90"  height="14" rx="3" class="sv-cell"/>
-          </g>
-          <g class="row">
-            <rect x="16"  y="102" width="120" height="14" rx="3" class="sv-cell"/>
-            <rect x="150" y="102" width="60"  height="14" rx="3" class="sv-cell"/>
-            <rect x="220" y="102" width="50"  height="14" rx="3" class="sv-cell"/>
-            <rect x="280" y="102" width="90"  height="14" rx="3" class="sv-cell"/>
-          </g>
-        </svg>
-        <span class="preview-caption">표 미리보기</span>
-      </div>
-      <div class="insight-body">
-        <h3>검색 트렌드 리포트 2025Q1</h3>
-        <p>검색량·연관어 기반 사회 이슈/관심사 흐름</p>
-        <ul class="tags"><li>#트렌드</li><li>#검색데이터</li></ul>
-      </div>
-    </article>
+          <button
+            class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="메뉴 열기"
+          >
+            <span></span><span></span><span></span>
+          </button>
 
-    <!-- 카드 2: 막대 차트 스타일 미리보기 -->
-    <article class="insight-card" data-cat="marketing" data-id="i2" tabindex="0" aria-label="광고 효율 대시보드 열기">
-      <div class="insight-preview is-bars" aria-hidden="true">
-        <svg viewBox="0 0 400 180" preserveAspectRatio="none">
-          <rect x="0" y="0" width="400" height="180" rx="8" class="sv-bg"/>
-          <!-- bars -->
-          <rect x="60"  y="90" width="32" height="70" rx="4" class="sv-bar"/>
-          <rect x="130" y="60" width="32" height="100" rx="4" class="sv-bar"/>
-          <rect x="200" y="78" width="32" height="82" rx="4" class="sv-bar"/>
-          <rect x="270" y="110" width="32" height="50" rx="4" class="sv-bar"/>
-        </svg>
-        <span class="preview-caption">막대 차트</span>
-      </div>
-      <div class="insight-body">
-        <h3>광고 효율 대시보드</h3>
-        <p>채널별 CTR/전환율 비교, ROAS 개선 포인트</p>
-        <ul class="tags"><li>#마케팅</li><li>#성과분석</li></ul>
-      </div>
-    </article>
-
-    <!-- 카드 3: 라인 차트 스타일 미리보기 -->
-    <article class="insight-card" data-cat="user" data-id="i3" tabindex="0" aria-label="유저 리텐션 분석 열기">
-      <div class="insight-preview is-line" aria-hidden="true">
-        <svg viewBox="0 0 400 180" preserveAspectRatio="none">
-          <rect x="0" y="0" width="400" height="180" rx="8" class="sv-bg"/>
-          <!-- line path (간단한 꺾은선) -->
-          <polyline points="20,60 90,90 160,110 230,130 300,140 380,150" class="sv-line"/>
-          <polyline points="20,40 90,60 160,70 230,95 300,100 380,120" class="sv-line alt"/>
-        </svg>
-        <span class="preview-caption">라인 차트</span>
-      </div>
-      <div class="insight-body">
-        <h3>유저 리텐션 분석</h3>
-        <p>코호트 리텐션/재방문 전환 경로 시각화</p>
-        <ul class="tags"><li>#사용자행동</li><li>#리텐션</li></ul>
-      </div>
-    </article>
-
-    <!-- 카드 4: 노트 스타일 미리보기 -->
-    <article class="insight-card" data-cat="experiment" data-id="i4" tabindex="0" aria-label="랜딩 A/B 테스트 열기">
-      <div class="insight-preview is-note" aria-hidden="true">
-        <div class="note-lines">
-          <span></span><span></span><span></span><span class="short"></span>
+          <nav class="primary-nav" id="primary-nav" data-nav aria-label="주요 탐색">
+            <ul>
+              <li><a href="#cases">대표 케이스</a></li>
+              <li><a href="#reading-system">읽는 순서</a></li>
+              <li><a href="#workflow">Notion → Site</a></li>
+              <li><a href="#connected-links">연결 자산</a></li>
+              <li><a href="./contact.html">연락</a></li>
+            </ul>
+          </nav>
         </div>
-        <span class="preview-caption">노트</span>
       </div>
-      <div class="insight-body">
-        <h3>랜딩 A/B 테스트</h3>
-        <p>히어로 문구/CTA 대비 실험, 통계적 유의성 검정</p>
-        <ul class="tags"><li>#AB테스트</li><li>#가설검증</li></ul>
-      </div>
-    </article>
+    </header>
 
-    <!-- 카드 5: (원한다면 다른 프리뷰 타입 재사용) -->
-    <article class="insight-card" data-cat="insight" data-id="i5" tabindex="0" aria-label="통찰 노트: 구매 장벽 열기">
-      <div class="insight-preview is-table" aria-hidden="true">
-        <svg viewBox="0 0 400 180" preserveAspectRatio="none">
-          <rect x="0" y="0" width="400" height="180" rx="8" class="sv-bg"/>
-          <rect x="16" y="20" width="140" height="16" rx="4" class="sv-cell"/>
-          <rect x="16" y="50" width="260" height="12" rx="4" class="sv-cell"/>
-          <rect x="16" y="70" width="220" height="12" rx="4" class="sv-cell"/>
-          <rect x="16" y="90" width="280" height="12" rx="4" class="sv-cell"/>
-        </svg>
-        <span class="preview-caption">표 미리보기</span>
-      </div>
-      <div class="insight-body">
-        <h3>통찰 노트: 구매 장벽</h3>
-        <p>퍼널 이탈구간 파악과 저비용 레버리지 제안</p>
-        <ul class="tags"><li>#인사이트</li><li>#레버리지</li></ul>
-      </div>
-    </article>
-  </div>
-</section>  
-  </main>
+    <main id="main">
+      <section class="hero section insight-hero">
+        <div class="shell hero__grid">
+          <div class="hero__copy reveal">
+            <p class="eyebrow">Marketing evidence hub</p>
+            <h1>숫자를 나열하지 않고, 판단 구조가 먼저 보이게 정리했습니다.</h1>
+            <p>
+              이 페이지는 <span class="accent-text">Performance Marketing / Marketing Analyst 트랙의 증거 허브</span>입니다.
+              카드 갤러리가 아니라, 각 케이스가 <span class="accent-text">문제 정의 → 대표 지표 → 해석 포인트 → 다음 액션</span>
+              순서로 바로 평가되도록 다시 설계했습니다.
+            </p>
 
-  <!-- ===== 상세 모달(시트) ===== -->
-  <div id="insightSheet" class="is-sheet" hidden aria-hidden="true">
-    <div class="is-sheet__backdrop" data-close></div>
-    <article class="is-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="isTitle">
-      <button class="is-sheet__close" type="button" aria-label="닫기" data-close>×</button>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#cases">대표 케이스 보기</a>
+              <a class="button button--secondary" href="./marketing-home.html">마케팅 랜딩으로 이동</a>
+            </div>
 
-      <!-- 좌: 시각화/이미지/차트 자리 -->
-      <div class="is-sheet__media">
-        <!-- 필요시 Chart.js 캔버스 교체 가능 -->
-        <img id="isImg" alt="">
-        <canvas id="isChart" aria-hidden="true" hidden></canvas>
-      </div>
+            <ul class="hero__tags" aria-label="핵심 키워드">
+              <li>Problem Definition</li>
+              <li>Funnel Bottleneck</li>
+              <li>KPI Interpretation</li>
+              <li>Retention</li>
+              <li>Experiment Design</li>
+              <li>Insight Memo</li>
+            </ul>
+          </div>
 
-      <!-- 우: 텍스트 -->
-      <section class="is-sheet__body">
-        <header class="is-sheet__head">
-          <h2 id="isTitle"></h2>
-          <ul id="isTags" class="tags"></ul>
-        </header>
+          <aside class="hero__panel reveal" aria-label="허브 요약 정보">
+            <div class="profile-panel frost insight-summary-card">
+              <div class="brand-mini">
+                <span class="brand-mini__badge">BK</span>
+                <div>
+                  <strong>강반석</strong>
+                  <span>Performance Marketing · Growth · Data</span>
+                </div>
+              </div>
 
-        <p id="isDesc" class="is-desc"></p>
-        <ul id="isMeta" class="is-meta"></ul>
+              <div class="profile-panel__body">
+                <h2>이번 1차 작업은 데이터 인사이트를 “예쁜 카드 모음”이 아니라 “평가 가능한 evidence hub”로 바꾸는 데 집중했습니다.</h2>
+                <p>
+                  현재 공개된 자산 제목은 유지하되, 읽는 사람이 빠르게 판단할 수 있게
+                  질문·지표·데이터·산출물 구조로 재배열했습니다.
+                </p>
+              </div>
 
-        <div class="is-actions">
-          <a id="isLink" class="bs-btn bs-btn--accent" target="_blank" rel="noopener">리포트/대시보드 열기</a>
+              <dl class="insight-summary-grid">
+                <div>
+                  <dt>포지션 문맥</dt>
+                  <dd>Performance Marketing / Marketing Analyst</dd>
+                </div>
+                <div>
+                  <dt>페이지 역할</dt>
+                  <dd>데이터 근거를 모아두는 보조 허브</dd>
+                </div>
+                <div>
+                  <dt>콘텐츠 형식</dt>
+                  <dd>리포트 · 대시보드 · 테스트 노트 · 인사이트 메모</dd>
+                </div>
+                <div>
+                  <dt>운영 구조</dt>
+                  <dd>Notion 원본 → GitHub Pages 반영 흐름</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="hint-card insight-note-card">
+              <strong>작업 포인트</strong>
+              <p>실제 Notion / PDF / 대시보드 URL만 꽂으면 바로 공개 가능한 형태로 구조부터 정리했습니다.</p>
+            </div>
+          </aside>
         </div>
       </section>
-    </article>
-  </div>
 
-  <footer class="bs-footer" role="contentinfo">
-    <div class="bs-container">
-      <p>© <span id="year"></span> banseok. 통합은 힘입니다.</p>
-      <a class="bs-footer__top" href="#top" aria-label="맨 위로">↑</a>
+      <section class="section section--tight" id="cases">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Selected cases</p>
+            <h2>카드를 예쁘게 나열하는 대신, “무엇을 어떻게 판단하는 사람인지”가 읽히게 바꿨습니다.</h2>
+            <p>
+              각 케이스는 현재 포트폴리오에 이미 노출된 제목을 유지하면서도,
+              채용 담당자나 협업자가 30초 안에 핵심을 파악할 수 있게 구조화했습니다.
+            </p>
+          </div>
+
+          <div class="insight-filters reveal" id="filterBar" aria-label="케이스 필터"></div>
+          <div class="case-grid case-grid--insight" id="caseGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section section--tight" id="reading-system">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Reading system</p>
+            <h2>이 페이지는 결과보다 해석 순서를 보여주도록 설계했습니다.</h2>
+            <p>
+              성과 수치만 보여주면 “무엇을 했는지”는 전달되지만, “왜 그렇게 판단했는지”는 남지 않습니다.
+              그래서 케이스를 읽는 기본 루프를 고정해 두었습니다.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-card reveal">
+              <span class="process-card__step">01</span>
+              <h3>Observe</h3>
+              <p>퍼널, CTR, 전환율, 리텐션, 검색량처럼 현상을 먼저 관찰합니다. 큰 숫자보다 “이상 패턴”을 먼저 포착합니다.</p>
+            </article>
+
+            <article class="process-card reveal">
+              <span class="process-card__step">02</span>
+              <h3>Define</h3>
+              <p>현상과 문제를 분리하고, 대표 지표를 하나 고정합니다. 무엇을 올릴지보다 무엇을 잘못 해석하지 말아야 하는지를 먼저 정합니다.</p>
+            </article>
+
+            <article class="process-card reveal">
+              <span class="process-card__step">03</span>
+              <h3>Validate</h3>
+              <p>세그먼트, 보조 지표, 실험 설계, 엣지 케이스를 통해 해석 리스크를 줄입니다. 숫자 변화가 우연인지 구조적인지 검증합니다.</p>
+            </article>
+
+            <article class="process-card reveal">
+              <span class="process-card__step">04</span>
+              <h3>Ship & Learn</h3>
+              <p>인사이트를 리포트나 대시보드로 남기고, 다음 액션까지 연결합니다. 포트폴리오에서도 재사용 가능한 판단 구조를 남깁니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tight" id="workflow">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Notion → Site workflow</p>
+            <h2>회고록을 쌓는 공간과 보여주는 공간을 분리하되, 운영은 한 번만 하게 만들었습니다.</h2>
+            <p>
+              원본은 Notion에서 관리하고, 공개용 구조는 GitHub Pages에서 읽히게 편집하는 방식이 유지보수 비용이 가장 낮습니다.
+              그래서 페이지 구조도 그 흐름에 맞게 설계했습니다.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card reveal workflow-card">
+              <p class="card__eyebrow">Step 01</p>
+              <h3>Capture in Notion</h3>
+              <p>회고, 리포트, 실험 노트, 데이터 스크린샷은 우선 Notion에서 정리합니다. 케이스 단위로 문제 정의와 배운 점을 쌓는 것이 핵심입니다.</p>
+            </article>
+
+            <article class="card reveal workflow-card">
+              <p class="card__eyebrow">Step 02</p>
+              <h3>Structure for the web</h3>
+              <p>공개 가능한 내용만 추려 제목, 질문, 대표 지표, 읽는 포인트, 산출물 링크로 압축합니다. 이 단계에서 채용 포지션에 맞는 문맥을 다시 정리합니다.</p>
+            </article>
+
+            <article class="card reveal workflow-card">
+              <p class="card__eyebrow">Step 03</p>
+              <h3>Publish & iterate</h3>
+              <p>GitHub Pages에 반영한 뒤, 새 케이스가 생길 때는 카드 데이터만 추가합니다. 구조를 고정해두면 디자인을 다시 무너뜨리지 않고 확장할 수 있습니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tight" id="connected-links">
+        <div class="shell">
+          <div class="section-head reveal">
+            <p class="eyebrow">Connected evidence</p>
+            <h2>이 허브는 단독 페이지가 아니라, 마케팅 트랙 전체를 연결하는 증거 레이어입니다.</h2>
+            <p>방문자가 여기서 멈추지 않고 다른 자산으로 넘어가도록 연결선을 명확하게 남겼습니다.</p>
+          </div>
+
+          <div class="link-grid">
+            <article class="link-card reveal">
+              <p class="card__eyebrow">Track landing</p>
+              <h3>Marketing / Growth 랜딩</h3>
+              <p>이 허브를 어떤 문맥으로 읽어야 하는지 가장 먼저 설명하는 진입점입니다.</p>
+              <div class="card__actions"><a href="./marketing-home.html">마케팅 랜딩 보기</a></div>
+            </article>
+
+            <article class="link-card reveal">
+              <p class="card__eyebrow">Adjacent proof</p>
+              <h3>브랜딩 / 메시지 실험</h3>
+              <p>숫자와 함께 읽히면 좋은 카피, 구조, 포지셔닝 관점의 보조 증거를 연결합니다.</p>
+              <div class="card__actions"><a href="./branding.html">브랜딩 자산 보기</a></div>
+            </article>
+
+            <article class="link-card reveal">
+              <p class="card__eyebrow">Contact</p>
+              <h3>바로 연결되는 문의 경로</h3>
+              <p>리포트 원본 요청, 프로젝트 문의, 협업 제안이 바로 이어지도록 연락 경로를 남깁니다.</p>
+              <div class="card__actions"><a href="./contact.html">연락 페이지 열기</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="insight-modal" id="insightModal" hidden>
+      <div class="insight-modal__backdrop" data-modal-close></div>
+      <div class="insight-modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="insight-modal__close" type="button" data-modal-close aria-label="닫기">×</button>
+
+        <div class="insight-modal__content">
+          <div class="insight-modal__header">
+            <p class="insight-modal__eyebrow" id="modalCategory"></p>
+            <h2 id="modalTitle"></h2>
+            <p class="insight-modal__summary" id="modalSummary"></p>
+            <ul class="pill-list" id="modalTags"></ul>
+          </div>
+
+          <div class="insight-detail-grid">
+            <section class="insight-detail-card">
+              <h3>핵심 질문</h3>
+              <p id="modalQuestion"></p>
+            </section>
+            <section class="insight-detail-card">
+              <h3>대표 지표</h3>
+              <p id="modalMetric"></p>
+            </section>
+            <section class="insight-detail-card">
+              <h3>데이터 / 입력값</h3>
+              <p id="modalSource"></p>
+            </section>
+            <section class="insight-detail-card">
+              <h3>산출물 형식</h3>
+              <p id="modalDeliverable"></p>
+            </section>
+          </div>
+
+          <div class="grid-2 insight-detail-lower">
+            <section class="list-card insight-list-card">
+              <h3>읽는 포인트</h3>
+              <ul id="modalHighlights"></ul>
+            </section>
+            <section class="list-card insight-list-card">
+              <h3>추천 독자 / 활용 맥락</h3>
+              <ul id="modalAudience"></ul>
+            </section>
+          </div>
+
+          <div class="banner insight-modal__banner">
+            <div class="banner__copy">
+              <p class="eyebrow">Source slot</p>
+              <h2>Notion / PDF / 대시보드 URL을 나중에 꽂아도 레이아웃이 무너지지 않게 설계했습니다.</h2>
+              <p>
+                공개 가능한 원본 링크가 준비되면 버튼이 활성화되도록 만들었습니다.
+                아직 비어 있는 케이스는 구조만 먼저 평가받을 수 있게 둔 상태입니다.
+              </p>
+            </div>
+            <div class="banner__actions" id="modalActions"></div>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
 
-  <!-- 전역 스크립트(테마 토글/공통 유틸) -->
-  <script src="assets/js/main.js" defer></script>
-  <!-- 데이터 인사이트 전용 스크립트 -->
-  <script src="assets/js/data-insight.js" defer></script>
-</body>
+    <footer class="footer">
+      <div class="shell footer__inner">
+        <div class="footer__meta">
+          <strong>강반석 · Data Insight Evidence Hub</strong>
+          <span>Performance Marketing / Marketing Analyst 문맥으로 읽히는 증거 허브</span>
+          <a class="top-link" href="#top">맨 위로 ↑</a>
+        </div>
+        <div class="footer__links">
+          <a href="./marketing-home.html">Marketing</a>
+          <a href="./pm-home.html">PM</a>
+          <a href="./contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/portfolio-system.js" defer></script>
+    <script src="./assets/js/data-insight-refresh.js" defer></script>
+  </body>
 </html>

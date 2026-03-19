@@ -11,7 +11,7 @@
   --accent2: #23d5ab;
 
   --shadow: 0 20px 60px rgba(0,0,0,.45);
-  --radius: 18px;
+  --radius: 20px; /* Bento Grid 트렌드에 맞춰 살짝 둥글게 조정 */
 
   --container: 1120px;
 }
@@ -28,7 +28,6 @@
   }
 }
 
-/* 테마 스위치: html[data-theme="dark|light"] 우선 */
 html[data-theme="dark"]{
   --bg:#0b0d10;
   --panel: rgba(255,255,255,.06);
@@ -48,14 +47,22 @@ html[data-theme="light"]{
   --shadow: 0 18px 50px rgba(0,0,0,.12);
 }
 
+/* 1. 부드러운 스크롤 이동 적용 */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
 body{
   margin:0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  /* 2. 트렌디한 폰트 스택 적용 (Pretendard 우선) */
+  font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.6; /* 가독성 강화 */
+  word-break: keep-all; /* 한글 단어 단위 끊김 방지 */
+  height: 100%;
 }
 
 a{ color: inherit; text-decoration:none; }
@@ -71,8 +78,25 @@ img{ max-width:100%; display:block; }
   overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
 }
 
-/* 버튼 */
-.btn{
+/* 3. 모던 Bento Grid 카드 디자인 & 호버 모션 통합 */
+.card, .work-card, .focus-card, .resource-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 호버 시 떠오르는 효과 */
+.card:hover, .work-card:hover, .focus-card:hover, .resource-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--accent);
+}
+
+/* 4. 글로우 효과가 추가된 버튼 디자인 */
+.btn, .button-primary, .button-secondary {
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -84,25 +108,29 @@ img{ max-width:100%; display:block; }
   color: var(--text);
   font-weight: 650;
   letter-spacing: -.2px;
-  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  transition: all 0.3s ease;
   cursor:pointer;
 }
-.btn:hover{ transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent), var(--line) 70%); }
-.btn--primary{
+
+.btn:hover, .button-secondary:hover { 
+  transform: translateY(-2px); 
+  border-color: color-mix(in srgb, var(--accent), var(--line) 70%); 
+}
+
+.btn--primary, .button-primary {
   background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent2), var(--accent) 30%));
   border-color: transparent;
-  box-shadow: 0 14px 40px color-mix(in srgb, var(--accent), transparent 72%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
 }
-.btn--ghost{ background: var(--panel); }
 
-/* 기본 카드 */
-.card{
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
+.btn--primary:hover, .button-primary:hover {
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent), transparent 50%);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
+
+.btn--ghost{ background: var(--panel); }
 
 /* 작은 태그 칩 */
 .chips{
@@ -132,16 +160,17 @@ img{ max-width:100%; display:block; }
   opacity: 1;
   transform: translateY(0);
 }
+
 /* ===== Brand (Topbar) ===== */
 .brand{
   display: inline-flex;
-  align-items: baseline;       /* 글자 기준선 맞춤 */
+  align-items: baseline;       
   gap: 6px;
   text-decoration: none;
 }
 
 .brand__name{
-  font-size: 20px;             /* 이름 강조 */
+  font-size: 20px;             
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text);
@@ -151,11 +180,11 @@ img{ max-width:100%; display:block; }
   font-size: 18px;
   font-weight: 600;
   color: var(--muted);
-  transform: translateY(-1px); /* 시각적 중심 보정 */
+  transform: translateY(-1px); 
 }
 
 .brand__role{
-  font-size: 13px;             /* 보조 정보 */
+  font-size: 13px;             
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--muted);

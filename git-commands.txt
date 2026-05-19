@@ -1,0 +1,24 @@
+# GitHub 업로드 명령어
+# 아래 명령어는 이 폴더 안에서 실행하세요.
+
+# 1. Git 초기화
+git init
+
+# 2. 파일 추가
+git add .
+
+# 3. 첫 커밋
+git commit -m "Initial portfolio website"
+
+# 4. 기본 브랜치 이름을 main으로 변경
+git branch -M main
+
+# 5. GitHub 원격 저장소 연결
+# <REPOSITORY_NAME> 부분을 실제 저장소 이름으로 바꾸세요.
+git remote add origin https://github.com/BANSEOK-KANG1/<REPOSITORY_NAME>.git
+
+# 6. GitHub로 업로드
+git push -u origin main
+
+# GitHub Pages 설정
+# Repository → Settings → Pages → Deploy from a branch → main / root 선택

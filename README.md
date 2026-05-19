@@ -1,53 +1,80 @@
-# portfolio-refresh-dual-track
+# Banseok Portfolio Website
 
-강반석 포트폴리오를 **역할 분기형 구조**로 다시 설계한 리뉴얼 패키지입니다.
+퍼포먼스마케팅, 데이터 트래킹, Product Operations 방향성을 보여주기 위한 정적 포트폴리오 웹사이트입니다.
+React나 빌드 도구 없이 `index.html`, `styles.css`, `script.js`만으로 구성되어 GitHub Pages에 바로 배포할 수 있습니다.
 
-## 들어 있는 파일
-- `index.html`  
-  새 허브 홈. Product / PM과 Performance Marketing / Marketing Analyst 두 트랙으로 분기합니다.
-- `pm-home.html`  
-  PM / Product 포지션용 랜딩.
-- `marketing-home.html`  
-  퍼포먼스 마케터 / 마케팅 분석가 포지션용 랜딩.
-- `assets/css/portfolio-system.css`  
-  공통 디자인 시스템.
-- `assets/js/portfolio-system.js`  
-  모바일 메뉴, 아주 가벼운 reveal 인터랙션, 이미지 fallback 처리.
+## 1. 파일 구조
 
-## 이번 버전의 핵심
-1. **폰트와 시각 톤을 더 현대적으로 정리**
-   - IBM Plex Sans KR 중심의 산세리프 시스템
-   - 여백, 타입 위계, 경계선, 톤온톤 surface 중심
-   - 과한 그래픽 대신 “정리된 정보 구조”를 강조
+```text
+bansuk-portfolio-git/
+├── index.html          # 홈페이지 본문 구조와 문구
+├── styles.css          # 디자인 시스템, 반응형 레이아웃
+├── script.js           # 모바일 메뉴, 스크롤 애니메이션, 현재 연도 표시
+├── assets/
+│   ├── favicon.svg     # 브라우저 탭 아이콘
+│   └── resume.pdf      # 여기에 실제 이력서 PDF를 추가하면 버튼이 연결됨
+├── content-guide.md    # 문구 수정 가이드
+├── git-commands.txt    # GitHub 업로드 명령어
+├── .gitignore
+└── README.md
+```
 
-2. **포트폴리오 진입점을 역할별로 분리**
-   - PM / Product
-   - Performance Marketing / Marketing Analyst
+## 2. 바로 수정해야 할 부분
 
-3. **기존 공개 자산을 버리지 않고 재배치**
-   - `pm.html`
-   - `intern.html`
-   - `data-insight.html`
-   - 기존 PDF 링크들
+### 이메일
+`index.html`에서 아래 문구를 찾아 실제 이메일로 바꾸세요.
 
-## 적용 방법
-현재 GitHub Pages 레포 루트 기준으로 아래처럼 복사하면 됩니다.
+```html
+mailto:your-email@example.com
+```
 
-- `index.html` → 루트 교체
-- `pm-home.html` → 루트 추가
-- `marketing-home.html` → 루트 추가
-- `assets/css/portfolio-system.css` → 추가
-- `assets/js/portfolio-system.js` → 추가
+### 이력서 PDF
+`assets/resume.pdf` 경로에 실제 이력서 파일을 넣으면 상단의 `이력서 다운로드` 버튼이 작동합니다.
+파일명이 다르면 `index.html`의 아래 링크를 수정하세요.
 
-## 권장 후속 작업
-- `contact.html`도 같은 디자인 시스템으로 맞추기
-- 이메일 / GitHub 계정 표기를 한 버전으로 통일하기
-- `data-insight.html`의 placeholder 문구(예: 표 미리보기, 막대 차트)를 실제 사례 카드로 교체하기
-- 마케팅 트랙용 실전 자료 2~3개 추가하기
-  - 매체 리포트 1건
-  - 랜딩 전환 개선 1건
-  - 크리에이티브 실험 1건
+```html
+href="assets/resume.pdf"
+```
 
-## 참고
-이 패키지는 **기존 repo의 `assets/img/portrait.jpg`가 있다는 전제**로 작성했습니다.
-이미지 경로가 다르면 각 HTML에서 프로필 이미지 경로만 수정하면 됩니다.
+### 회사명 공개 여부
+현재 경력 섹션에는 `나라원`, `글로벌알파미디어`가 들어가 있습니다.
+공개 포트폴리오에서 회사명 노출이 부담되면 아래처럼 바꾸세요.
+
+```text
+나라원 → 공공 SI 제안팀
+글로벌알파미디어 → 마케팅 에이전시 / 퍼포먼스마케팅팀
+```
+
+## 3. GitHub Pages 배포 방법
+
+1. GitHub에서 새 repository 생성
+2. 이 폴더의 파일을 repository에 업로드
+3. GitHub repository에서 `Settings` → `Pages` 이동
+4. `Deploy from a branch` 선택
+5. Branch: `main`, Folder: `/root` 선택
+6. 저장 후 생성되는 GitHub Pages URL 확인
+
+## 4. 로컬에서 확인하기
+
+브라우저에서 `index.html` 파일을 직접 열면 됩니다.
+VS Code를 사용한다면 Live Server 확장 프로그램으로 확인하는 방식이 가장 편합니다.
+
+## 5. 디자인 방향
+
+이 포트폴리오는 디자이너형 포트폴리오가 아니라 채용용 랜딩페이지에 가깝게 설계했습니다.
+핵심 컨셉은 다음과 같습니다.
+
+- Clean SaaS 스타일
+- 데이터 대시보드 느낌의 카드 구조
+- 한 섹션에 한 메시지만 배치
+- 프로젝트별 Problem / Action / Tools / Metric 구조
+- 모바일에서도 읽히는 반응형 레이아웃
+
+## 6. 추천 수정 순서
+
+1. 이메일과 이력서 PDF 연결
+2. 첫 화면 문구 확정
+3. 프로젝트별 실제 수치와 결과 추가
+4. 회사명 공개 여부 결정
+5. GitHub Pages 배포
+6. 채용공고별로 자기소개/프로젝트 순서 미세 조정
